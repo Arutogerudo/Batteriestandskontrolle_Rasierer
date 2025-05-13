@@ -1,6 +1,6 @@
 # Teilfunktionalitäten: Batteriestandskontrolle für Rasierapparat
 
-### 1. **Batteriestandserkennung**
+### 1. **Erkennung Batteriestand**
 
 ### 2. **Anzeige Batteriestand**
 
@@ -10,4 +10,4 @@
 
 ### 5. **Ladeerkennung & -statusanzeige**
 
-### 6. **Schutz der Elektronik und des Akkus**
+### 6. **Schutz der Elektronik und der Batterie**
