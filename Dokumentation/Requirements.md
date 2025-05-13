@@ -25,7 +25,6 @@
     <tr>
       <th>Nr.</th>
       <th>Jira-Referenz</th>
-      <th>Jira-Referenz</th>
       <th>Titel</th>
       <th>Beschreibung</th>
     </tr>
@@ -33,12 +32,10 @@
   <tbody>
     <tr class="muss">
       <td>1.1</td><td>BAT-7</td>
-      <td>1.1</td><td>BAT-7</td>
       <td>Automatische Spannungsmessung</td>
       <td>Die Spannung des Akkus wird zuverlässig gemessen.</td>
     </tr>
     <tr class="soll">
-      <td>1.2</td><td>BAT-8</td>
       <td>1.2</td><td>BAT-8</td>
       <td>Ladezustandsberechnung in Prozent</td>
       <td>Die Spannung wird zuverlässig in Prozent umgerechnet.</td>
@@ -47,18 +44,13 @@
       <td>2.1</td><td>BAT-10</td>
       <td>Anzeige aktueller Batteriestand</td>
       <td>Batteriestand wird beim Einschalten angezeigt.</td>
-      <td>2.1</td><td>BAT-10</td>
-      <td>Anzeige aktueller Batteriestand</td>
-      <td>Batteriestand wird beim Einschalten angezeigt.</td>
     </tr>
     <tr class="soll">
-      <td>2.2</td><td>BAT-11</td>
       <td>2.2</td><td>BAT-11</td>
       <td>Einfache Statusanzeige bei Knopfdruck</td>
       <td>Bei kurzem Drücken des An-/Aus-Knopfes wird der aktuelle Batteriestand angezeigt.</td>
     </tr>
     <tr class="kann">
-      <td>2.3</td><td>BAT-12</td>
       <td>2.3</td><td>BAT-12</td>
       <td>Restlaufzeit auf Knopfdruck</td>
       <td>Bei erneutem kurzem Drücken des An-/Aus-Knopfes wird die Restbetriebszeit angezeigt.</td>
@@ -66,31 +58,24 @@
     <tr class="muss">
       <td>2.4</td><td>BAT-13</td>
       <td>Anzeige bei längerer Nichtbenutzung</td>
-      <td>2.4</td><td>BAT-13</td>
-      <td>Anzeige bei längerer Nichtbenutzung</td>
       <td>Die Batteriestandskontrolle funktioniert auch nach längerer Nichtnutzung zuverlässig.</td>
     </tr>
     <tr class="soll">
-      <td>2.5</td><td>BAT-14</td>
-      <td>Anzeige bei Benutzerinteraktion aktualisieren</td>
       <td>2.5</td><td>BAT-14</td>
       <td>Anzeige bei Benutzerinteraktion aktualisieren</td>
       <td>Die Anzeige wird bei jeder Benutzerinteraktion automatisch aktualisiert.</td>
     </tr>
     <tr class="muss">
       <td>3.1</td><td>BAT-20</td>
-      <td>3.1</td><td>BAT-20</td>
       <td>Spannungsreferenz definieren</td>
       <td>Es werden feste Spannungswerte für leer und voll als Referenz zur Anzeige genutzt.</td>
     </tr>
     <tr class="muss">
       <td>3.2</td><td>BAT-21</td>
-      <td>3.2</td><td>BAT-21</td>
       <td>Initiale Kalibrierung</td>
       <td>Beim ersten vollständigen Lade- und Entladezyklus erfolgt eine Kalibrierung.</td>
     </tr>
     <tr class="soll">
-      <td>3.3</td><td>BAT-22</td>
       <td>3.3</td><td>BAT-22</td>
       <td>Rekalibrierung nach Ladezyklen</td>
       <td>Nach mehreren vollständigen Ladezyklen erfolgt automatisch eine neue Kalibrierung.</td>
@@ -99,36 +84,28 @@
       <td>4.1</td><td>BAT-26</td>
       <td>Warnung bei niedrigem Batteriestand</td>
       <td>Bei Unterschreiten der Warnschwelle gibt es ein visuelles und akustisches Signal als Warnung für den Nutzer.</td>
-      <td>4.1</td><td>BAT-26</td>
-      <td>Warnung bei niedrigem Batteriestand</td>
-      <td>Bei Unterschreiten der Warnschwelle gibt es ein visuelles und akustisches Signal als Warnung für den Nutzer.</td>
     </tr>
     <tr class="kann">
-      <td>4.2</td><td>BAT-27</td>
       <td>4.2</td><td>BAT-27</td>
       <td>Warnschwelle einstellbar</td>
       <td>Der Benutzer kann einstellen, ob die Warnung bei 30 % oder 10 % Restladung erfolgt.</td>
     </tr>
     <tr class="soll">
       <td>5.1</td><td>BAT-29</td>
-      <td>5.1</td><td>BAT-29</td>
       <td>Ladeaktivität anzeigen</td>
       <td>Der laufende Ladevorgang wird klar angezeigt.</td>
     </tr>
     <tr class="soll">
-      <td>5.2</td><td>BAT-30</td>
       <td>5.2</td><td>BAT-30</td>
       <td>Ladeabschluss anzeigen</td>
       <td>Es wird eindeutig angezeigt, wenn der Akku vollständig geladen ist.</td>
     </tr>
     <tr class="soll">
       <td>5.3</td><td>BAT-31</td>
-      <td>5.3</td><td>BAT-31</td>
       <td>Ladefehler anzeigen</td>
       <td>Der Nutzer wird visuell informiert, wenn der Ladevorgang fehlschlägt.</td>
     </tr>
     <tr class="muss">
-      <td>5.4</td><td>BAT-32</td>
       <td>5.4</td><td>BAT-32</td>
       <td>Ladezustand elektronisch erkennen</td>
       <td>Die Ladeelektronik erkennt, ob der Ladevorgang aktiv, abgeschlossen oder fehlgeschlagen ist.</td>
@@ -136,24 +113,19 @@
     <tr class="kann">
       <td>5.5</td><td>BAT-33</td>
       <td>mögliche Rasur während Laden signalisieren</td>
-      <td>5.5</td><td>BAT-33</td>
-      <td>mögliche Rasur während Laden signalisieren</td>
       <td>Während des Ladevorgangs gibt es eine visuelle Meldung, wenn eine Rasur möglich ist.</td>
     </tr>
     <tr class="muss">
-      <td>6.1</td><td>BAT-35</td>
       <td>6.1</td><td>BAT-35</td>
       <td>Unterspannungsschutz</td>
       <td>Das Gerät schaltet sich bei kritischem Akkustand automatisch ab, um Tiefentladung zu vermeiden.</td>
     </tr>
     <tr class="muss">
       <td>6.2</td><td>BAT-36</td>
-      <td>6.2</td><td>BAT-36</td>
       <td>Überladeschutz</td>
       <td>Der Ladevorgang wird automatisch bei Erreichen der maximalen Spannung abgebrochen.</td>
     </tr>
     <tr class="muss">
-      <td>6.3</td><td>BAT-37</td>
       <td>6.3</td><td>BAT-37</td>
       <td>Temperaturüberwachung beim Laden</td>
       <td>Die Temperatur wird während des Ladevorgangs kontrolliert.</td>
@@ -171,7 +143,6 @@
     <tr>
       <th>Nr.</th>
       <th>Jira-Referenz</th>
-      <th>Jira-Referenz</th>
       <th>Titel</th>
       <th>Beschreibung</th>
     </tr>
@@ -179,13 +150,10 @@
   <tbody>
     <tr class="soll">
       <td>1.3</td><td>BAT-9</td>
-      <td>1.3</td><td>BAT-9</td>
       <td>Keine zusätzliche Bedienung</td>
-      <td>Die Batteriestandserkennung erfordert keine zusätzliche Interaktion zur Rasur.</td>
       <td>Die Batteriestandserkennung erfordert keine zusätzliche Interaktion zur Rasur.</td>
     </tr>
     <tr class="soll">
-      <td>2.6</td><td>BAT-15</td>
       <td>2.6</td><td>BAT-15</td>
       <td>Intuitive Anzeige</td>
       <td>Der Batteriestand wird in einer für den Nutzer klar verständlichen Form dargestellt.</td>
@@ -193,18 +161,14 @@
     <tr class="soll">
       <td>2.7</td><td>BAT-16</td>
       <td>Angenehme Anzeige</td>
-      <td>2.7</td><td>BAT-16</td>
-      <td>Angenehme Anzeige</td>
       <td>Die Anzeige ist nicht zu hell oder visuell aufdringlich.</td>
     </tr>
     <tr class="kann">
-      <td>2.8</td><td>BAT-17</td>
       <td>2.8</td><td>BAT-17</td>
       <td>Barrierefreie Anzeige (Farbenblindheit)</td>
       <td>Die Anzeige ist auch für farbenblinde Nutzer eindeutig erkennbar.</td>
     </tr>
     <tr class="kann">
-      <td>2.9</td><td>BAT-18</td>
       <td>2.9</td><td>BAT-18</td>
       <td>Barrierefreie Anzeige (Sehschwäche)</td>
       <td>Die Anzeige ist auch für Nutzer mit eingeschränktem Sehvermögen gut lesbar.</td>
@@ -212,36 +176,29 @@
     <tr class="soll">
       <td>2.10</td><td>BAT-19</td>
       <td>Anzeige ohne Verzögerungen</td>
-      <td>2.10</td><td>BAT-19</td>
-      <td>Anzeige ohne Verzögerungen</td>
       <td>Die Anzeige erfolgt innerhalb von &lt;1 Sekunde nach Benutzerinteraktion.</td>
     </tr>
     <tr class="muss">
-      <td>3.4</td><td>BAT-23</td>
       <td>3.4</td><td>BAT-23</td>
       <td>Anzeigetoleranz</td>
       <td>Die Prozentanzeige muss mit einer Toleranz von ±5 % gegenüber der realen Kapazität übereinstimmen.</td>
     </tr>
     <tr class="muss">
       <td>3.5</td><td>BAT-24</td>
-      <td>3.5</td><td>BAT-24</td>
       <td>Alterungsrobustheit</td>
       <td>Auch bei &lt;80 % Akkukapazität nach mehreren Jahren bleibt die Anzeige zuverlässig.</td>
     </tr>
     <tr class="kann">
-      <td>3.6</td><td>BAT-25</td>
       <td>3.6</td><td>BAT-25</td>
       <td>Ressourcenschonende Kalibrierung</td>
       <td>Die Kalibrierung darf nur minimal Rechen- und Speicherressourcen beanspruchen.</td>
     </tr>
     <tr class="soll">
       <td>4.3</td><td>BAT-28</td>
-      <td>4.3</td><td>BAT-28</td>
       <td>Wahrnehmbarkeit der Warnung</td>
       <td>Die Warnsignale müssen in typischen Alltagssituationen gut wahrnehmbar sein (z. B. im Bad oder bei Geräuschkulisse).</td>
     </tr>
     <tr class="soll">
-      <td>5.6</td><td>BAT-34</td>
       <td>5.6</td><td>BAT-34</td>
       <td>Ladeanzeige energieeffizient</td>
       <td>Die Ladezustandsanzeige muss stromsparend sein und den Ladevorgang nicht negativ beeinflussen.</td>
@@ -250,7 +207,6 @@
 </table>
 
 
-### 3. Abhängigkeiten zwischen Requirements
 ### 3. Abhängigkeiten zwischen Requirements
 
 | Requirement-Nr.     | Zusammenhang / Abhängigkeit / Konfliktbeschreibung                                                                 |
