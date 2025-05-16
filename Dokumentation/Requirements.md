@@ -55,11 +55,6 @@
       <td>Restlaufzeit auf Knopfdruck</td>
       <td>Bei erneutem kurzem Drücken des An-/Aus-Knopfes wird die Restbetriebszeit angezeigt.</td>
     </tr>
-    <tr class="muss">
-      <td>2.4</td><td>BAT-13</td>
-      <td>Anzeige bei längerer Nichtbenutzung</td>
-      <td>Die Batteriestandskontrolle funktioniert auch nach längerer Nichtnutzung zuverlässig.</td>
-    </tr>
     <tr class="soll">
       <td>2.5</td><td>BAT-14</td>
       <td>Anzeige bei Benutzerinteraktion aktualisieren</td>
@@ -152,6 +147,11 @@
       <td>1.3</td><td>BAT-9</td>
       <td>Keine zusätzliche Bedienung</td>
       <td>Die Batteriestandserkennung erfordert keine zusätzliche Interaktion zur Rasur.</td>
+    </tr>
+    <tr class="muss">
+      <td>2.4</td><td>BAT-13</td>
+      <td>Anzeige bei längerer Nichtbenutzung</td>
+      <td>Die Batteriestandskontrolle funktioniert auch nach längerer Nichtnutzung zuverlässig.</td>
     </tr>
     <tr class="soll">
       <td>2.6</td><td>BAT-15</td>

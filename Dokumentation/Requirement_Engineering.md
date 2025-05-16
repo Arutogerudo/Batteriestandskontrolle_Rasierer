@@ -22,7 +22,17 @@ Hier wurde der Fokus speziell auf das Ziel der Interaktion und die Schnittstelle
 
 Basierend auf den Use Cases und den bisherigen Erkenntnissen aus Stakeholder Analyse, Lasten- und Pflichtenheft wurden die 6 Teilfunktionalitäten definiert:
 
-[Teilfunktionalitäten](referenziert/Teilfunktionalitäten)
+1. **Erkennung Batteriestand**
+
+2. **Anzeige Batteriestand**
+
+3. **Kalibrierung der Batterieanzeige**
+
+4. **Warnung bei niedrigem Batteriestand**
+
+5. **Ladeerkennung & -statusanzeige**
+
+6. **Schutz der Elektronik und der Batterie**
 
 ## Requirements
 
