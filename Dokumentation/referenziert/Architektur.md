@@ -14,10 +14,35 @@
 
 ![Komponentendiagramm](Komponentendiagramm.png)
 
+| **Komponente**      | **Requirements**              | **Jira-Referenzen**                                           |
+| --------------- | --------------------- | ------------------------------------------------------------ |
+| UserInterface | Req. 2.1, Req. 2.2, Req. 2.4, Req. 2.5, Req. 2.6, Req. 2.7, Req. 2.8, Req. 2.9, Req. 2.10      | BAT-10, BAT-11, BAT-13, BAT-14, BAT-15, BAT-16, BAT-17, BAT-18, BAT-19              |
+| BatteryLogic | Req. 1.1, Req. 1.2, Req. 1.3  | BAT-7, BAT-8, BAT-9   |
+| HardwareAbstraction  | Req. 1.1, Req. 2.2, Req. 2.5 | BAT-7, BAT-11, BAT-14 |
+| PersistenceManager  | Req. 3.1, Req. 3.2    | BAT-20, BAT-21
+
 ## Schnittstellendefinition
 
 | **Quelle**      | **Ziel**              | **Schnittstellen**                                           |
 | --------------- | --------------------- | ------------------------------------------------------------ |
-| `UserInterface` | `BatteryLogic`        |  [getStateOfCharge()]()               |
-| `BatteryLogic` | `HardwareAbstraction` |  |      |
-| `HardwareAbstraction`  | `PersistenceManager`  |    |
+| `UserInterface` | `BatteryLogic`        |  [getStateOfCharge()](Schnittstellendokumentation.md#methode-getstateofcharge), [getRemainingRuntime()](Schnittstellendokumentation.md#methode-getremainingruntime)               |
+| `BatteryLogic` | `HardwareAbstraction` |  [getBatteryVoltage()](Schnittstellendokumentation.md#methode-getbatteryvoltage), [getButtonPress()](Schnittstellendokumentation.md#methode-getbuttonpress)     |
+| `HardwareAbstraction`  | `PersistenceManager`  | [loadCalibrationData()](Schnittstellendokumentation.md#methode-loadcalibrationdata)    |
+
+
+## Technologiestack
+
+## Technologiestack – Batteriestandsanzeige Software
+
+| Kategorie            | Technologie / Tool             | Begründung                             |
+|----------------------|--------------------------------|----------------------------------------|
+| Sprache | Java | persönliche Erfahrung -> erhöhte Produktivität & geringere Fehleranfälligkeit, einfache Wartung  |
+| Buildsystem | --keins-- | kein Build |
+| Versionskontrolle | Git + GitHub | De-facto-Standard |
+| Organisation, Tracking | Jira | bereits Vorerfahrungen, sehr viele Funktionalitäten, Unternehmensstandard, Integration in github möglich |
+| IDE | VS Code | Leicht, modular, gut kompatibel für Code in Java und Doku in .md |
+| Ausgabe | Konsole | einfachste Lösung und in meinem Projekt kein Fokus |
+| Dokumentation | Markdown + draw.io | Für Anforderungen & Architektur, gute und einfache Tools für Modellierung und Dokumentation |
+| Codeanalyse | SonarQube | CI/CD integrierbar, ideal für Clean Code, Integration mit Github ermöglicht automatische Prüfung |
+|Test-Framework | JUnit | Standard für Java, einfach, erweiterbar  |
+| Frameworks, Bibliotheken | | |
