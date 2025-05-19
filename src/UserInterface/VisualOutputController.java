@@ -1,45 +1,42 @@
-import java.awt.*;
+package UserInterface;
+
 import javax.swing.*;
 
 import BatteryLogic.BatteryStateController;
 import HardwareAbstraction.VoltageSimulator;
 
 public class VisualOutputController {
-    //private boolean showRemainingTime;
-    private LEDController ledController;
-    private JLabel displayed;
-    private BatteryStateController batteryController;
+    private final LEDController ledController;
+    private final JLabel displayed;
+    private final BatteryStateController batteryController;
 
-    public VisualOutputController(VoltageSimulator simulator){
-        //this.showRemainingTime = showRemainingTime;
+    public VisualOutputController(VoltageSimulator simulator) {
         displayed = new JLabel();
         ledController = new LEDController();
         batteryController = new BatteryStateController(simulator);
         updateDisplay(batteryController.calculateStateOfCharge(), false);
     }
 
-    LEDController getLedController(){
+    LEDController getLedController() {
         return ledController;
     }
 
-    JLabel getDisplayed(){
+    JLabel getDisplayed() {
         return displayed;
     }
 
-    public void updateDisplay(int percent, boolean showPercentage){
-        if(showPercentage){
+    public void updateDisplay(int percent, boolean showPercentage) {
+        if (showPercentage) {
             displayed.setText(percent + "%");
-        //} else if(showRemainingTime){
-        //    displayed = new JLabel(minutes + "Min.");
         } else {
-            displayed.setText("");;
+            displayed.setText("");
         }
-        if(batteryController.isLowBattery()){
+        if (batteryController.isLowBattery()) {
             showLowBatteryWarning();
         }
     }
 
-    private void showLowBatteryWarning(){
-        ledController.startBlinking(Color.RED);
+    private void showLowBatteryWarning() {
+        ledController.startBlinking();
     }
 }

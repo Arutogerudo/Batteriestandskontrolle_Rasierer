@@ -1,3 +1,5 @@
+package UserInterface;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,11 +34,11 @@ public class LEDController {
         led.setLEDState(Color.DARK_GRAY, false);
     }
 
-    void startBlinking(Color color) {
+    void startBlinking() {
         if (blinkTimer.isRunning()) {
             return; 
         }
-        blinkColor = color;
+        blinkColor = Color.RED;
         blinkState = false;
         blinkTimer.start();
     }

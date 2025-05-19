@@ -1,7 +1,9 @@
+package UserInterface;
+
 import javax.swing.*;
 import java.awt.*;
 
-class LEDPanel extends JPanel {
+public class LEDPanel extends JPanel {
     private Color ledColor = Color.DARK_GRAY;
 
     LEDPanel() {

@@ -1,3 +1,5 @@
+package UserInterface;
+
 import javax.swing.*;
 
 import BatteryLogic.BatteryStateController;
@@ -10,15 +12,14 @@ import HardwareAbstraction.VoltageSimulator;
 import java.awt.*;
 
 public class SimpleGUI {
-    private VisualOutputController visualOutputController;
-    private OperationController operationController;
+    private final VisualOutputController visualOutputController;
+    private final OperationController operationController;
     private static JButton button;
-    private boolean showPercentage;
-    private VoltageSimulator simulator;
-    private InteractionHandler handler;
-    private BatteryStateController batteryController;
+    private final VoltageSimulator simulator;
+    private final InteractionHandler handler;
+    private final BatteryStateController batteryController;
 
-    SimpleGUI(VoltageSimulator simulator){
+    public SimpleGUI(VoltageSimulator simulator){
         this.simulator = simulator;
 
         button = new JButton();
@@ -32,12 +33,9 @@ public class SimpleGUI {
         setupPanel(visualOutputController.getLedController().getLedPanel(), visualOutputController.getDisplayed());
     }
 
-    void update(){
-        if (handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE){
-            showPercentage = true;
-        } else {
-            showPercentage = false;
-        }
+    public void update(){
+        boolean showPercentage;
+        showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
         operationController.updateOperationState(simulator, handler);
         visualOutputController.updateDisplay(batteryController.calculateStateOfCharge(), showPercentage);
     }
@@ -49,10 +47,10 @@ public class SimpleGUI {
         display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         display.setLayout(new BorderLayout());
 
-        ImageIcon originalImage = new ImageIcon("Batteriestandskontrolle_Rasierer\\src\\resources\\powerIcon.jpg");
-        ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon originalImage = new ImageIcon("C:\\Users\\Lara\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\powerIcon.jpg");
+        ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(140, 140, Image.SCALE_SMOOTH));
         button.setIcon(scaledImage);
-        button.setPreferredSize(new Dimension(150, 150));
+        button.setPreferredSize(new Dimension(140, 140));
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));

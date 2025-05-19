@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 public class ButtonInput {
     private long pressStartTime;
-    private Timer inactivityTimer;
+    private final Timer inactivityTimer;
 
     public ButtonInput(JButton button, InteractionHandler handler) {
         inactivityTimer = new Timer(5000, e -> {

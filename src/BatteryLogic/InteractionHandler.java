@@ -30,11 +30,9 @@ public class InteractionHandler {
         return operationState;
     }
 
-    // Diese Setter werden intern von den Commands verwendet
     void setOperatingState(OperationStates newState) {
         this.operationState = newState;
     }
-
     void setDisplayState(DisplayStates newState) {
         this.displayState = newState;
     }

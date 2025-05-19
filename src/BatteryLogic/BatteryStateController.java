@@ -5,9 +5,9 @@ import PersistenceManager.CalibrationData;
 import PersistenceManager.SettingsStorage;
 
 public class BatteryStateController {
-    private VoltageSensor voltageSensor;
-    private CalibrationData calib;
-    private int lowBatteryThreshold;
+    private final VoltageSensor voltageSensor;
+    private final CalibrationData calib;
+    private final int lowBatteryThreshold;
 
     public BatteryStateController(VoltageSimulator simulator){
         voltageSensor = new VoltageSensor(simulator);

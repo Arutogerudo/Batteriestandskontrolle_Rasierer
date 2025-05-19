@@ -10,12 +10,12 @@ public class SettingsStorage {
 
     private static SettingsStorage instance;
 
-    private int lowBatteryThreshold;
+    private final int lowBatteryThreshold;
     private double[] voltage;
     private int[] stateOfCharge;
 
-    private static final Path CALIB_TXT_FILE = Path.of("C:\\Users\\laraa\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\calibVoltageToSoC.txt");
-    private static final Path THRESHOLD_TXT_FILE = Path.of("C:\\Users\\laraa\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\threshold.txt");
+    private static final Path CALIB_TXT_FILE = Path.of("C:\\Users\\Lara\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\calibVoltageToSoC.txt");
+    private static final Path THRESHOLD_TXT_FILE = Path.of("C:\\Users\\Lara\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\threshold.txt");
 
     private SettingsStorage() {
         lowBatteryThreshold = 10;

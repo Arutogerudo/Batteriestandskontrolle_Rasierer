@@ -1,5 +1,5 @@
-import HardwareAbstraction.ChargingState;
-import HardwareAbstraction.VoltageSimulator;
+import HardwareAbstraction.*;
+import UserInterface.*;
 
 public class Program {
     public static void main(String[] args) {
