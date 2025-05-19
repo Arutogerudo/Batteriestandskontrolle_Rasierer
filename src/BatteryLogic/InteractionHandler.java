@@ -1,28 +1,24 @@
 package BatteryLogic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class InteractionHandler {
     private OperationStates operationState = OperationStates.OFF;
     private DisplayStates displayState = DisplayStates.OFF;
 
-    public void handleButtonPress(String event) {
-        switch (operationState) {
-            case OFF:
-                if (event.equals("longPress")) {
-                    operationState = OperationStates.OPERATING;
-                    displayState = DisplayStates.STATE_OF_CHARGE;
-                } else if (event.equals("shortPress")) {
-                    displayState = DisplayStates.STATE_OF_CHARGE;
-                } else if (event.equals("inactivity")) {
-                    displayState = DisplayStates.OFF;
-                }
-                break;
+    private final Map<String, ButtonCommand> commandMap = new HashMap<>();
 
-            case OPERATING:
-                if (event.equals("longPress")) {
-                    operationState = OperationStates.OFF;
-                    displayState = DisplayStates.OFF;
-                }
-                break;
+    public InteractionHandler() {
+        commandMap.put("shortPress", new ShortPressCommand());
+        commandMap.put("longPress", new LongPressCommand());
+        commandMap.put("inactivity", new InactivityCommand());
+    }
+
+    public void handleButtonPress(String event) {
+        ButtonCommand command = commandMap.get(event);
+        if (command != null) {
+            command.execute(this);
         }
     }
 
@@ -32,5 +28,14 @@ public class InteractionHandler {
 
     public OperationStates getOperatingState() {
         return operationState;
+    }
+
+    // Diese Setter werden intern von den Commands verwendet
+    void setOperatingState(OperationStates newState) {
+        this.operationState = newState;
+    }
+
+    void setDisplayState(DisplayStates newState) {
+        this.displayState = newState;
     }
 }

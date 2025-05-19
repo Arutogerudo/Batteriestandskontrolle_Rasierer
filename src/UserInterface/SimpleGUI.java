@@ -49,7 +49,7 @@ public class SimpleGUI {
         display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         display.setLayout(new BorderLayout());
 
-        ImageIcon originalImage = new ImageIcon("Batteriestandskontrolle_Rasierer\\src\\resources\\vecteezy_power-icon-power-icon-vector-isolated-on-white-background_7528224.jpg");
+        ImageIcon originalImage = new ImageIcon("Batteriestandskontrolle_Rasierer\\src\\resources\\powerIcon.jpg");
         ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
         button.setIcon(scaledImage);
         button.setPreferredSize(new Dimension(150, 150));
