@@ -6,15 +6,15 @@ zentrale Stakeholder: Endnutzer (= Kunden)
 
 ## Lasten- / Pflichtenheft
 
-[Lastenheft: Batteriestandskontrolle für Rasierapparat](referenziert/Lastenheft)
+[Lastenheft: Batteriestandskontrolle für Rasierapparat](referenziert/Requirement_Engineering/Lastenheft)
 
-[Pflichtenheft: Batteriestandskontrolle für Rasierapparat](referenziert/Pflichtenheft)
+[Pflichtenheft: Batteriestandskontrolle für Rasierapparat](referenziert/Requirement_Engineering/Pflichtenheft)
 
 Sowohl das Lasten-, als auch das Pflichtenheft, ist nicht voll ausformuliert sondern dient eher zur groben Orientierung. Das formulieren der grundlegenden Anforderungen aus Sicht des Kunden und aus Sicht der Entwicklung wurde als Werkzeug genutzt, um sich in diese beiden Blickwinkel hineinzuversetzen und im Requirement Engineering mit berücksichtigen zu können.
 
 ## Use Cases
 
-[Use Cases](referenziert/Use_cases)
+[Use Cases](referenziert/Requirement_Engineering/Use_cases)
 
 Hier wurde der Fokus speziell auf das Ziel der Interaktion und die Schnittstellen zwischen Mensch und Gerät gelegt.
 

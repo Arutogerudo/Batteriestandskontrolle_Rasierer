@@ -10,9 +10,9 @@
 - Jede Schicht darf nur die direkt darunterliegende Schicht ansprechen.
 -Es gibt keine Rückwärtssprünge oder Querkommunikation.
 
-## Komponentendiagramm erstellen
+## Komponentendiagramm 
 
-![Komponentendiagramm](Komponentendiagramm.png)
+![Komponentendiagramm](referenziert/Architektur/Komponentendiagramm.png)
 
 | **Komponente**      | **Requirements**              | **Jira-Referenzen**                                           |
 | --------------- | --------------------- | ------------------------------------------------------------ |
@@ -23,16 +23,16 @@
 
 ## Schnittstellendefinition
 
-| **Quelle**      | **Ziel**              | **Schnittstellen**                                           |
+| **Ziel**      | **Quelle**              | **Schnittstellen**                                           |
 | --------------- | --------------------- | ------------------------------------------------------------ |
-| `UserInterface` | `BatteryLogic`        |  [getStateOfCharge()](Schnittstellendokumentation.md#methode-getstateofcharge), [getRemainingRuntime()](Schnittstellendokumentation.md#methode-getremainingruntime)               |
-| `BatteryLogic` | `HardwareAbstraction` |  [getBatteryVoltage()](Schnittstellendokumentation.md#methode-getbatteryvoltage), [getButtonPress()](Schnittstellendokumentation.md#methode-getbuttonpress)     |
-| `HardwareAbstraction`  | `PersistenceManager`  | [loadCalibrationData()](Schnittstellendokumentation.md#methode-loadcalibrationdata)    |
+| `UserInterface` | `BatteryLogic`        |  [updateOperationState()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-updateoperationstate), [getDisplayState()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-getdisplaystate), [calculateStateOfCharge()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-calculatestateofcharge)               |
+| `UserInterface` | `HardwareAbstraction`        |  [ButtonInput()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-buttoninput)          |
+| `BatteryLogic` | `HardwareAbstraction` |  [readVoltage()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-readvoltage), [setState()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-setstate)     |
+| `BatteryLogic`  | `PersistenceManager`  | [readCalibVoltageToSoCFromDisc()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-readcalibvoltagetosocfromdisc), [readLowBatteryThresholdFromDisc()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-readlowbatterythresholdfromdisc)   |
+| `HardwareAbstraction`  | `PersistenceManager`  | [loadCalibrationData()](./referenziert/Architektur/Schnittstellendokumentation.md#methode-loadcalibrationdata)    |
 
 
 ## Technologiestack
-
-## Technologiestack – Batteriestandsanzeige Software
 
 | Kategorie            | Technologie / Tool             | Begründung                             |
 |----------------------|--------------------------------|----------------------------------------|
