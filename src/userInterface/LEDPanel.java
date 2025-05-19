@@ -3,6 +3,9 @@ package userInterface;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A simple LED panel that can be used to represent the state of a battery.
+ */
 public class LEDPanel extends JPanel {
     private Color ledColor = Color.DARK_GRAY;
 

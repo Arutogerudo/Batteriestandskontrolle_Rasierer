@@ -5,7 +5,7 @@ public class Program {
     public static void main(String[] args) {
         VoltageSimulator simulator = new VoltageSimulator();
         SimpleGUI gui = new SimpleGUI(simulator);
-        simulator.setState(ChargingState.DISCHARGING_ACTIVE);
+        simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
 
         new Thread(() -> {
             while (true) {

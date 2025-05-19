@@ -3,6 +3,9 @@ package userInterface;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Controller of a simple LED panel that can be used to represent the state of a battery.
+ */
 public class LEDController {
     private final LEDPanel led;
     private final Timer blinkTimer;
@@ -43,7 +46,7 @@ public class LEDController {
         blinkTimer.start();
     }
 
-    void stopBlinking() {
+    private void stopBlinking() {
         blinkTimer.stop();
         blinkState = false;
     }

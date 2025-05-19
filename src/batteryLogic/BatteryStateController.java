@@ -4,11 +4,18 @@ import hardwareAbstraction.*;
 import persistenceManager.CalibrationData;
 import persistenceManager.SettingsStorage;
 
+/**
+ * This class is responsible for managing the battery state and calculating the state of charge (SoC)
+ */
 public class BatteryStateController {
     private final VoltageSensor voltageSensor;
     private final CalibrationData calib;
     private final int lowBatteryThreshold;
 
+    /**
+     *  Creates BatteryStateController.
+     * @param simulator The voltage simulator used to read the battery voltage
+     */
     public BatteryStateController(VoltageSimulator simulator){
         voltageSensor = new VoltageSensor(simulator);
         SettingsStorage storage = persistenceManager.SettingsStorage.getInstance();
@@ -16,9 +23,12 @@ public class BatteryStateController {
         lowBatteryThreshold = storage.readLowBatteryThresholdFromDisc();
     }
 
-    public int calculateStateOfCharge() {
-        double voltage = voltageSensor.readVoltage();
-
+    /**
+     * Calculates the state of charge (SoC) based on the given voltage.
+     * @param voltage The voltage to be converted to SoC
+     * @return The state of charge (SoC) as a percentage
+     */
+    public int calculateStateOfCharge(double voltage) {
         double[] voltages = calib.getVoltageCalib();
         int[] socValues = calib.getSoCCalib();
 
@@ -35,14 +45,18 @@ public class BatteryStateController {
             }
         }
 
-        return 0; // Fallback
+        return 0;
     }
 
     private int interpolate(double x, double x0, double x1, int y0, int y1){
         return (int) (y0 + (y1 - y0) * (x - x0) / (x1 - x0));
     }
 
+    /**
+     * Checks if the battery is low based on the current state of charge (SoC).
+     * @return If the current state of charge (SoC) is below the low battery threshold
+     */
     public boolean isLowBattery(){
-        return calculateStateOfCharge() <= lowBatteryThreshold;
+        return calculateStateOfCharge(voltageSensor.readVoltage()) <= lowBatteryThreshold;
     }
 }

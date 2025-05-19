@@ -64,7 +64,7 @@ batteryLogic.OperationController,"3,00",3,3
 batteryLogic.OperationStates,n/a,n/a,0
 batteryLogic.ShortPressCommand,"2,00",2,2
 hardwareAbstraction.ButtonInput,"1,33",2,4
-hardwareAbstraction.ChargingState,n/a,n/a,0
+hardwareAbstraction.ChargingStates,n/a,n/a,0
 hardwareAbstraction.VoltageSensor,"1,00",1,2
 hardwareAbstraction.VoltageSimulator,"2,25",6,9
 persistenceManager.CalibrationData,"1,00",1,3

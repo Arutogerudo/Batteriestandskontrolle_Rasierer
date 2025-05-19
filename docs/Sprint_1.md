@@ -1,6 +1,6 @@
 # Sprint 1
 
-## Sprint Planning
+### Sprint Planning
 
 **Requirements:**
 

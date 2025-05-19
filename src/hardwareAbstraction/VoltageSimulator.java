@@ -1,25 +1,39 @@
 package hardwareAbstraction;
 
+/**
+ * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge.
+ */
 public class VoltageSimulator {
     private double voltage;  
-    private ChargingState state;
+    private ChargingStates state;
 
-    private static final double ACTIVE_DISCHARGE_RATE = 0.0004; // (4.2-3) / 50 Min / 60 sProMin -> 1 volle Ladung reicht für 50 Min. Betrieb
+    private static final double ACTIVE_DISCHARGE_RATE = 0.0004;
     private static final double PASSIVE_DISCHARGE_RATE = 0.00001;
-    private static final double CHARGE_RATE = 0.00033; // 1 volle Ladung dauert 60 Min
+    private static final double CHARGE_RATE = 0.00033;
 
     private static final double MIN_VOLTAGE = 3.0;
-    private static final double MAX_VOLTAGE = 4.2;
+    private static final double START_VOLTAGE = 4.2;
+    private static final double MAX_VOLTAGE = START_VOLTAGE;
 
+    /**
+     * Creates a VoltageSimulator.
+     */
     public VoltageSimulator() {
-        this.voltage = 4.2;
-        this.state = ChargingState.DISCHARGING_PASSIVE;
+        this.voltage = START_VOLTAGE;
+        this.state = ChargingStates.DISCHARGING_PASSIVE;
     }
 
-    public void setState(ChargingState newState) {
+    /**
+     * Sets the state of the battery, e.g. loading, actively discharging or passively discharging.
+     * @param newState the new state of the battery
+     */
+    public void setState(ChargingStates newState) {
         this.state = newState;
     }
 
+    /**
+     * Simulates the passage of time, updating the voltage based on the current state.
+     */
     public void tick() {
         switch (state) {
             case DISCHARGING_ACTIVE:

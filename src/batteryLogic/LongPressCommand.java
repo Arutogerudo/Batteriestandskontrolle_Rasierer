@@ -1,5 +1,8 @@
 package batteryLogic;
 
+/**
+ * Command for long button press in the battery management system.
+ */
 public class LongPressCommand implements ButtonCommand {
     @Override
     public void execute(InteractionHandler handler) {

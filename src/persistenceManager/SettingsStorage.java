@@ -6,8 +6,15 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Singleton class to manage settings related to battery calibration and low battery threshold.
+ */
 public class SettingsStorage {
 
+    private static final double MIN_VOLTAGE = 3;
+    private static final double MAX_VOLTAGE = 4.2;
+    private static final double[] INITIAL_VOLTAGE_CALIB = new double[] { 4.2, 4.0, 3.75, 3.5, 3.0 };
+    private static final int[] INITIAL_SOC_CALIB = new int[] { 100, 80, 50, 20, 0 };
     private static SettingsStorage instance;
 
     private final int lowBatteryThreshold;
@@ -23,6 +30,10 @@ public class SettingsStorage {
         saveSettings();
     }
 
+    /**
+     * Returns the singleton instance of SettingsStorage.
+     * @return the singleton instance of SettingsStorage
+     */
     public static synchronized SettingsStorage getInstance() {
         if (instance == null) {
             instance = new SettingsStorage();
@@ -31,8 +42,8 @@ public class SettingsStorage {
     }
 
     private void initialCalibration() {
-        voltage = new double[] { 4.2, 4.0, 3.75, 3.5, 3.0 };
-        stateOfCharge = new int[] { 100, 80, 50, 20, 0 };
+        voltage = INITIAL_VOLTAGE_CALIB;
+        stateOfCharge = INITIAL_SOC_CALIB;
     }
 
     private void saveSettings() {
@@ -46,8 +57,8 @@ public class SettingsStorage {
             content.append("Voltage,SoC\n");
 
             for (int i = 0; i < voltage.length; i++) {
-                if (voltage[i] < 2.5 || voltage[i] > 4.5) {
-                    throw new IllegalArgumentException("Voltage must be between 2.5 and 4.5.");
+                if (voltage[i] < MIN_VOLTAGE || voltage[i] > MAX_VOLTAGE) {
+                    throw new IllegalArgumentException("Voltage must be between 3 and 4.2.");
                 }
 
                 content
@@ -74,6 +85,10 @@ public class SettingsStorage {
         }
     }
 
+    /**
+     * Reads the low battery threshold from the disk.
+     * @return the low battery threshold
+     */
     public int readLowBatteryThresholdFromDisc() {
         try {
             String content = Files.readString(THRESHOLD_TXT_FILE, StandardCharsets.UTF_8);
@@ -84,6 +99,10 @@ public class SettingsStorage {
         }
     }
 
+    /**
+     * Reads the voltage calibration data from the disk.
+     * @return the voltage calibration data
+     */
     public CalibrationData readCalibVoltageToSoCFromDisc() {
         try {
             List<String> lines = Files.readAllLines(CALIB_TXT_FILE, StandardCharsets.UTF_8);
