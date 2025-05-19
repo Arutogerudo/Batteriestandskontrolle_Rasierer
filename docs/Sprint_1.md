@@ -46,4 +46,31 @@
 
 ### Schritt 6: Review & Retro
 
-Entscheidung gegen Branches, da kein Deployment, keine wirklich großen Teilfunktionalitäten und Arbeit alleine.
+**Was lief gut?**
+
+- Alle Anforderungen wurden umgesetzt.
+- Die Recherche zu Beginn, um wichtige Informationen zu sammeln, war sehr hilfreich.
+- Der Zeitplan wurde eingehalten.
+- Die Tests wurden erfolgreich durchgeführt.
+
+**Was lief nicht so gut?**
+
+- Prozessual musste viel nachgearbeitet werden. Vor allem das Klassendiagramm wurde im Verlauf der Implementierung nochmal komplett umgeschrieben.
+- Der Startpunkt hat gefehlt (vorher Plan zu haben, was zu tun ist).
+- Schwierig von 0 anzufangen.
+- Die Tools waren noch nicht eingerichtet (z.B. IDE Wechsel, Code Metriken, ...).
+- Ich habe nicht konsequent direkt die Dokumentation aktualisiert. (Dadurch fehlt jetzt erster Wurf des Klassendiagramms).
+- Implementierung wurde nicht Feature für Feature angegangen, sondern eher querbeet und dadurch dann alles auf einmal.
+
+**Was werde ich im nächsten Sprint anders machen?**
+
+- Ich werde die Dokumentation direkt während der einzelnen Entwicklungsphasen auf dem aktuellen Stand halten.
+- Ich werde die Implementierung Feature-driven angehen.
+- Ich bleibe bei den jetzt festgelegten Tools.
+- Ich werde prozessual sauberer arbeiten.
+
+**Lessons Learned:**
+
+- Ich habe gelernt, dass ich mich nicht von der Vielzahl an Anforderungen überfordern lassen sollte.
+- Die richtigen Tools ermöglichen es effizient zu arbeiten, wohingegen die falschen Tools eher neue Hürden schaffen.
+- Meine geplante Statusanzeige für den Ladezustand ist nicht optimal, da Personen mit einer Rot-Grün-Sehschwäche Schwierigkeiten haben, den Ladezustand zu erkennen.

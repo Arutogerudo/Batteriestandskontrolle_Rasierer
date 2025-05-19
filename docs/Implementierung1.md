@@ -1,5 +1,7 @@
 # Implementierung
 
+Entscheidung gegen Branches, da kein Deployment, keine wirklich großen Teilfunktionalitäten und Arbeit alleine.
+
 ## Traceability-Matrix
 
 | Requirement-ID | Jira-Issue | Komponente                         | Klasse(n)                             | Schnittstelle(n)                | Testfall(e) |
