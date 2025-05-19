@@ -1,24 +1,18 @@
 # Lastenheft: Batteriestandskontrolle für Rasierapparat
 
 1. Der aktuelle Batteriestand wird klar, eindeutig und in intuitiv verständlicher Form angezeigt.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Die Bedienung des Rasierers wird durch die Batteriestandsanzeige nicht komplizierter.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Die Anzeige des Batteriestands erfolgt ohne spürbare Verzögerungen.
+  - Die Bedienung des Rasierers wird durch die Batteriestandsanzeige nicht komplizierter.
+  - Die Anzeige des Batteriestands erfolgt ohne spürbare Verzögerungen.
 
 2. Der Ladevorgang und seine verschiedenen Zustände sind eindeutig erkennbar.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -  Beim Laden ist klar erkennbar, wenn der Ladevorgang aktiv ist.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -  Beim Laden ist klar erkennbar, wenn der Ladevorgang abgeschlossen ist.
+  -  Beim Laden ist klar erkennbar, wenn der Ladevorgang aktiv ist.
+  -  Beim Laden ist klar erkennbar, wenn der Ladevorgang abgeschlossen ist.
 
 3. Ich werde darauf hingewiesen, dass die Batterie bald leer geht, damit ich den Rasierer vor dem nächsten Einsatz laden kann.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Ich kann einstellen, ob mich der Rasierer schon bei 30 % oder erst bei 10 % warnen soll.
+  - Ich kann einstellen, ob mich der Rasierer schon bei 30 % oder erst bei 10 % warnen soll.
 
 4. Ich kann mir den Akkustand des Rasierers auf Knopfdruck anzeigen lassen, auch wenn der Rasierer gerade nicht verwendet wird.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Die Anzeige ist für farbenblinde oder ältere Nutzer erkennbar sein.
+  - Die Anzeige ist für farbenblinde oder ältere Nutzer erkennbar sein.
 
 5. Ich werde darüber informiert, wenn der Akku nicht richtig lädt.
 

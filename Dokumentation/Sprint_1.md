@@ -26,23 +26,24 @@
 
 ### Schritt 1: Recherche
 
-[Rechercheergebnisse](./referenziert/Rechercheergebnisse.md)
+[Rechercheergebnisse](./referenziert/Rechercheergebnisse.md#sprint-1)
 
 ### Schritt 2: Architektur
 
-[Architektur](Architektur.md)
+[Architektur](Architektur1.md)
 
 ### Schritt 3: Design
 
-[Design](Design.md)
+[Design](Design1.md)
 
 ### Schritt 4: Implementierung
 
-[Implementierung](Implementierung.md)
+[Implementierung](Implementierung1.md)
 
 ### Schritt 5: Test
 
-[Test](Test.md)
+[Test](Test1.md)
 
 ### Schritt 6: Review & Retro
 
+Entscheidung gegen Branches, da kein Deployment, keine wirklich großen Teilfunktionalitäten und Arbeit alleine.

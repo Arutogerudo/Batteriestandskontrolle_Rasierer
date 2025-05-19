@@ -1,5 +1,5 @@
-import HardwareAbstraction.*;
-import UserInterface.*;
+import hardwareAbstraction.*;
+import userInterface.*;
 
 public class Program {
     public static void main(String[] args) {
@@ -11,6 +11,7 @@ public class Program {
             while (true) {
                 simulator.tick();
                 try {
+                    // intentional sleep for simulation purposes
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

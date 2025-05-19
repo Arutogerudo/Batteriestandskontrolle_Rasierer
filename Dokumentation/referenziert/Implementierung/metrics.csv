@@ -1,0 +1,89 @@
+Complexity metrics,Mo., 19 Mai 2025 15:49:06 MESZ
+Method,CogC,ev(G),iv(G),v(G)
+Program.main(String[]),7,1,4,4
+batteryLogic.BatteryStateController.BatteryStateController(VoltageSimulator),0,1,1,1
+batteryLogic.BatteryStateController.calculateStateOfCharge(),10,9,9,10
+"batteryLogic.BatteryStateController.interpolate(double, double, double, int, int)",0,1,1,1
+batteryLogic.BatteryStateController.isLowBattery(),0,1,1,1
+batteryLogic.InactivityCommand.execute(InteractionHandler),1,1,2,2
+batteryLogic.InteractionHandler.InteractionHandler(),0,1,1,1
+batteryLogic.InteractionHandler.getDisplayState(),0,1,1,1
+batteryLogic.InteractionHandler.getOperatingState(),0,1,1,1
+batteryLogic.InteractionHandler.handleButtonPress(String),1,1,2,2
+batteryLogic.InteractionHandler.setDisplayState(DisplayStates),0,1,1,1
+batteryLogic.InteractionHandler.setOperatingState(OperationStates),0,1,1,1
+batteryLogic.LongPressCommand.execute(InteractionHandler),2,1,3,3
+"batteryLogic.OperationController.updateOperationState(VoltageSimulator, InteractionHandler)",2,1,3,3
+batteryLogic.ShortPressCommand.execute(InteractionHandler),1,1,2,2
+"hardwareAbstraction.ButtonInput.ButtonInput(JButton, InteractionHandler)",3,1,2,2
+hardwareAbstraction.VoltageSensor.VoltageSensor(VoltageSimulator),0,1,1,1
+hardwareAbstraction.VoltageSensor.readVoltage(),0,1,1,1
+hardwareAbstraction.VoltageSimulator.VoltageSimulator(),0,1,1,1
+hardwareAbstraction.VoltageSimulator.getVoltage(),0,1,1,1
+hardwareAbstraction.VoltageSimulator.setState(ChargingState),0,1,1,1
+hardwareAbstraction.VoltageSimulator.tick(),3,1,1,6
+mousePressed(MouseEvent),0,n/a,n/a,n/a
+mouseReleased(MouseEvent),2,n/a,n/a,n/a
+"persistenceManager.CalibrationData.CalibrationData(double[], int[])",0,1,1,1
+persistenceManager.CalibrationData.getSoCCalib(),0,1,1,1
+persistenceManager.CalibrationData.getVoltageCalib(),0,1,1,1
+persistenceManager.SettingsStorage.SettingsStorage(),0,1,1,1
+persistenceManager.SettingsStorage.getInstance(),1,1,1,2
+persistenceManager.SettingsStorage.initialCalibration(),0,1,1,1
+persistenceManager.SettingsStorage.readCalibVoltageToSoCFromDisc(),2,1,3,3
+persistenceManager.SettingsStorage.readLowBatteryThresholdFromDisc(),1,1,2,2
+persistenceManager.SettingsStorage.saveSettings(),0,1,1,1
+persistenceManager.SettingsStorage.writeCalibVoltageToSoCToDisc(),5,3,3,5
+persistenceManager.SettingsStorage.writeLowBatteryThresholdToDisc(),1,1,2,2
+userInterface.LEDController.LEDController(),0,1,1,1
+userInterface.LEDController.getLedPanel(),0,1,1,1
+userInterface.LEDController.startBlinking(),1,2,1,2
+userInterface.LEDController.stopBlinking(),0,1,1,1
+userInterface.LEDController.turnOff(),0,1,1,1
+userInterface.LEDController.turnOn(Color),0,1,1,1
+userInterface.LEDPanel.LEDPanel(),0,1,1,1
+userInterface.LEDPanel.paintComponent(Graphics),0,1,1,1
+"userInterface.LEDPanel.setLEDState(Color, boolean)",1,1,1,2
+userInterface.SimpleGUI.SimpleGUI(VoltageSimulator),0,1,1,1
+"userInterface.SimpleGUI.setupPanel(LEDPanel, JLabel)",0,1,1,1
+userInterface.SimpleGUI.update(),0,1,1,1
+userInterface.VisualOutputController.VisualOutputController(VoltageSimulator),0,1,1,1
+userInterface.VisualOutputController.getDisplayed(),0,1,1,1
+userInterface.VisualOutputController.getLedController(),0,1,1,1
+userInterface.VisualOutputController.showLowBatteryWarning(),0,1,1,1
+"userInterface.VisualOutputController.updateDisplay(int, boolean)",3,1,3,3
+
+Class,OCavg,OCmax,WMC
+Program,"3,00",3,3
+batteryLogic.BatteryStateController,"3,00",9,12
+batteryLogic.DisplayStates,n/a,n/a,0
+batteryLogic.InactivityCommand,"2,00",2,2
+batteryLogic.InteractionHandler,"1,17",2,7
+batteryLogic.LongPressCommand,"3,00",3,3
+batteryLogic.OperationController,"3,00",3,3
+batteryLogic.OperationStates,n/a,n/a,0
+batteryLogic.ShortPressCommand,"2,00",2,2
+hardwareAbstraction.ButtonInput,"1,33",2,4
+hardwareAbstraction.ChargingState,n/a,n/a,0
+hardwareAbstraction.VoltageSensor,"1,00",1,2
+hardwareAbstraction.VoltageSimulator,"2,25",6,9
+persistenceManager.CalibrationData,"1,00",1,3
+persistenceManager.SettingsStorage,"1,50",3,12
+userInterface.LEDController,"1,17",2,7
+userInterface.LEDPanel,"1,33",2,4
+userInterface.SimpleGUI,"1,00",1,3
+userInterface.VisualOutputController,"1,40",3,7
+
+Package,v(G)avg,v(G)tot
+,"4,00",4
+batteryLogic,"2,14",30
+hardwareAbstraction,"1,86",13
+persistenceManager,"1,82",20
+userInterface,"1,24",21
+
+Module,v(G)avg,v(G)tot
+Batteriestandskontrolle_Rasierer,"1,76",88
+
+Project,v(G)avg,v(G)tot
+project,"1,76",88
+

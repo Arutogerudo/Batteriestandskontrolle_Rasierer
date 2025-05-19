@@ -1,4 +1,4 @@
-package BatteryLogic;
+package batteryLogic;
 
 public enum DisplayStates {
     OFF,

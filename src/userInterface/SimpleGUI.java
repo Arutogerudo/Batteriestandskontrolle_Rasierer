@@ -1,13 +1,13 @@
-package UserInterface;
+package userInterface;
 
 import javax.swing.*;
 
-import BatteryLogic.BatteryStateController;
-import BatteryLogic.DisplayStates;
-import BatteryLogic.InteractionHandler;
-import BatteryLogic.OperationController;
-import HardwareAbstraction.ButtonInput;
-import HardwareAbstraction.VoltageSimulator;
+import batteryLogic.BatteryStateController;
+import batteryLogic.DisplayStates;
+import batteryLogic.InteractionHandler;
+import batteryLogic.OperationController;
+import hardwareAbstraction.ButtonInput;
+import hardwareAbstraction.VoltageSimulator;
 
 import java.awt.*;
 

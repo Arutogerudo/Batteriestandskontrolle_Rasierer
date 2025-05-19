@@ -1,6 +1,6 @@
-package HardwareAbstraction;
+package hardwareAbstraction;
 
-import BatteryLogic.InteractionHandler;
+import batteryLogic.InteractionHandler;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -10,9 +10,8 @@ public class ButtonInput {
     private final Timer inactivityTimer;
 
     public ButtonInput(JButton button, InteractionHandler handler) {
-        inactivityTimer = new Timer(5000, e -> {
-            handler.handleButtonPress("inactivity");
-        });
+        inactivityTimer = new Timer(5000, e -> handler.handleButtonPress("inactivity"));
+
         inactivityTimer.setRepeats(false);
 
         button.addMouseListener(new MouseAdapter() {

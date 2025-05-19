@@ -1,4 +1,4 @@
-package HardwareAbstraction;
+package hardwareAbstraction;
 
 public enum ChargingState {
     DISCHARGING_ACTIVE,     // Rasierer in Betrieb

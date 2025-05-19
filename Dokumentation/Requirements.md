@@ -20,7 +20,7 @@
 
 ### 1. Funktionale Requirements
 
-<table border="1" cellpadding="6" cellspacing="0">
+<table>
   <thead>
     <tr>
       <th>Nr.</th>
@@ -133,7 +133,7 @@
 
 ### 2. Nicht-funktionale Requirements
 
-<table border="1" cellpadding="6" cellspacing="0">
+<table>
   <thead>
     <tr>
       <th>Nr.</th>
@@ -209,33 +209,33 @@
 
 ### 3. Abhängigkeiten zwischen Requirements
 
-| Requirement-Nr.     | Zusammenhang / Abhängigkeit / Konfliktbeschreibung                                                                 |
-|-------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| 1.1 → 1.2, 1.3                 | Die Spannungsmessung (1.1) ist Voraussetzung für die Umrechnung in Prozent (1.2) und muss dabei automatisch & benutzerfrei (1.3) erfolgen. |
-| 3.1 → 1.2, 3.2, 5.5           | Die Definition der Referenzspannungen (3.1) ist Grundlage für die Prozentanzeige (1.2) und das Signalisieren, dass wieder eine Rasur möglich ist, (5.5) und Voraussetzung für die initiale Kalibrierung (3.2). |
-| 3.2 → 3.3           | Die Definition der initialen Kalibrierung (3.2) ist Vorraussetzung für die regelmäßige Rekalibrierung (3.3). |
-| 3.3 → 3.4                 | Regelmäßige Rekalibrierung (3.3) ist notwendig, um die Anzeigetoleranz von ±5 % (3.4) dauerhaft zu gewährleisten. |
-| 5.4 → 5.1, 5.2, 5.3, 5.5               | Die Anzeige des Ladezustands (5.1, 5.2, 5.3, 5.5) basiert auf der Erkennung durch die Elektronik (5.4). |
-| 1.2 → 2                | Der Ladezustand der Batterie muss zuverlässig in Prozent umgerechnet werden (1.2), um die adäquate Anzeige zu ermöglichen (2). |
-| 2.1 → 2.*               | Die generelle Anzeige des Batteriezustandes (2.1) bildet die Grundlage für alle weiterführenden Anzeigen (2.3) bzw. die Anzeige als Folge von konkreten Aktionen (2.2, 2.5). |
-| 3 → 2.1                | Die Spannungsreferenz und die richtige Kalibrierung (3) ist Vorraussetzung für eine korrekte Anzeige (2.1). |
-| 1.1, 3.1 → 6.1, 6.2                | Die definierte Spannungsreferenz (3.1) und die zuverlässige Messung der Akkuspannung (1.1) ist Vorraussetzung für einen gelungenen Unterspannungs- (6.1) und Überladeschutz (6.2). |
-| 6, 3.3 → 3.5                | Die Umsetzung der Schutzfunktionen für die Sicherheit und die Langlebigkeit der Batterie (6), sowie die regelmäßige Rekalibrierung der Spannungsreferenz (3.3) sind maßgeblich für die Altersrobustheit (3.5). |
+| Requirement-Nr.          | Zusammenhang / Abhängigkeit / Konfliktbeschreibung                                                                                                                                                             |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.1 → 1.2, 1.3           | Die Spannungsmessung (1.1) ist Voraussetzung für die Umrechnung in Prozent (1.2) und muss dabei automatisch & benutzerfrei (1.3) erfolgen.                                                                     |
+| 3.1 → 1.2, 3.2, 5.5      | Die Definition der Referenzspannungen (3.1) ist Grundlage für die Prozentanzeige (1.2) und das Signalisieren, dass wieder eine Rasur möglich ist, (5.5) und Voraussetzung für die initiale Kalibrierung (3.2). |
+| 3.2 → 3.3                | Die Definition der initialen Kalibrierung (3.2) ist Vorraussetzung für die regelmäßige Rekalibrierung (3.3).                                                                                                   |
+| 3.3 → 3.4                | Regelmäßige Rekalibrierung (3.3) ist notwendig, um die Anzeigetoleranz von ±5 % (3.4) dauerhaft zu gewährleisten.                                                                                              |
+| 5.4 → 5.1, 5.2, 5.3, 5.5 | Die Anzeige des Ladezustands (5.1, 5.2, 5.3, 5.5) basiert auf der Erkennung durch die Elektronik (5.4).                                                                                                        |
+| 1.2 → 2                  | Der Ladezustand der Batterie muss zuverlässig in Prozent umgerechnet werden (1.2), um die adäquate Anzeige zu ermöglichen (2).                                                                                 |
+| 2.1 → 2.*                | Die generelle Anzeige des Batteriezustandes (2.1) bildet die Grundlage für alle weiterführenden Anzeigen (2.3) bzw. die Anzeige als Folge von konkreten Aktionen (2.2, 2.5).                                   |
+| 3 → 2.1                  | Die Spannungsreferenz und die richtige Kalibrierung (3) ist Vorraussetzung für eine korrekte Anzeige (2.1).                                                                                                    |
+| 1.1, 3.1 → 6.1, 6.2      | Die definierte Spannungsreferenz (3.1) und die zuverlässige Messung der Akkuspannung (1.1) ist Vorraussetzung für einen gelungenen Unterspannungs- (6.1) und Überladeschutz (6.2).                             |
+| 6, 3.3 → 3.5             | Die Umsetzung der Schutzfunktionen für die Sicherheit und die Langlebigkeit der Batterie (6), sowie die regelmäßige Rekalibrierung der Spannungsreferenz (3.3) sind maßgeblich für die Altersrobustheit (3.5). |
 
 ### 4. Konflikte zwischen Requirements
 
-| Requirement-Nr.     | Zusammenhang / Abhängigkeit / Konfliktbeschreibung                                                                 |
-|-------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| 2.10 ↔ 3.6, 5.6                | Ressourcenschonung (3.6)  oder energieeffizienter Ladeanzeige (5.6) kann mit schneller Anzeigeaktualisierung (2.10) in Konflikt stehen . |
-| 2.7 ↔ 4.3                | Nicht störende Helligkeit (2.7) kann im Widerspruch stehen zu gut wahrnehmbaren Warnungen (4.4). |
+| Requirement-Nr. | Zusammenhang / Abhängigkeit / Konfliktbeschreibung                                                                                       |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 2.10 ↔ 3.6, 5.6 | Ressourcenschonung (3.6)  oder energieeffizienter Ladeanzeige (5.6) kann mit schneller Anzeigeaktualisierung (2.10) in Konflikt stehen . |
+| 2.7 ↔ 4.3       | Nicht störende Helligkeit (2.7) kann im Widerspruch stehen zu gut wahrnehmbaren Warnungen (4.4).                                         |
 
 ### 5. Zusammengehörigkeiten zwischen Requirements
 
-| Requirement-Nr.       | Beschreibung / Begründung                                                                                         |
-|--------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| 1.1, 1.2, 3.1                   | Spannungsmessung (1.1), Umrechnung in Prozent (1.2) und Referenzwerte (3.1) bilden die Grundlage der Anzeige. |
-| 1.2, 3.4, 3.5                  | Prozentanzeige (1.2) ist nur sinnvoll, wenn sie innerhalb einer definierten Toleranz (3.4) und auch bei alternden Akkus (3.5) stabil funktioniert. |
-| 4.1, 4.2                  | Die Einstellung der Warnschwelle (4.2) ist nur sinnvoll, wenn es auch eine Warnung bei niedrigem Akkustand (4.1) gibt und diese ist von der Warnschwelle abhängig.  |
-| 6.2, 6.3, 5                  | Der Überladeschutz (6.2) und die Temperaturüberwachung beim Laden (6.3) hängen mit dem Ladevorgang und seiner Anzeige im generellen (5) zusammen. |
-| 6.1, 1                  | Der Unterspannungsschutz (6.1) hängt eng mit der Erkennung des aktuellen Batteriestandes (1) zusammen, da sonst keine Unterspannung ausgemacht werden kann. |
-| 2.6, 4.3                  | Die intuitive Batteriestandsanzeige (2.6) hängt mit der guten Wahrnehmbarkeit der Warnung bei niedrigem Batteriestand (4.4) zusammen, da beide dasselbe Ziel verfolgen. Für den Nutzer gut erkennbar und leicht verständlich zu sein. |
+| Requirement-Nr. | Beschreibung / Begründung                                                                                                                                                                                                             |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.1, 1.2, 3.1   | Spannungsmessung (1.1), Umrechnung in Prozent (1.2) und Referenzwerte (3.1) bilden die Grundlage der Anzeige.                                                                                                                         |
+| 1.2, 3.4, 3.5   | Prozentanzeige (1.2) ist nur sinnvoll, wenn sie innerhalb einer definierten Toleranz (3.4) und auch bei alternden Akkus (3.5) stabil funktioniert.                                                                                    |
+| 4.1, 4.2        | Die Einstellung der Warnschwelle (4.2) ist nur sinnvoll, wenn es auch eine Warnung bei niedrigem Akkustand (4.1) gibt und diese ist von der Warnschwelle abhängig.                                                                    |
+| 6.2, 6.3, 5     | Der Überladeschutz (6.2) und die Temperaturüberwachung beim Laden (6.3) hängen mit dem Ladevorgang und seiner Anzeige im generellen (5) zusammen.                                                                                     |
+| 6.1, 1          | Der Unterspannungsschutz (6.1) hängt eng mit der Erkennung des aktuellen Batteriestandes (1) zusammen, da sonst keine Unterspannung ausgemacht werden kann.                                                                           |
+| 2.6, 4.3        | Die intuitive Batteriestandsanzeige (2.6) hängt mit der guten Wahrnehmbarkeit der Warnung bei niedrigem Batteriestand (4.4) zusammen, da beide dasselbe Ziel verfolgen. Für den Nutzer gut erkennbar und leicht verständlich zu sein. |

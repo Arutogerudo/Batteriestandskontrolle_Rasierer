@@ -1,9 +1,9 @@
-package UserInterface;
+package userInterface;
 
 import javax.swing.*;
 
-import BatteryLogic.BatteryStateController;
-import HardwareAbstraction.VoltageSimulator;
+import batteryLogic.BatteryStateController;
+import hardwareAbstraction.VoltageSimulator;
 
 public class VisualOutputController {
     private final LEDController ledController;

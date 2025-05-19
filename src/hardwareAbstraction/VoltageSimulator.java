@@ -1,4 +1,4 @@
-package HardwareAbstraction;
+package hardwareAbstraction;
 
 public class VoltageSimulator {
     private double voltage;  

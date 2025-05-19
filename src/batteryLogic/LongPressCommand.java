@@ -1,4 +1,4 @@
-package BatteryLogic;
+package batteryLogic;
 
 public class LongPressCommand implements ButtonCommand {
     @Override

@@ -1,4 +1,6 @@
-# Spannung der Batterie messen (Req. 1.1)
+# Sprint 1
+
+### Spannung der Batterie messen (Req. 1.1)
 
 [Task: Spannungsmessmethode für Li-Ionen-Akku festlegen](https://uniprojectslara.atlassian.net/browse/BAT-38)
 
@@ -6,7 +8,7 @@ In Rasierapparaten werden in der Regel Lithium Ionen Akkus verwendet. Diese Akku
 
 Intern misst ein Mikrocontroller die Spannung und rechnet diese anschließend in einen Prozentwert um.
 
-# Spannungs-Ladekurve eines Lithium Ionen Akkus (Req. 1.2, Req. 3.1)
+### Spannungs-Ladekurve eines Lithium Ionen Akkus (Req. 1.2, Req. 3.1)
 
 [Task: Recherche zur Spannungs-Ladezustands-Kurve](https://uniprojectslara.atlassian.net/browse/BAT-47)
 
@@ -31,7 +33,7 @@ Mit steigendem Alter entlädt sich der Akku schneller, da der Akku immer weniger
 *Bei Nennspannung von 3.75 V (nicht passend zu Abbildung s.o., diese gibt lediglich eine Orientierung für den Verlauf der Spannung abhängig von der Entladezeit).
 
 
-# Entwurf der Berechnungsfunktion (Req. 1.2)
+### Entwurf der Berechnungsfunktion (Req. 1.2)
 
 [Task: Entwurf der Berechnungsfunktion](https://uniprojectslara.atlassian.net/browse/BAT-48)
 
@@ -41,7 +43,7 @@ Mit fortschreitendem Alter der Batterie wird der Ladezustand in Prozent schnelle
 
 **Erkenntnis:** Die regelmäßige Kalibrierung wird nicht für die Umrechnung von Spannung in Ladezustand in Prozent benötigt, da der Spannungsrahmen und die zugehörigen Werte in Prozent erhalten bleiben. Das was regelmäßig durch einen Faktor angepasst werden muss ist die Umrechnung des Ladezustands in Prozent in die Restlaufzeit. Diese wird bei steigendem Alter für gleiche Ladezustände abnehmen.
 
-# Triggerevents definieren (Req. 2.5)
+### Triggerevents definieren (Req. 2.5)
 
 [Task: Definition von Triggerevents](https://uniprojectslara.atlassian.net/browse/BAT-73)
 
@@ -51,13 +53,13 @@ Mit fortschreitendem Alter der Batterie wird der Ladezustand in Prozent schnelle
 4. Andocken an Ladestation oder Trennen davon
 5. Während Betrieb
 
-# übliche Display-Helligkeit (Req. 2.7)
+### übliche Display-Helligkeit (Req. 2.7)
 
 [Task: Definition Display-Helligkeit](https://uniprojectslara.atlassian.net/browse/BAT-79)
 
 Die Einheit für Helligkeit bei Bildschirmen (Nits entspricht cd/m^2). Ein höherer Wert bedeutet, dass der Bildschirm heller ist. Für die meisten Anwendungen auf kleinen Displays sind Werte zwischen 200 und 500 Nits empfohlen. Um eine gute Lesbarkeit bei Tageslicht zu gewährleisten, aber gleichzeitig nicht zu grell im Dunkeln zu sein, liegt die Helligkeit des Displays zwischen 300 und 350 Nits.
 
-# UI Gestaltung unter Beachtung von Farbenblindheit (Req. 2.8)
+### UI Gestaltung unter Beachtung von Farbenblindheit (Req. 2.8)
 
 [Task: Recherche UI Gestaltung unter Beachtung von Farbenblindheit](https://uniprojectslara.atlassian.net/browse/BAT-82)
 
@@ -65,7 +67,7 @@ Die Einheit für Helligkeit bei Bildschirmen (Nits entspricht cd/m^2). Ein höhe
 - Zahlenwerte (in Prozent) sind unabhängig von der Farbe verständlich
 - Software zum testen der Anzeige: [Coblis - Color Blindness Simulator](https://www.color-blindness.com/coblis-color-blindness-simulator/)
 
-# Mindestschriftgröße bei eingeschränktem Sehvermögen (Req. 2.9)
+### Mindestschriftgröße bei eingeschränktem Sehvermögen (Req. 2.9)
 
 [Task: Mindestschriftgröße definieren](https://uniprojectslara.atlassian.net/browse/BAT-83)
 
@@ -79,31 +81,27 @@ Der Rasierer wird in einem nahen Betrachtungsabstand, also bei ca. 20 - 40 cm ve
 
 Die wichtigste Information ist die Prozentanzeige, diese wird größtmöglich und zentral platziert. Eventuell weitere Informationen können in kleinerer Schriftgröße darum herum platziert werden. 
 
-# Standards Kontraste (Req. 2.9)
+### Standards Kontraste (Req. 2.9)
 
 [Task: Kontraste nach Standards prüfen](https://uniprojectslara.atlassian.net/browse/BAT-84)
 
 Nach WCAG 2.1 – Kontrastanforderungen, einem gängigen Standard, sollte das Kontrastverhältnis der eingesetzten Farben bei großem Text (>= 18 pt) 3:1 sein. Um Barrierefreiheit AAA zu gewährleisten ist die Mindestanforderung ein Verhältnis von 7:1.
 
-# Ablauf Kalibriervorgang definieren (Req. 3.2)
+### Ablauf Kalibriervorgang definieren (Req. 3.2)
 
 [Task: Definition Kalibriervorgang](https://uniprojectslara.atlassian.net/browse/BAT-93)
 
 Basiert auf der Definition der Berechnungsfunktion von Spannung in Ladezustand in Prozent. 
 
-### 1. Initiale Kalibrierung
-Die initiale Kalibrierung erfolgt einmalig während der Produktion des Geräts. Dabei wird eine feste Beziehung zwischen der Zellenspannung der Batterie und dem Ladezustand in Prozent (State of Charge, SoC) definiert. 
+1. Initiale Kalibrierung: 
+- Die initiale Kalibrierung erfolgt einmalig während der Produktion des Geräts. Dabei wird eine feste Beziehung zwischen der Zellenspannung der Batterie und dem Ladezustand in Prozent (State of Charge, SoC) definiert.
+- Diese Beziehung wird in Form einer Lookup-Tabelle im Gerät hinterlegt und durch lineare Interpolation zwischen den Messpunkten ergänzt.
+- Ziel: Ermöglicht eine zuverlässige Berechnung des Ladezustands (%) anhand der Batteriespannung über die gesamte Lebensdauer hinweg. Diese Beziehung bleibt konstant und unterliegt keiner Nachkalibrierung.
 
-Diese Beziehung wird in Form einer Lookup-Tabelle im Gerät hinterlegt und durch lineare Interpolation zwischen den Messpunkten ergänzt.
-
-Ziel: Ermöglicht eine zuverlässige Berechnung des Ladezustands (%) anhand der Batteriespannung über die gesamte Lebensdauer hinweg. Diese Beziehung bleibt konstant und unterliegt keiner Nachkalibrierung.
-
-### 2. Regelmäßige Kalibrierung (Betriebskalibrierung)
-Die regelmäßige Kalibrierung erfolgt automatisch während des Betriebs und dient der Korrektur der Restlaufzeitberechnung. Mit zunehmendem Alter der Batterie nimmt deren nutzbare Kapazität ab, sodass für den gleichen Ladezustand weniger Energie zur Verfügung steht. Der Ladezustand in Prozent bleibt korrekt, jedoch muss die daraus berechnete verbleibende Nutzungsdauer (Restlaufzeit) entsprechend angepasst werden.
-
-Dies geschieht durch einen dynamischen Kalibrierfaktor, der aus dem Vergleich von theoretischer und tatsächlicher Nutzungsdauer bestimmt wird.
-
-Ziel: Die Anzeige der verbleibenden Betriebszeit bleibt trotz Batteriealterung realistisch und vertrauenswürdig.
+2. Regelmäßige Kalibrierung (Betriebskalibrierung)
+- Die regelmäßige Kalibrierung erfolgt automatisch während des Betriebs und dient der Korrektur der Restlaufzeitberechnung. Mit zunehmendem Alter der Batterie nimmt deren nutzbare Kapazität ab, sodass für den gleichen Ladezustand weniger Energie zur Verfügung steht. Der Ladezustand in Prozent bleibt korrekt, jedoch muss die daraus berechnete verbleibende Nutzungsdauer (Restlaufzeit) entsprechend angepasst werden.
+- Dies geschieht durch einen dynamischen Kalibrierfaktor, der aus dem Vergleich von theoretischer und tatsächlicher Nutzungsdauer bestimmt wird.
+- Ziel: Die Anzeige der verbleibenden Betriebszeit bleibt trotz Batteriealterung realistisch und vertrauenswürdig.
 
 Kalibrierfaktor-Berechnung:
 Der Kalibrierfaktor wird automatisch ermittelt auf Basis folgender Ereignisse:

@@ -1,7 +1,7 @@
-package BatteryLogic;
+package batteryLogic;
 
-import HardwareAbstraction.ChargingState;
-import HardwareAbstraction.VoltageSimulator;
+import hardwareAbstraction.ChargingState;
+import hardwareAbstraction.VoltageSimulator;
 
 public class OperationController {
     public void updateOperationState(VoltageSimulator simulator, InteractionHandler handler){

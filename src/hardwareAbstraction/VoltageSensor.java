@@ -1,7 +1,7 @@
-package HardwareAbstraction;
+package hardwareAbstraction;
 
 public class VoltageSensor {
-    private VoltageSimulator simulator;
+    private final VoltageSimulator simulator;
 
     public VoltageSensor(VoltageSimulator simulator){
         this.simulator = simulator;

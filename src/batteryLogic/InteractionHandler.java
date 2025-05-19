@@ -1,4 +1,4 @@
-package BatteryLogic;
+package batteryLogic;
 
 import java.util.HashMap;
 import java.util.Map;

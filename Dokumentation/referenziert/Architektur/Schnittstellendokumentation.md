@@ -1,9 +1,9 @@
-# Schnittstelle UserInterface -> BatteryLogic
+# Schnittstelle userInterface -> batteryLogic
 
 ### Methode: updateOperationState()
 
 Beschreibung:
-Aktualisiert den Betriebszustand des Systems basierend auf aktuellen Informationen aus der BatteryLogic (z. B. Ladezustand, Spannung).
+Aktualisiert den Betriebszustand des Systems basierend auf aktuellen Informationen aus der batteryLogic (z. B. Ladezustand, Spannung).
 
 Parameter:
 Keine.
@@ -43,7 +43,7 @@ Verhalten:
 Interpoliert auf Basis der kalibrierten Spannungs- und SoC-Werte. Gibt bei fehlender Kalibration eine Ausnahme zurück.
 
 
-# Schnittstelle UserInterface -> HardwareAbstraction
+# Schnittstelle userInterface -> hardwareAbstraction
 
 ### Methode: ButtonInput()
 
@@ -62,7 +62,7 @@ Konstruktor – kein Rückgabewert.
 Verhalten:
 Erkennt kurze (<1 s) und lange (≥1 s) Tastendrücke und löst entsprechende Events im Handler aus. Außerdem erkennt er, wenn außerhalb des Betriebs 5s keine Userinteraktion mit dem Knopf stattgefunden hat und löst Event "Inaktivität" aus. Dieses führt zur Deaktivierung der Anzeige.
 
-# Schnittstelle BatteryLogic -> HardwareAbstraction
+# Schnittstelle batteryLogic -> hardwareAbstraction
 
   ### Methode: readVoltage()
 
@@ -93,7 +93,7 @@ Verhalten:
 Simuliert unterschiedliche Zustände (aktive/passive Entladung, Aufladung), was sich auf die Spannungsentwicklung auswirkt.
 
 
-# Schnittstelle BatteryLogic -> PersistenceManager
+# Schnittstelle batteryLogic -> persistenceManager
 
   ### Methode: readCalibVoltageToSoCFromDisc()
 
@@ -124,7 +124,7 @@ Verhalten:
 Liest einen numerischen Wert aus einer Textdatei und interpretiert ihn als unteren SoC-Schwellenwert. Bei Format- oder Leseproblemen erfolgt Fehlerausgabe und Rückgabe von -1.
 
 
-# Schnittstelle HardwareAbstraction -> PersistenceManager
+# Schnittstelle hardwareAbstraction -> persistenceManager
 
   ### Methode: loadCalibrationData()
 

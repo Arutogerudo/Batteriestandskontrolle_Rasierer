@@ -1,4 +1,4 @@
-package PersistenceManager;
+package persistenceManager;
 
 public class CalibrationData {
     private final double[] voltage;
