@@ -27,7 +27,7 @@ Ziel: Verifikation der Umrechnung von Spannung in Ladezustand (Interpolation).
 
 Eingabe: 3.6 V
 
-Erwartung: Ladezustand ≈ 35 %, mit einer Toleranz von ±5 % laut Requirement.
+Erwartung: Ladezustand ≈ 35 %, mit einer Toleranz von ±5 % laut Requirement (BAT-51).
 
 Ergebnis: Die Methode calculateStateOfCharge() liefert einen Wert im erwarteten Bereich (30 %–40 %). Die Toleranz wurde korrekt berücksichtigt.
 
