@@ -10,7 +10,7 @@ Intern misst ein Mikrocontroller die Spannung und rechnet diese anschließend in
 
 [Task: Recherche zur Spannungs-Ladezustands-Kurve](https://uniprojectslara.atlassian.net/browse/BAT-47)
 
-![Entladekurve Lithium-Ionen-Zelle](Nennspannung_Lithium_Ionen_Akku_600x600.webp)
+![Entladekurve Lithium-Ionen-Zelle](Nennspannung.webp)
 
 An den Rändern, also in Bereichen von ca. 90% - 100% und 0% - 10% ist ein starker Spannungsanstieg / -abfall zu erkennen. Dort sorgen große Spannungsänderungen für kleinere Änderungen im Ladezustand. Im mittleren Bereich (20% - 80%) ist die Spannung recht stabil. Dort ist die Messung des Ladezustands ungenauer, da nur kleine Spannungsänderungen messbar sind. 
 
