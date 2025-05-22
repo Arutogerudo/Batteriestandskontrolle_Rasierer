@@ -27,21 +27,31 @@ Entscheidung gegen Branches, da kein Deployment, keine wirklich großen Teilfunk
 
 ![Methodenmetriken](referenziert/Implementierung/methodMetrics.png)
 
-Die Methodenmetriken zeigen insgesamt ein positives Bild: Die meisten Methoden weisen niedrige Werte für kognitive Komplexität (CogC), zyklomatische Komplexität (v(G)) sowie strukturelle Metriken wie ev(G) und iv(G) auf. Dies spricht für einen klar strukturierten, gut wartbaren und einfach testbaren Code.
-Eine Ausnahme stellt jedoch die Methode calculateStateOfCharge() dar. Die Werte deuten darauf hin, dass die Methode zu viele Verzweigungen und Wiederholungen enthält, was die Lesbarkeit und Wartbarkeit erheblich einschränkt. Ursache ist vor allem die wiederholte Abfrage von Spannungsbereichen mittels if-else-Konstrukten auf fest indexierten Arrays. 
-Die Methode wurde daher überarbeitet: Statt mehrfacher Verzweigungen wird nun eine Schleife verwendet, die die Kalibrierungspunkte dynamisch verarbeitet. Dadurch wird die Komplexität reduziert, die Methode ist robuster gegenüber Änderungen und besser testbar.
+Die Methodenmetriken zeigen insgesamt ein positives Bild: Die meisten Methoden weisen niedrige Werte für kognitive
+Komplexität (CogC), zyklomatische Komplexität (v(G)) sowie strukturelle Metriken wie ev(G) und iv(G) auf. Dies spricht
+für einen klar strukturierten, gut wartbaren und einfach testbaren Code.
+Eine Ausnahme stellt jedoch die Methode calculateStateOfCharge() dar. Die Werte deuten darauf hin, dass die Methode zu
+viele Verzweigungen und Wiederholungen enthält, was die Lesbarkeit und Wartbarkeit erheblich einschränkt. Ursache ist
+vor allem die wiederholte Abfrage von Spannungsbereichen mittels if-else-Konstrukten auf fest indexierten Arrays.
+Die Methode wurde daher überarbeitet: Statt mehrfacher Verzweigungen wird nun eine Schleife verwendet, die die
+Kalibrierungspunkte dynamisch verarbeitet. Dadurch wird die Komplexität reduziert, die Methode ist robuster gegenüber
+Änderungen und besser testbar.
 
 ### Klassenmetriken
 
 ![Klassenmetriken](referenziert/Implementierung/classMetrics.png)
 
-Die Klassenmetriken zeigen die durchschnittliche Komplexität (OCavg) aller Methoden in einer Klasse, die höchste Einzelkomplexität (OCmax) und die Summe aller Methodenkomplexitäten pro Klasse (WMC) an. Insbesondere nach der Anpassung von calculateStateOfCharge() sind die Werte für alle Klassen im grünen Bereich, was für die Modularität und Wartbarkeit des Codes spricht.
+Die Klassenmetriken zeigen die durchschnittliche Komplexität (OCavg) aller Methoden in einer Klasse, die höchste
+Einzelkomplexität (OCmax) und die Summe aller Methodenkomplexitäten pro Klasse (WMC) an. Insbesondere nach der Anpassung
+von calculateStateOfCharge() sind die Werte für alle Klassen im grünen Bereich, was für die Modularität und Wartbarkeit
+des Codes spricht.
 
 ### Package Metriken
 
 ![PackageMetriken.png](referenziert/Implementierung/packageMetrics.png)
 
-Die Packagemetriken zeigen die durchschnittliche Komplexität pro Methode (v(G)avg) und die Summer der Komplexitäten aller Methoden eines packages. Die Werte sind insgesamt im grünen Bereich.
+Die Packagemetriken zeigen die durchschnittliche Komplexität pro Methode (v(G)avg) und die Summer der Komplexitäten
+aller Methoden eines packages. Die Werte sind insgesamt im grünen Bereich.
 
 ### Modulmetriken
 

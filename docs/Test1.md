@@ -2,7 +2,8 @@
 
 ## **1. Ziel der Tests**
 
-Das Ziel der Tests ist die Verifikation und Validierung des Batteriesystems hinsichtlich funktionaler Korrektheit, Benutzerfreundlichkeit sowie robuster Systemreaktion auf externe und interne Eingaben. Die Tests stellen sicher, dass:
+Das Ziel der Tests ist die Verifikation und Validierung des Batteriesystems hinsichtlich funktionaler Korrektheit,
+Benutzerfreundlichkeit sowie robuster Systemreaktion auf externe und interne Eingaben. Die Tests stellen sicher, dass:
 
 * Spannungen innerhalb zulässiger technischer Grenzen verarbeitet werden.
 * Die Umrechnung von Spannung in Ladezustandsanzeige korrekt erfolgt.
@@ -15,7 +16,8 @@ Das Ziel der Tests ist die Verifikation und Validierung des Batteriesystems hins
 
 ### 2.1 Unit Tests
 
-Ziel: Prüfung der kleinstmöglichen Testeinheiten (z. B. Methoden in `BatteryStateController`), um fehlerhafte Logik frühzeitig zu erkennen.
+Ziel: Prüfung der kleinstmöglichen Testeinheiten (z. B. Methoden in `BatteryStateController`), um fehlerhafte Logik
+frühzeitig zu erkennen.
 
 Beispielsweise getestet:
 
@@ -24,17 +26,20 @@ Beispielsweise getestet:
 
 ### 2.2 Usability Tests
 
-Ziel: Bewertung der Benutzerfreundlichkeit und Barrierefreiheit der Anzeige. Diese Tests konzentrieren sich auf reale Nutzerinteraktionen mit dem System (UX1–UX4).
+Ziel: Bewertung der Benutzerfreundlichkeit und Barrierefreiheit der Anzeige. Diese Tests konzentrieren sich auf reale
+Nutzerinteraktionen mit dem System (UX1–UX4).
 
 ### 2.3 Black-Box/Systemtests
 
-Ziel: Prüfung des sichtbaren Systemverhaltens ohne Kenntnis der internen Implementierung. Diese Tests stellen sicher, dass Benutzerinteraktionen und automatisierte Prozesse wie erwartet funktionieren (BB1–BB5).
+Ziel: Prüfung des sichtbaren Systemverhaltens ohne Kenntnis der internen Implementierung. Diese Tests stellen sicher,
+dass Benutzerinteraktionen und automatisierte Prozesse wie erwartet funktionieren (BB1–BB5).
 
 ---
 
 ## **3. Teststrategie**
 
-Die Teststrategie kombiniert **strukturierte manuelle Tests** mit **automatisierten Unit-Tests**, um folgende Ziele zu erreichen:
+Die Teststrategie kombiniert **strukturierte manuelle Tests** mit **automatisierten Unit-Tests**, um folgende Ziele zu
+erreichen:
 
 * **Automatisierte Tests** für alle testbaren Codeeinheiten (insbesondere `BatteryStateController`)
 * **Manuelle Tests** für Usability-Aspekte, UI-Wahrnehmung und Timing (UX1–UX4, BB1–BB5)
@@ -62,7 +67,7 @@ Die Teststrategie kombiniert **strukturierte manuelle Tests** mit **automatisier
 ### Out-of-Scope:
 
 * Hardwareseitige Energieversorgung oder Batterieverhalten außerhalb des Softwarebereichs
-* Langzeitverhalten (z. B. Alterung der Batterie)
+* Langzeitverhalten (z. B. Alterung der Batterie)
 * Fehlerverhalten bei Sensordefekten (sofern nicht spezifiziert)
 
 ## Code-Review Checkliste
@@ -71,7 +76,10 @@ Die Teststrategie kombiniert **strukturierte manuelle Tests** mit **automatisier
 
 ## Auffälligkeiten bei Code-Review
 
-Die wichtigsten Punkte aus der Code-Review Checkliste wurden in die automatischen Inspections von IntelliJ integriert, so dass der Code-Review-Prozess weitestgehend automatisiert werden kann. Anhand der Inspection Ergebnisse wurde der Code gecleant. Außerdem wurden komplexere Methoden (z.B. calculateStateOfCharge) überarbeitet, um die lesbarkeit und wartbarkeit zu erhöhen.
+Die wichtigsten Punkte aus der Code-Review Checkliste wurden in die automatischen Inspections von IntelliJ integriert,
+sodass der Code-Review-Prozess weitestgehend automatisiert werden kann. Anhand der Inspection Ergebnisse wurde der Code
+gecleant. Außerdem wurden komplexere Methoden (z.B. calculateStateOfCharge) überarbeitet, um die lesbarkeit und
+wartbarkeit zu erhöhen.
 
 ## Definition Testfälle inkl. betroffener Requirements
 
