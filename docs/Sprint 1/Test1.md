@@ -72,7 +72,7 @@ erreichen:
 
 ## Code-Review Checkliste
 
-[Code-Review Checkliste](./referenziert/Test/Code_Review_Checkliste.md)
+[Code-Review Checkliste](../referenziert/Test/Code_Review_Checkliste.md)
 
 ## Auffälligkeiten bei Code-Review
 
@@ -83,8 +83,8 @@ wartbarkeit zu erhöhen.
 
 ## Definition Testfälle inkl. betroffener Requirements
 
-[Testfälle](./referenziert/Test/Testfaelle.md)
+[Testfälle](../referenziert/Test/Testfaelle.md)
 
 ## Dokumentation der Ergebnisse
 
-[Ergebnisse](./referenziert/Test/Testergebnisse.md)
+[Ergebnisse](../referenziert/Test/Testergebnisse.md)

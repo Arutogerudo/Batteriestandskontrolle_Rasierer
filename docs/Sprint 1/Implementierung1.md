@@ -25,7 +25,7 @@ Entscheidung gegen Branches, da kein Deployment, keine wirklich großen Teilfunk
 
 ### Methodenmetriken
 
-![Methodenmetriken](referenziert/Implementierung/methodMetrics.png)
+![Methodenmetriken](../referenziert/Implementierung/methodMetrics.png)
 
 Die Methodenmetriken zeigen insgesamt ein positives Bild: Die meisten Methoden weisen niedrige Werte für kognitive
 Komplexität (CogC), zyklomatische Komplexität (v(G)) sowie strukturelle Metriken wie ev(G) und iv(G) auf. Dies spricht
@@ -39,7 +39,7 @@ Kalibrierungspunkte dynamisch verarbeitet. Dadurch wird die Komplexität reduzie
 
 ### Klassenmetriken
 
-![Klassenmetriken](referenziert/Implementierung/classMetrics.png)
+![Klassenmetriken](../referenziert/Implementierung/classMetrics.png)
 
 Die Klassenmetriken zeigen die durchschnittliche Komplexität (OCavg) aller Methoden in einer Klasse, die höchste
 Einzelkomplexität (OCmax) und die Summe aller Methodenkomplexitäten pro Klasse (WMC) an. Insbesondere nach der Anpassung
@@ -48,13 +48,13 @@ des Codes spricht.
 
 ### Package Metriken
 
-![PackageMetriken.png](referenziert/Implementierung/packageMetrics.png)
+![PackageMetriken.png](../referenziert/Implementierung/packageMetrics.png)
 
 Die Packagemetriken zeigen die durchschnittliche Komplexität pro Methode (v(G)avg) und die Summer der Komplexitäten
 aller Methoden eines packages. Die Werte sind insgesamt im grünen Bereich.
 
 ### Modulmetriken
 
-![Modulmetriken.png](referenziert/Implementierung/moduleMetrics.png)
+![Modulmetriken.png](../referenziert/Implementierung/moduleMetrics.png)
 
 Siehe Packagemetriken.

@@ -14,15 +14,15 @@ und die Interaktion zwischen den Klassen klar ersichtlich ist. Die Sichtbarkeit 
 entsprechend der Konventionen angegeben. Das einzige, was nicht berücksichtigt wurde, sind Enums und Hilfsklassen zur 
 Umsetzung der Designpatterns.
 
-![Klassendiagramm](./referenziert/Design/Klassendiagramm.png)
+![Klassendiagramm](../referenziert/Design/Klassendiagramm.png)
 
 ## Zustandsdiagramm Knopfinteraktion
 
-![Zustandsdiagramm Knopfinteraktion](./referenziert/Design/Zustandsdiagramm_Knopfinteraktion.png)
+![Zustandsdiagramm Knopfinteraktion](../referenziert/Design/Zustandsdiagramm_Knopfinteraktion.png)
 
 ## Sequenzdiagramm Spannungsmessung zu Anzeige
 
-![Sequenzdiagramm Spannungsmessung zu Anzeige](./referenziert/Design/Sequenzdiagramm_Messung_zu_Anzeige.png)
+![Sequenzdiagramm Spannungsmessung zu Anzeige](../referenziert/Design/Sequenzdiagramm_Messung_zu_Anzeige.png)
 
 ## Designpatterns
 

@@ -109,3 +109,7 @@ Der Kalibrierfaktor wird automatisch ermittelt auf Basis folgender Ereignisse:
 - Vollständiger Lade-/Entladezyklus (z. B. von <3,1 V auf 4,2 V)
 - Messung der tatsächlichen Betriebszeit je Ladezyklus
 - Vergleich mit dem ursprünglich erwarteten Wert
+
+
+# Sprint 2
+

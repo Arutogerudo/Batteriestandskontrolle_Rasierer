@@ -34,6 +34,8 @@ Risiken frühzeitig zu minimieren und eine solide Grundlage für die folgenden S
 - Req. 3.1: Spannungsreferenz definieren
 - Req. 3.2: Initiale Kalibrierung
 
+**Sprint-Zeitraum:** 14.05.2025 - 19.05.2025
+
 **Sprintziel:**
 
 1. Batteriestandserkennung vollständig umgesetzt (mit entsprechenden Vorbedingungen), als Basis für alle weiteren
@@ -49,7 +51,7 @@ gewonnenen Erkenntnisse wurden in die weitere Anforderungsbeschreibung und spät
 integriert. Damit wurde sichergestellt, dass sowohl technische Präzision als auch Usability-Anforderungen von Beginn an
 berücksichtigt werden.
 
-[Rechercheergebnisse](./referenziert/Rechercheergebnisse.md#sprint-1)
+[Rechercheergebnisse](../referenziert/Rechercheergebnisse.md#sprint-1)
 
 ### Schritt 2: Architektur
 
