@@ -2,15 +2,16 @@
 
 ## Architekturmuster festlegen
 
-**Schichtenarchitektur**: 
+**Schichtenarchitektur**:
 
-- Trennung der Verantwortlichkeiten (Hardwarenahe-Funktionen wie Spannung messen, Anwendungslogik wie Kalibrierung und Ladezustandsberechnung, Benutzeroberfläche)
+- Trennung der Verantwortlichkeiten (Hardwarenahe-Funktionen wie Spannung messen, Anwendungslogik wie Kalibrierung und
+  Ladezustandsberechnung, Benutzeroberfläche)
 - Jede Schicht ist unabhängig testbar und austauschbar
 - Segmente nach funktionaler Rolle gruppiert → Kapselung und Entkopplung der Anwendung
 - Jede Schicht darf nur die direkt darunterliegende Schicht ansprechen.
--Es gibt keine Rückwärtssprünge oder Querkommunikation.
+  -Es gibt keine Rückwärtssprünge oder Querkommunikation.
 
-## Komponentendiagramm 
+## Komponentendiagramm
 
 ![Komponentendiagramm](../referenziert/Architektur/Komponentendiagramm.png)
 
@@ -21,16 +22,24 @@
 | hardwareAbstraction | Req. 1.1, Req. 2.2, Req. 2.5                                                              | BAT-7, BAT-11, BAT-14                                                  |
 | persistenceManager  | Req. 3.1, Req. 3.2                                                                        | BAT-20, BAT-21                                                         |
 
+**Verantwortlichkeiten der Komponenten:**
+
+| **Komponente**      | **Rolle**                  | **Verantwortlichkeiten**                                                 |
+|---------------------|----------------------------|--------------------------------------------------------------------------|
+| userInterface       | Präsentationsschicht       | Anzeige von Zuständen, LED-Steuerung, Barrierefreiheit, User-Interaktion |
+| batteryLogic        | Business-Logik             | Ladezustand berechnen, User-Interaktionen handeln                        |
+| hardwareAbstraction | Hardware-Interface         | Zugriff auf Sensoren / Simulatoren, LEDs abstrahieren                    |
+| persistenceManager  | Speicher- / Konfig-Schicht | Kalibrierung, Spannungsreferenz, persistente Werte speichern/laden       |
+
 ## Schnittstellendefinition
 
-| **Ziel**              | **Quelle**            | **Schnittstellen**                                                                                                                                                                                                                                                                                                                             |
-|-----------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Ziel**              | **Quelle**            | **Schnittstellen**                                                                                                                                                                                                                                                                                                                                |
+|-----------------------|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `userInterface`       | `batteryLogic`        | [updateOperationState()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-updateoperationstate), [getDisplayState()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-getdisplaystate), [calculateStateOfCharge()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-calculatestateofcharge) |
-| `userInterface`       | `hardwareAbstraction` | [ButtonInput()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-buttoninput)                                                                                                                                                                                                                                                 |
-| `batteryLogic`        | `hardwareAbstraction` | [readVoltage()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-readvoltage), [setState()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-setstate)                                                                                                                                                       |
-| `batteryLogic`        | `persistenceManager`  | [readCalibVoltageToSoCFromDisc()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-readcalibvoltagetosocfromdisc), [readLowBatteryThresholdFromDisc()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-readlowbatterythresholdfromdisc)                                                                     |
-| `hardwareAbstraction` | `persistenceManager`  | [loadCalibrationData()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-loadcalibrationdata)                                                                                                                                                                                                                                 |
-
+| `userInterface`       | `hardwareAbstraction` | [ButtonInput()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-buttoninput)                                                                                                                                                                                                                                                   |
+| `batteryLogic`        | `hardwareAbstraction` | [readVoltage()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-readvoltage), [setState()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-setstate)                                                                                                                                                        |
+| `batteryLogic`        | `persistenceManager`  | [readCalibVoltageToSoCFromDisc()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-readcalibvoltagetosocfromdisc), [readLowBatteryThresholdFromDisc()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-readlowbatterythresholdfromdisc)                                                                      |
+| `hardwareAbstraction` | `persistenceManager`  | [loadCalibrationData()](../referenziert/Architektur/Schnittstellendokumentation.md#methode-loadcalibrationdata)                                                                                                                                                                                                                                   |
 
 ## Technologiestack
 
@@ -47,6 +56,7 @@
 | Test-Framework           | JUnit              | Standard für Java, einfach, erweiterbar                                                                  |
 | Frameworks, Bibliotheken |                    |                                                                                                          |
 
-**Änderung der IDE von VS Code zu IntelliJ IDEA**, da VS Code nicht alle benötigten Funktionen für Java bietet: 
+**Änderung der IDE von VS Code zu IntelliJ IDEA**, da VS Code nicht alle benötigten Funktionen für Java bietet:
+
 - In IntelliJ IDEA ist die **Code-Analyse über das Plugin Metrics Reloaded** direkt integrierbar.
 - Bessere Unterstützung bei Code-Review durch Warnings.

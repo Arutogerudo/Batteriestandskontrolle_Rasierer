@@ -34,6 +34,12 @@ Minimal-Marketable-Product steht. Sprint 3 kann dann für weitere Extras und zur
 2. Gute Integration in bereits vorhandenen Code
 3. Prozessual sauber arbeiten
 
-### Recherche
+### Schritt 1: Recherche
 
 [Rechercheergebnisse](../referenziert/Rechercheergebnisse.md#sprint-2)
+
+### Schritt 2: Architektur
+
+
+
+[Architektur](Architektur2.md)
