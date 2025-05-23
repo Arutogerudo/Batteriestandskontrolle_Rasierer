@@ -40,6 +40,8 @@ Minimal-Marketable-Product steht. Sprint 3 kann dann für weitere Extras und zur
 
 ### Schritt 2: Architektur
 
-
-
 [Architektur](Architektur2.md)
+
+### Schritt 3: Design
+
+[Design](Design2.md)
