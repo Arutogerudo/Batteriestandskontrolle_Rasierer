@@ -47,7 +47,7 @@ public class SimpleGUI {
         new ButtonInput(button, handler);
 
         batteryController = new BatteryStateController(simulator);
-        visualOutputController = new VisualOutputController(simulator);
+        visualOutputController = new VisualOutputController(simulator, handler);
         operationController = new OperationController();
         setupPanel(visualOutputController.getLedController().getLedPanel(), visualOutputController.getDisplayed());
     }

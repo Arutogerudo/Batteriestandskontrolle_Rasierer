@@ -12,7 +12,7 @@ public class Program {
     public static void main(String[] args) {
         VoltageSimulator simulator = new VoltageSimulator();
         SimpleGUI gui = new SimpleGUI(simulator);
-        simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
+        simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
         ChargingDetection chargingDetection = new ChargingDetection(simulator);
 
         new Thread(() -> {

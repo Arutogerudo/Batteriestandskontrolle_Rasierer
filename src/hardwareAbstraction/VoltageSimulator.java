@@ -7,9 +7,9 @@ public class VoltageSimulator {
     private double voltage;
     private ChargingStates state;
 
-    private static final double ACTIVE_DISCHARGE_RATE = 0.004;
+    private static final double ACTIVE_DISCHARGE_RATE = 0.0004;
     private static final double PASSIVE_DISCHARGE_RATE = 0.00001;
-    private static final double CHARGE_RATE = 0.0033;
+    private static final double CHARGE_RATE = 0.00033;
 
     private static final double MIN_VOLTAGE = 3.0;
     private static final double START_VOLTAGE = 4.2;

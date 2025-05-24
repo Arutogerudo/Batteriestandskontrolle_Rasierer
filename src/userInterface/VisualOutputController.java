@@ -3,6 +3,9 @@ package userInterface;
 import javax.swing.*;
 
 import batteryLogic.BatteryStateController;
+import batteryLogic.DisplayStates;
+import batteryLogic.InteractionHandler;
+import batteryLogic.OperationStates;
 import hardwareAbstraction.ChargingDetection;
 import hardwareAbstraction.ChargingStates;
 import hardwareAbstraction.VoltageSensor;
@@ -18,17 +21,20 @@ public class VisualOutputController {
     private final JLabel displayed;
     private final BatteryStateController batteryController;
     private final ChargingDetection chargingDetecter;
+    private ChargingStates previousChargingState = null;
+    private final InteractionHandler handler;
 
     /**
      * Constructor for VisualOutputController.
      *
      * @param simulator The voltage simulator used to read the battery voltage.
      */
-    public VisualOutputController(VoltageSimulator simulator) {
+    public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler) {
         displayed = new JLabel();
         ledController = new LEDController();
         batteryController = new BatteryStateController(simulator);
         chargingDetecter = new ChargingDetection(simulator);
+        this.handler = handler;
         updateDisplay(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
     }
 
@@ -47,9 +53,13 @@ public class VisualOutputController {
             displayed.setText("");
         }
 
-        ChargingStates state = chargingDetecter.getChargingState();
+        ChargingStates currentState = chargingDetecter.getChargingState();
 
-        if (state == ChargingStates.CHARGING) {
+        if (currentState == ChargingStates.CHARGING && previousChargingState != ChargingStates.CHARGING) {
+            handler.setDisplayState(DisplayStates.OFF);
+        }
+
+        if (currentState == ChargingStates.CHARGING) {
             if (percent == 100) {
                 ledController.controlLED(LEDMode.FULL_CHARGE);
             } else {
@@ -57,11 +67,14 @@ public class VisualOutputController {
             }
         } else if (batteryController.isLowBattery()) {
             ledController.controlLED(LEDMode.WARNING);
-        } else if (state == ChargingStates.OVERLOAD_PROTECTION) {
+        } else if (currentState == ChargingStates.OVERLOAD_PROTECTION) {
             ledController.controlLED(LEDMode.FULL_CHARGE);
         } else {
             ledController.controlLED(LEDMode.OFF);
         }
+
+        previousChargingState = currentState;
     }
+
 
 }

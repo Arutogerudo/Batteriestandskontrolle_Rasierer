@@ -1,5 +1,7 @@
 package hardwareAbstraction;
 
+import userInterface.VisualOutputController;
+
 import java.util.Scanner;
 
 public class ChargingDetection {

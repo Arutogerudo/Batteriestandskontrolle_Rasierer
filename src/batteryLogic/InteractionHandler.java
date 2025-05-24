@@ -47,7 +47,7 @@ public class InteractionHandler {
     void setOperatingState(OperationStates newState) {
         this.operationState = newState;
     }
-    void setDisplayState(DisplayStates newState) {
+    public void setDisplayState(DisplayStates newState) {
         this.displayState = newState;
     }
 }
