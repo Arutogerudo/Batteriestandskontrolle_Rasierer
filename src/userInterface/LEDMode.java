@@ -1,6 +1,6 @@
 package userInterface;
 
-public enum LEDMode {
+enum LEDMode {
     /**
      * Active in case of not charging and not unter low-battery warning.
      */

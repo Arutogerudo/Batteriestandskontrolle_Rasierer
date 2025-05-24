@@ -7,10 +7,11 @@ import java.awt.*;
  * A simple LED panel that can be used to represent the state of a battery.
  */
 public class LEDPanel extends JPanel {
+    private static final int SIZE = 16;
     private Color ledColor = Color.DARK_GRAY;
 
     LEDPanel() {
-        setPreferredSize(new Dimension(16, 16));
+        setPreferredSize(new Dimension(SIZE, SIZE));
         setOpaque(false);
     }
 

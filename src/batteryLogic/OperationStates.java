@@ -1,7 +1,7 @@
 package batteryLogic;
 
 /**
- * Enum which defines all possible operation states of the razer.
+ * Enum which defines all possible operation states of the shaver.
  */
 public enum OperationStates {
     /**

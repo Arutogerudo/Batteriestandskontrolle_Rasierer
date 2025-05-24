@@ -47,6 +47,11 @@ public class InteractionHandler {
     void setOperatingState(OperationStates newState) {
         this.operationState = newState;
     }
+
+    /**
+     * Updates Display State of GUI.
+     * @param newState The new display state of gui
+     */
     public void setDisplayState(DisplayStates newState) {
         this.displayState = newState;
     }

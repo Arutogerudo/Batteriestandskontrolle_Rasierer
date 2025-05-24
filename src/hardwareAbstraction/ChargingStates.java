@@ -16,7 +16,13 @@ public enum ChargingStates {
      * Shaver is charging.
      */
     CHARGING,
+    /**
+     * Shaver is fully loaded but charging cable is still plugged in.
+     */
     OVERLOAD_PROTECTION,
+    /**
+     * Battery´s temperature is not in ok range, so the charge is paused.
+     */
     CHARGE_STOP_BC_TEMP
 }
 

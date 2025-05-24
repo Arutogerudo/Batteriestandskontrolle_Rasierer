@@ -5,13 +5,10 @@ import javax.swing.*;
 import batteryLogic.BatteryStateController;
 import batteryLogic.DisplayStates;
 import batteryLogic.InteractionHandler;
-import batteryLogic.OperationStates;
 import hardwareAbstraction.ChargingDetection;
 import hardwareAbstraction.ChargingStates;
 import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
-
-import java.awt.*;
 
 /**
  * This class is responsible for managing the visual output of the battery state.
@@ -20,7 +17,7 @@ public class VisualOutputController {
     private final LEDController ledController;
     private final JLabel displayed;
     private final BatteryStateController batteryController;
-    private final ChargingDetection chargingDetecter;
+    private final ChargingDetection chargingDetector;
     private ChargingStates previousChargingState = null;
     private final InteractionHandler handler;
 
@@ -28,12 +25,13 @@ public class VisualOutputController {
      * Constructor for VisualOutputController.
      *
      * @param simulator The voltage simulator used to read the battery voltage.
+     * @param handler interaction handler to switch display off when charge is starting
      */
     public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler) {
         displayed = new JLabel();
         ledController = new LEDController();
         batteryController = new BatteryStateController(simulator);
-        chargingDetecter = new ChargingDetection(simulator);
+        chargingDetector = new ChargingDetection(simulator);
         this.handler = handler;
         updateDisplay(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
     }
@@ -53,7 +51,7 @@ public class VisualOutputController {
             displayed.setText("");
         }
 
-        ChargingStates currentState = chargingDetecter.getChargingState();
+        ChargingStates currentState = chargingDetector.getChargingState();
 
         if (currentState == ChargingStates.CHARGING && previousChargingState != ChargingStates.CHARGING) {
             handler.setDisplayState(DisplayStates.OFF);

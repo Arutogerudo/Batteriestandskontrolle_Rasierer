@@ -11,9 +11,11 @@ public class OperationController {
     /**
      * Updates the operation state of the shaver based on the last interactions. This update is directly applied to the simulator.
      * @param simulator The voltage simulator that simulates the battery's behavior.
+     * @param tempSim Simulates the temperature of the battery.
      * @param handler The interaction handler that manages the current state of the battery.
+     * @param chargingDetector Detects if the charger is plugged in.
      */
-    public void updateOperationState(VoltageSimulator simulator, TemperatureSimulator tempSim, InteractionHandler handler, ChargingDetection chargingDetecter) {
+    public void updateOperationState(VoltageSimulator simulator, TemperatureSimulator tempSim, InteractionHandler handler, ChargingDetection chargingDetector) {
         if (!tempSim.isTemperatureInSafeRange()) {
             if (handler.getOperatingState() == OperationStates.OPERATING) {
                 handler.setOperatingState(OperationStates.OFF);
@@ -24,14 +26,14 @@ public class OperationController {
             return;
         }
 
-        if (chargingDetecter.getChargingState() != ChargingStates.CHARGING && chargingDetecter.getChargingState() != ChargingStates.OVERLOAD_PROTECTION && chargingDetecter.getChargingState() != ChargingStates.CHARGE_STOP_BC_TEMP) {
+        if (chargingDetector.getChargingState() != ChargingStates.CHARGING && chargingDetector.getChargingState() != ChargingStates.OVERLOAD_PROTECTION && chargingDetector.getChargingState() != ChargingStates.CHARGE_STOP_BC_TEMP) {
             if (handler.getOperatingState() == OperationStates.OFF) {
                 simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
             } else if (handler.getOperatingState() == OperationStates.OPERATING) {
                 simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
             }
         } else {
-            if (chargingDetecter.getChargingState() != ChargingStates.OVERLOAD_PROTECTION && chargingDetecter.getChargingState() != ChargingStates.CHARGE_STOP_BC_TEMP) {
+            if (chargingDetector.getChargingState() != ChargingStates.OVERLOAD_PROTECTION && chargingDetector.getChargingState() != ChargingStates.CHARGE_STOP_BC_TEMP) {
                 simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
             }
             handler.setOperatingState(OperationStates.OFF);

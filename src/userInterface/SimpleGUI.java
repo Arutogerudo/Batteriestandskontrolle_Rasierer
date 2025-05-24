@@ -27,17 +27,18 @@ public class SimpleGUI {
     private final VoltageSensor sensor;
     private final InteractionHandler handler;
     private final BatteryStateController batteryController;
-    private final ChargingDetection chargingDetecter;
+    private final ChargingDetection chargingDetector;
     private final TemperatureSimulator tempSim;
 
     /**
      * Constructor for the SimpleGUI class.
      * @param simulator The voltage simulator used to simulate the battery voltage.
+     * @param tempSim Temperature simulator of battery
      */
     public SimpleGUI(VoltageSimulator simulator, TemperatureSimulator tempSim){
         this.simulator = simulator;
         this.sensor = new VoltageSensor(simulator);
-        this.chargingDetecter = new ChargingDetection(simulator);
+        this.chargingDetector = new ChargingDetection(simulator);
         this.tempSim = tempSim;
 
         button = new JButton();
@@ -57,7 +58,7 @@ public class SimpleGUI {
     public void update(){
         boolean showPercentage;
         showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
-        operationController.updateOperationState(simulator, tempSim, handler, chargingDetecter);
+        operationController.updateOperationState(simulator, tempSim, handler, chargingDetector);
         visualOutputController.updateDisplay(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage);
     }
 

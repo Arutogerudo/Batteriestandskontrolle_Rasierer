@@ -56,6 +56,10 @@ public class VoltageSimulator {
         return voltage;
     }
 
+    /**
+     * Returns the current Charging state (Charging, Discharging)
+     * @return Current Charging state.
+     */
     public ChargingStates getState() {
         return state;
     }
