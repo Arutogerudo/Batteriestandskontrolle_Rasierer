@@ -6,6 +6,8 @@ import batteryLogic.BatteryStateController;
 import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
 
+import java.awt.*;
+
 /**
  * This class is responsible for managing the visual output of the battery state.
  */
@@ -40,11 +42,7 @@ public class VisualOutputController {
             displayed.setText("");
         }
         if (batteryController.isLowBattery()) {
-            showLowBatteryWarning();
+            ledController.controlLED(LEDMode.WARNING);
         }
-    }
-
-    private void showLowBatteryWarning() {
-        ledController.startBlinking();
     }
 }

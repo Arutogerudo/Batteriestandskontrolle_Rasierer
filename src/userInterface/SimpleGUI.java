@@ -11,6 +11,7 @@ import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * This class represents a simple GUI for the battery status check of a shaver.
@@ -65,7 +66,7 @@ public class SimpleGUI {
         display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         display.setLayout(new BorderLayout());
 
-        ImageIcon originalImage = new ImageIcon("C:\\Users\\Lara\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\powerIcon.jpg");
+        ImageIcon originalImage = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/powerIcon.jpg")));
         ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(WIDTH_HEIGHT_BUTTON, WIDTH_HEIGHT_BUTTON, Image.SCALE_SMOOTH));
         button.setIcon(scaledImage);
         button.setPreferredSize(new Dimension(WIDTH_HEIGHT_BUTTON, WIDTH_HEIGHT_BUTTON));

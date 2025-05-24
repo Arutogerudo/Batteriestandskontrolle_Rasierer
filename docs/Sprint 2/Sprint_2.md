@@ -16,7 +16,7 @@ Minimal-Marketable-Product steht. Sprint 3 kann dann für weitere Extras und zur
 **Requirements:**
 
 - Req. 2.8: Barrierefreie Anzeige (Farbenblindheit)
-  Req. 4.1: Warnung bei niedrigem Batteriestand
+- Req. 4.1: Warnung bei niedrigem Batteriestand
 - Req. 4.3: Wahrnehmbarkeit der Warnung
 - Req. 5.1: Ladeaktivität anzeigen
 - Req. 5.2: Ladeabschluss anzeigen

@@ -1,5 +1,6 @@
 package persistenceManager;
 
+import java.nio.file.Paths;
 import java.util.List;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -21,8 +22,8 @@ public class SettingsStorage {
     private double[] voltage;
     private int[] stateOfCharge;
 
-    private static final Path CALIB_TXT_FILE = Path.of("C:\\Users\\Lara\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\calibVoltageToSoC.txt");
-    private static final Path THRESHOLD_TXT_FILE = Path.of("C:\\Users\\Lara\\OneDrive - Technische Hochschule Deggendorf\\Studium\\Semester 4\\Software Engineering\\Projekt - Batteriestandkontrolle Rasierer\\Batteriestandskontrolle_Rasierer\\src\\resources\\threshold.txt");
+    private static final Path CALIB_TXT_FILE = Paths.get("src", "resources", "calibVoltageToSoC.txt");
+    private static final Path THRESHOLD_TXT_FILE = Paths.get("src", "resources", "threshold.txt");
 
     private SettingsStorage() {
         lowBatteryThreshold = 10;

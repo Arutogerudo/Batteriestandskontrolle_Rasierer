@@ -1,7 +1,14 @@
 import hardwareAbstraction.*;
 import userInterface.*;
 
+/**
+ * Class to start programm.
+ */
 public class Program {
+    /**
+     * Start of Programm.
+     * @param args arguments
+     */
     public static void main(String[] args) {
         VoltageSimulator simulator = new VoltageSimulator();
         SimpleGUI gui = new SimpleGUI(simulator);
