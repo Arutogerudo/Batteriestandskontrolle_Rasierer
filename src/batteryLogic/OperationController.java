@@ -13,9 +13,9 @@ public class OperationController {
      * @param handler The interaction handler that manages the current state of the battery.
      */
     public void updateOperationState(VoltageSimulator simulator, InteractionHandler handler) {
-        if (handler.getOperatingState() == OperationStates.OFF) {
+        if (handler.getOperatingState() == OperationStates.OFF && simulator.getState() != ChargingStates.CHARGING) {
             simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
-        } else if (handler.getOperatingState() == OperationStates.OPERATING) {
+        } else if (handler.getOperatingState() == OperationStates.OPERATING && simulator.getState() != ChargingStates.CHARGING) {
             simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
         }
     }

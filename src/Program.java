@@ -13,6 +13,7 @@ public class Program {
         VoltageSimulator simulator = new VoltageSimulator();
         SimpleGUI gui = new SimpleGUI(simulator);
         simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
+        ChargingDetection chargingDetection = new ChargingDetection();
 
         new Thread(() -> {
             while (true) {
@@ -29,6 +30,12 @@ public class Program {
         new Thread(() -> {
             while (true) {
                 gui.update();
+            }
+        }).start();
+
+        new Thread(() -> {
+            while (true) {
+                chargingDetection.listenForChargingCommands(simulator);
             }
         }).start();
         
