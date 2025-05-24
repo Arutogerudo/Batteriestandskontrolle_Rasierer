@@ -58,7 +58,7 @@ public class VisualOutputController {
         } else if (batteryController.isLowBattery()) {
             ledController.controlLED(LEDMode.WARNING);
         } else if (state == ChargingStates.OVERLOAD_PROTECTION) {
-            ledController.controlLED(LEDMode.CHARGING);
+            ledController.controlLED(LEDMode.FULL_CHARGE);
         } else {
             ledController.controlLED(LEDMode.OFF);
         }
