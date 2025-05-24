@@ -153,19 +153,19 @@ Der Kalibrierfaktor wird automatisch ermittelt auf Basis folgender Ereignisse:
 **Änderung inkl. Begründung:**
 
 - Warnung bei Unterschreiten der Schwelle: rot schnell blinkend
-- Signalisierung der Ladeaktivität: gelb dauerleuchtend
-- Signalisierung des Ladeabschlusses: blau langsam blinkend
+- Signalisierung der Ladeaktivität: gelb langsam blinkend
+- Signalisierung des Ladeabschlusses: blau dauerleuchtend
 
 Beibehalten des rot blinkens für die Warnung, da Rot eine kulturell etablierte Warnfarbe ist. Das Blinkmuster dient
 zusätzlich als Hinweis, falls die Farbe allein nicht erkannt wird. Hohe Blinkfrequenz sorgt für klare visuelle
 Wahrnehmbarkeit.
 
 Änderung von Rot auf Gelb für das Signalisieren der Ladeaktivität, da Gelb deutlich besser unterscheidbar von Rot und
-Grün ist, gerade bei Farbsehstörungen. Dauerleuchten unterscheidet sich visuell vom Blinkmuster der Warnung. Dadurch
+Grün ist, gerade bei Farbsehstörungen. Langsames Blinken unterscheidet sich visuell vom Blinkmuster der Warnung. Dadurch
 entsteht ein klar unterscheidbarer Zustand, auch bei beeinträchtigtem Farbsehen.
 
-Änderung von Grün auf Blau mit langsamen Blinken für das Signalisieren des Ladeabschlusses, da Blau für nahezu alle
-Formen der Farbsehschwäche gut erkennbar ist. Das langsame Blinkmuster hebt den Zustand zusätzlich vom Dauerleuchten (
+Änderung von Grün auf Blau mit Dauerleuchten für das Signalisieren des Ladeabschlusses, da Blau für nahezu alle
+Formen der Farbsehschwäche gut erkennbar ist. Das Dauerleuchten hebt den Zustand zusätzlich vom langsamen Blinken (
 Laden) und schnellen Blinken (Warnung) ab. So wird auch ohne Farberkennung ein eindeutiges visuelles Feedback
 ermöglicht.
 

@@ -8,11 +8,12 @@ import java.awt.*;
  */
 public class LEDController {
     private static final int WARNING_DELAY = 500;
-    private static final int FULL_CHARGE_DELAY = 1000;
+    private static final int CHARGING_DELAY = 1000;
     private final LEDPanel led;
     private final Timer blinkTimer;
     private boolean blinkState;
     private Color blinkColor;
+    private LEDMode currentMode = LEDMode.OFF;
 
     LEDController() {
         this.led = new LEDPanel();
@@ -30,27 +31,33 @@ public class LEDController {
     }
 
     void controlLED(LEDMode mode) {
+        if (mode == currentMode) {
+            return;
+        } else {
+            turnOff();
+        }
         switch (mode) {
             case OFF:
                 turnOff();
-                stopBlinking();
                 break;
             case WARNING:
                 blinkTimer.setDelay(WARNING_DELAY);
                 startBlinking(Color.RED);
                 break;
             case CHARGING:
-                turnOn();
+                blinkTimer.setDelay(CHARGING_DELAY);
+                startBlinking(Color.YELLOW);
+                break;
             case FULL_CHARGE:
-                blinkTimer.setDelay(FULL_CHARGE_DELAY);
-                startBlinking(Color.BLUE);
+                turnOn();
                 break;
         }
+        currentMode = mode;
     }
 
     private void turnOn() {
         stopBlinking();
-        led.setLEDState(Color.YELLOW, true);
+        led.setLEDState(Color.BLUE, true);
     }
 
     private void turnOff() {

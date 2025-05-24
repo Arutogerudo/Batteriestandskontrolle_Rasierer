@@ -3,6 +3,8 @@ package userInterface;
 import javax.swing.*;
 
 import batteryLogic.BatteryStateController;
+import hardwareAbstraction.ChargingDetection;
+import hardwareAbstraction.ChargingStates;
 import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
 
@@ -15,15 +17,18 @@ public class VisualOutputController {
     private final LEDController ledController;
     private final JLabel displayed;
     private final BatteryStateController batteryController;
+    private final ChargingDetection chargingDetecter;
 
     /**
      * Constructor for VisualOutputController.
+     *
      * @param simulator The voltage simulator used to read the battery voltage.
      */
     public VisualOutputController(VoltageSimulator simulator) {
         displayed = new JLabel();
         ledController = new LEDController();
         batteryController = new BatteryStateController(simulator);
+        chargingDetecter = new ChargingDetection(simulator);
         updateDisplay(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
     }
 
@@ -41,8 +46,22 @@ public class VisualOutputController {
         } else {
             displayed.setText("");
         }
-        if (batteryController.isLowBattery()) {
+
+        ChargingStates state = chargingDetecter.getChargingState();
+
+        if (state == ChargingStates.CHARGING) {
+            if (percent == 100) {
+                ledController.controlLED(LEDMode.FULL_CHARGE);
+            } else {
+                ledController.controlLED(LEDMode.CHARGING);
+            }
+        } else if (batteryController.isLowBattery()) {
             ledController.controlLED(LEDMode.WARNING);
+        } else if (state == ChargingStates.OVERLOAD_PROTECTION) {
+            ledController.controlLED(LEDMode.CHARGING);
+        } else {
+            ledController.controlLED(LEDMode.OFF);
         }
     }
+
 }

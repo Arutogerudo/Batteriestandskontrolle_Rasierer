@@ -1,7 +1,7 @@
 package hardwareAbstraction;
 
 /**
- * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge.
+ * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge. But increased speed by factor 10.
  */
 public class VoltageSimulator {
     private double voltage;
@@ -32,10 +32,6 @@ public class VoltageSimulator {
         this.state = newState;
     }
 
-    public ChargingStates getState() {
-        return state;
-    }
-
     /**
      * Simulates the passage of time, updating the voltage based on the current state.
      */
@@ -44,7 +40,7 @@ public class VoltageSimulator {
             case DISCHARGING_ACTIVE:
                 voltage -= ACTIVE_DISCHARGE_RATE;
                 break;
-            case DISCHARGING_PASSIVE:
+            case DISCHARGING_PASSIVE, OVERLOAD_PROTECTION:
                 voltage -= PASSIVE_DISCHARGE_RATE;
                 break;
             case CHARGING:
@@ -58,6 +54,10 @@ public class VoltageSimulator {
 
     double getVoltage() {
         return voltage;
+    }
+
+    public ChargingStates getState() {
+        return state;
     }
 }
 

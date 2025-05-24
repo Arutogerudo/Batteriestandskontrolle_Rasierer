@@ -12,12 +12,12 @@
 
 **Anzeigedesign Ladeaktivität:**
 
-LED leutet während Ladeaktivität durchgehend gelb. Auf Knopfdruck kann die Ladezustandsanzeige aktiviert werden. Der
+LED blinkt während Ladeaktivität langsam gelb. Auf Knopfdruck kann die Ladezustandsanzeige aktiviert werden. Der
 Rasierer lässt sich während der Ladeaktivität allerdings nicht einschalten
 
 **Anzeigedesign Ladeende:**
 
-LED blinkt langsam in blau (solange das Ladekabel noch dran ist). Anschalten nicht möglich, solange Kabel noch
+LED leuchtet dauerhaft in blau (solange das Ladekabel noch dran ist). Anschalten nicht möglich, solange Kabel noch
 verbunden, aber Ladezustandsanzeige kann über Knopfdruck abgerufen werden.
 
 **Ladefehler und wie diese angezeigt werden:**
