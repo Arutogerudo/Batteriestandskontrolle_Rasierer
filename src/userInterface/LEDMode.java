@@ -1,0 +1,21 @@
+package userInterface;
+
+public enum LEDMode {
+    /**
+     * Active in case of not charging and not unter low-battery warning.
+     */
+    OFF,
+    /**
+     * Active in case of low-battery warning.
+     */
+    WARNING,
+    /**
+     * Active in case of charging.
+     */
+    CHARGING,
+    /**
+     * Active in case of completed charge.
+     */
+    FULL_CHARGE
+}
+
