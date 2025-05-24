@@ -16,6 +16,7 @@ public enum ChargingStates {
      * Shaver is charging.
      */
     CHARGING,
-    OVERLOAD_PROTECTION
+    OVERLOAD_PROTECTION,
+    CHARGE_STOP_BC_TEMP
 }
 

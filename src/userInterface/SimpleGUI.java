@@ -2,10 +2,7 @@ package userInterface;
 
 import javax.swing.*;
 
-import batteryLogic.BatteryStateController;
-import batteryLogic.DisplayStates;
-import batteryLogic.InteractionHandler;
-import batteryLogic.OperationController;
+import batteryLogic.*;
 import hardwareAbstraction.ButtonInput;
 import hardwareAbstraction.ChargingDetection;
 import hardwareAbstraction.VoltageSensor;
@@ -31,15 +28,17 @@ public class SimpleGUI {
     private final InteractionHandler handler;
     private final BatteryStateController batteryController;
     private final ChargingDetection chargingDetecter;
+    private final TemperatureSimulator tempSim;
 
     /**
      * Constructor for the SimpleGUI class.
      * @param simulator The voltage simulator used to simulate the battery voltage.
      */
-    public SimpleGUI(VoltageSimulator simulator){
+    public SimpleGUI(VoltageSimulator simulator, TemperatureSimulator tempSim){
         this.simulator = simulator;
         this.sensor = new VoltageSensor(simulator);
         this.chargingDetecter = new ChargingDetection(simulator);
+        this.tempSim = tempSim;
 
         button = new JButton();
 
@@ -58,7 +57,7 @@ public class SimpleGUI {
     public void update(){
         boolean showPercentage;
         showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
-        operationController.updateOperationState(simulator, handler, chargingDetecter);
+        operationController.updateOperationState(simulator, tempSim, handler, chargingDetecter);
         visualOutputController.updateDisplay(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage);
     }
 
