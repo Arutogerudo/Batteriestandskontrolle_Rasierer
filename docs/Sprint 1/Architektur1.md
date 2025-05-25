@@ -43,18 +43,18 @@
 
 ## Technologiestack
 
-| Kategorie                | Technologie / Tool | Begründung                                                                                               |
-|--------------------------|--------------------|----------------------------------------------------------------------------------------------------------|
-| Sprache                  | Java Temurin 17    | persönliche Erfahrung -> erhöhte Produktivität & geringere Fehleranfälligkeit, einfache Wartung          |
-| Buildsystem              | --keins--          | kein Build                                                                                               |
-| Versionskontrolle        | Git + GitHub       | Standard                                                                                                 |
-| Organisation, Tracking   | Jira               | bereits Vorerfahrungen, sehr viele Funktionalitäten, Unternehmensstandard, Integration in github möglich |
-| IDE                      | IntelliJ           | Leicht, modular, gut kompatibel für Code in Java und Doku in .md                                         |
-| Ausgabe                  | Konsole            | einfachste Lösung und in meinem Projekt kein Fokus                                                       |
-| Dokumentation            | Markdown + draw.io | Für Anforderungen & Architektur, gute und einfache Tools für Modellierung und Dokumentation              |
-| Codeanalyse              | MetricsReloaded    | CI/CD integrierbar, ideal für Clean Code, Integration mit Github ermöglicht automatische Prüfung         |
-| Test-Framework           | JUnit              | Standard für Java, einfach, erweiterbar                                                                  |
-| Frameworks, Bibliotheken |                    |                                                                                                          |
+| Kategorie                | Technologie / Tool            | Begründung                                                                                                   |
+|--------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------|
+| Sprache                  | Java Temurin 17               | persönliche Erfahrung -> erhöhte Produktivität & geringere Fehleranfälligkeit, einfache Wartung              |
+| Buildsystem              | --keins--                     | kein Build                                                                                                   |
+| Versionskontrolle        | Git + GitHub                  | Standard                                                                                                     |
+| Organisation, Tracking   | Jira                          | bereits Vorerfahrungen, sehr viele Funktionalitäten, Unternehmensstandard, Integration in github möglich     |
+| IDE                      | IntelliJ                      | Leicht, modular, gut kompatibel für Code in Java und Doku in .md                                             |
+| Ausgabe                  | Konsole                       | einfachste Lösung und in meinem Projekt kein Fokus                                                           |
+| Dokumentation            | Markdown + draw.io / PlantUML | Für Anforderungen & Architektur, gute und einfache Tools für Modellierung und Dokumentation, IDE Integration |
+| Codeanalyse              | MetricsReloaded               | CI/CD integrierbar, ideal für Clean Code, Integration mit Github ermöglicht automatische Prüfung             |
+| Test-Framework           | JUnit                         | Standard für Java, einfach, erweiterbar                                                                      |
+| Frameworks, Bibliotheken |                               |                                                                                                              |
 
 **Änderung der IDE von VS Code zu IntelliJ IDEA**, da VS Code nicht alle benötigten Funktionen für Java bietet:
 

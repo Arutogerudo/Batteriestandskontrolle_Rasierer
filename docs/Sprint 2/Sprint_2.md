@@ -45,3 +45,55 @@ Minimal-Marketable-Product steht. Sprint 3 kann dann für weitere Extras und zur
 ### Schritt 3: Design
 
 [Design](Design2.md)
+
+### Schritt 4: Implementierung
+
+Einige zusätzliche Hilfsklassen und Schnittstellen wurden eingeführt, um Wiederverwendbarkeit und Verständlichkeit zu
+verbessern.
+
+Bereits während der Implementierung wurden kontinuierlich manuelle Tests durchgeführt – sowohl über die grafische
+Benutzeroberfläche (GUI) als auch über die Kommandozeile. Dabei wurden gezielt Teilsysteme geprüft, ob sie die
+erwarteten Ergebnisse liefern, um Fehler frühzeitig zu identifizieren und zu beheben.
+
+Nach der Implementierung wurde das Klassendiagramm aktualisiert, um die tatsächlich umgesetzten Strukturen korrekt
+abzubilden. Auch die Bezeichnungen im Zustands- und Sequenzdiagramm wurden überprüft und angepasst, um mit der
+Implementierung konsistent zu sein, vor allem in den Bezeichnungen.
+
+[Implementierung](Implementierung2.md)
+
+# TODO: Code cleanen (Komplexität reduzieren, Abhängigkeiten verringern, eindeutigere Schnittstellen)
+# TODO: Code-Metriken erstellen & dokumentieren - Komplexität, Abhängigkeiten, Testabdeckung, ... (Sprint 1 kommentieren, dass nur Komplexität - Fehler)
+# TODO: Code Review - Code-Qualität, Lesbarkeit, Verständlichkeit, ...
+# TODO: Klassendiagramm erzeugen (PlantUML Parser)
+# TODO: Zustands- und Sequenzdiagramme überarbeiten (Abläufe, Bezeichnungen, ...)
+# TODO: Doku Design updaten mit neuen Grafiken + Dokumentieren
+# TODO: Traceability-Matrix erstellen / updaten aus Sprint 1 (Anforderungen, Jira-Issues, Klassen, Schnittstellen, Testfälle)
+# TODO: im Urlaub - Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
+# TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
+# TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
+# TODO: Review durchführen
+
+### Schritt 5: Test
+
+### Schritt 6: Review & Retro
+
+**Was lief gut?**
+
+- Alle Anforderungen wurden umgesetzt.
+- Die Recherche zu Beginn, um wichtige Informationen zu sammeln, war sehr hilfreich.
+- Der Zeitplan wurde eingehalten.
+- Die Implementierung wurde strukturiert und feature-driven durchgeführt, was die Übersichtlichkeit
+  verbessert hat.
+- Die neuen Tools haben zu mehr Effizienz und Klarheit beigetragen.
+
+**Was lief nicht so gut?**
+
+- 
+
+**Was werde ich im nächsten Sprint anders machen?**
+
+- 
+
+**Lessons Learned:**
+
+- 

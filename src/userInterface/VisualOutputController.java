@@ -58,21 +58,15 @@ public class VisualOutputController {
         }
 
         if (currentState == ChargingStates.CHARGING) {
-            if (percent == 100) {
-                ledController.controlLED(LEDMode.FULL_CHARGE);
-            } else {
-                ledController.controlLED(LEDMode.CHARGING);
-            }
-        } else if (batteryController.isLowBattery()) {
-            ledController.controlLED(LEDMode.WARNING);
+            ledController.controlLED(percent == 100 ? LEDMode.FULL_CHARGE : LEDMode.CHARGING);
         } else if (currentState == ChargingStates.OVERLOAD_PROTECTION) {
             ledController.controlLED(LEDMode.FULL_CHARGE);
+        } else if (batteryController.isLowBattery()) {
+            ledController.controlLED(LEDMode.WARNING);
         } else {
             ledController.controlLED(LEDMode.OFF);
         }
 
         previousChargingState = currentState;
     }
-
-
 }
