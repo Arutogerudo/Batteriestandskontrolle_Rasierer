@@ -11,6 +11,13 @@ public class OperationController {
     private final IInteractionHandler handler;
     private final IChargingDetection chargingDetector;
 
+    /**
+     * Constructor for the OperationController.
+     * @param simulator The voltage simulator to control the battery's voltage state.
+     * @param tempSim The temperature simulator to simulate the battery's temperature.
+     * @param handler The interaction handler to manage user interactions and operating states.
+     * @param chargingDetector The charging detection interface to recognize charging of the battery.
+     */
     public OperationController(IVoltageSimulator simulator, ITemperatureSimulator tempSim, IInteractionHandler handler, IChargingDetection chargingDetector) {
         this.simulator = simulator;
         this.tempSim = tempSim;

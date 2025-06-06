@@ -61,13 +61,20 @@ Implementierung konsistent zu sein, vor allem in den Bezeichnungen.
 
 [Implementierung](Implementierung2.md)
 
-# TODO: Traceability-Matrix erstellen / updaten aus Sprint 1 (Anforderungen, Jira-Issues, Klassen, Schnittstellen, Testfälle)
-
 ### Schritt 5: Test
 
-# TODO: Code Review - Code-Qualität, Lesbarkeit, Verständlichkeit, ...
+Nach Abschluss der Implementierung habe ich zunächst alle während der Entwicklung durchgeführten Tests als formale
+Testfälle dokumentiert. Darauf aufbauend habe ich das übergeordnete Ziel des Testens, die geplanten Testarten sowie
+deren Abdeckung definiert und eine Teststrategie festgelegt. Um die interne Codequalität sicherzustellen, habe ich eine
+das Codereview durchgeführt. Der Code wurde basierend auf den Ergebnissen überarbeitet. Anschließend habe ich gezielt
+weitere Testfälle ergänzt, um die vollständige Abdeckung aller Hauptanforderungen sicherzustellen.
+
+[Test](Test2.md)
+
 # TODO: Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
+
 # TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
+
 # TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
 
 ### Schritt 6: Review & Retro

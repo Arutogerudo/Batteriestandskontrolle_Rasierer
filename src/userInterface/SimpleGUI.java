@@ -23,12 +23,9 @@ public class SimpleGUI {
     private final VisualOutputController visualOutputController;
     private final OperationController operationController;
     private static JButton button;
-    private final VoltageSimulator simulator;
     private final VoltageSensor sensor;
     private final InteractionHandler handler;
     private final BatteryStateController batteryController;
-    private final ChargingDetection chargingDetector;
-    private final TemperatureSimulator tempSim;
 
     /**
      * Constructor for the SimpleGUI class.
@@ -36,10 +33,8 @@ public class SimpleGUI {
      * @param tempSim Temperature simulator of battery
      */
     public SimpleGUI(VoltageSimulator simulator, TemperatureSimulator tempSim){
-        this.simulator = simulator;
         this.sensor = new VoltageSensor(simulator);
-        this.chargingDetector = new ChargingDetection(simulator);
-        this.tempSim = tempSim;
+        ChargingDetection chargingDetector = new ChargingDetection(simulator);
 
         button = new JButton();
 
