@@ -3,7 +3,7 @@ package hardwareAbstraction;
 /**
  * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge. But increased speed by factor 10.
  */
-public class VoltageSimulator {
+public class VoltageSimulator implements IVoltageSimulator {
     private double voltage;
     private ChargingStates state;
 
@@ -28,6 +28,7 @@ public class VoltageSimulator {
      *
      * @param newState the new state of the battery
      */
+    @Override
     public void setState(ChargingStates newState) {
         this.state = newState;
     }

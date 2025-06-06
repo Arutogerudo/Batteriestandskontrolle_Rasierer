@@ -48,7 +48,7 @@ public class SimpleGUI {
 
         batteryController = new BatteryStateController(simulator);
         visualOutputController = new VisualOutputController(simulator, handler);
-        operationController = new OperationController();
+        operationController = new OperationController(simulator, tempSim, handler, chargingDetector);
         setupPanel(visualOutputController.getLedController().getLedPanel(), visualOutputController.getDisplayed());
     }
 
@@ -58,7 +58,7 @@ public class SimpleGUI {
     public void update(){
         boolean showPercentage;
         showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
-        operationController.updateOperationState(simulator, tempSim, handler, chargingDetector);
+        operationController.updateOperationState();
         visualOutputController.updateVisuals(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage);
     }
 

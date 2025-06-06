@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Integrates logic to detect charge cable.
  */
-public class ChargingDetection {
+public class ChargingDetection implements IChargingDetection {
     private static final double FULL_CHARGE_VOLTAGE = 4.2;
     private final VoltageSimulator simulator;
 
@@ -43,6 +43,7 @@ public class ChargingDetection {
      * Returns the current charging state of the battery.
      * @return current charging state
      */
+    @Override
     public ChargingStates getChargingState(){
         if (simulator.getVoltage() >= FULL_CHARGE_VOLTAGE) {
             return ChargingStates.OVERLOAD_PROTECTION;

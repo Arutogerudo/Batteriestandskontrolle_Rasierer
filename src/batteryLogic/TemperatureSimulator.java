@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Simulates Temperature Sensor.
  */
-public class TemperatureSimulator extends Thread {
+public class TemperatureSimulator extends Thread implements ITemperatureSimulator {
     private static final double LOWER_TEMP_LIMIT = 15.0;
     private static final double UPPER_TEMP_LIMIT = 45.0;
     private static final double NORMAL_TEMP = 25.0;
@@ -45,7 +45,8 @@ public class TemperatureSimulator extends Thread {
      *
      * @return true, if temperature in safe range; else false
      */
-    boolean isTemperatureInSafeRange() {
+    @Override
+    public boolean isTemperatureInSafeRange() {
         return temperature >= LOWER_TEMP_LIMIT && temperature <= UPPER_TEMP_LIMIT;
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Handles user interactions with the device over button input.
  */
-public class InteractionHandler {
+public class InteractionHandler implements CommandContext, IInteractionHandler {
     private OperationStates operationState = OperationStates.OFF;
     private DisplayStates displayState = DisplayStates.OFF;
 
@@ -40,11 +40,13 @@ public class InteractionHandler {
         return displayState;
     }
 
-    OperationStates getOperatingState() {
+    @Override
+    public OperationStates getOperatingState() {
         return operationState;
     }
 
-    void setOperatingState(OperationStates newState) {
+    @Override
+    public void setOperatingState(OperationStates newState) {
         this.operationState = newState;
     }
 

@@ -1,31 +1,37 @@
 package batteryLogic;
 
-import hardwareAbstraction.ChargingDetection;
-import hardwareAbstraction.ChargingStates;
-import hardwareAbstraction.VoltageSimulator;
+import hardwareAbstraction.*;
 
 /**
  * This class is responsible for controlling the operation state of the battery.
  */
 public class OperationController {
+    private final IVoltageSimulator simulator;
+    private final ITemperatureSimulator tempSim;
+    private final IInteractionHandler handler;
+    private final IChargingDetection chargingDetector;
+
+    public OperationController(IVoltageSimulator simulator, ITemperatureSimulator tempSim, IInteractionHandler handler, IChargingDetection chargingDetector) {
+        this.simulator = simulator;
+        this.tempSim = tempSim;
+        this.handler = handler;
+        this.chargingDetector = chargingDetector;
+    }
+
     /**
      * Updates the operation state of the shaver based on the last interactions. This update is directly applied to the simulator.
-     * @param simulator The voltage simulator that simulates the battery's behavior.
-     * @param tempSim Simulates the temperature of the battery.
-     * @param handler The interaction handler that manages the current state of the battery.
-     * @param chargingDetector Detects if the charger is plugged in.
      */
-    public void updateOperationState(VoltageSimulator simulator, TemperatureSimulator tempSim, InteractionHandler handler, ChargingDetection chargingDetector) {
+    public void updateOperationState() {
         ChargingStates chargingState = chargingDetector.getChargingState();
         OperationStates opState = handler.getOperatingState();
 
         if (!tempSim.isTemperatureInSafeRange()) {
-            handleUnsafeTemperature(simulator, handler, chargingState, opState);
+            handleUnsafeTemperature((VoltageSimulator) simulator, (InteractionHandler) handler, chargingState, opState);
             return;
         }
 
         if (!isChargingOrInProtection(chargingState)) {
-            handleNoChargingOrProtectionState(simulator, opState);
+            handleNoChargingOrProtectionState((VoltageSimulator) simulator, opState);
         } else {
             handler.setOperatingState(OperationStates.OFF);
         }

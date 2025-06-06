@@ -61,16 +61,24 @@ Implementierung konsistent zu sein, vor allem in den Bezeichnungen.
 
 [Implementierung](Implementierung2.md)
 
-# TODO: Code cleanen (Komplexität reduzieren, Abhängigkeiten verringern, eindeutigere Schnittstellen)
-# TODO: Code-Metriken erstellen & dokumentieren - Komplexität, Abhängigkeiten, Testabdeckung, ... (Sprint 1 kommentieren, dass nur Komplexität - Fehler)
+# TODO: Code-Metriken erstellen & dokumentieren - Komplexität, Abhängigkeiten, Testabdeckung, ... 
+
 # TODO: Code Review - Code-Qualität, Lesbarkeit, Verständlichkeit, ...
+
 # TODO: Klassendiagramm erzeugen (PlantUML Parser)
+
 # TODO: Zustands- und Sequenzdiagramme überarbeiten (Abläufe, Bezeichnungen, ...)
+
 # TODO: Doku Design updaten mit neuen Grafiken + Dokumentieren
+
 # TODO: Traceability-Matrix erstellen / updaten aus Sprint 1 (Anforderungen, Jira-Issues, Klassen, Schnittstellen, Testfälle)
+
 # TODO: im Urlaub - Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
+
 # TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
+
 # TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
+
 # TODO: Review durchführen
 
 ### Schritt 5: Test
@@ -85,14 +93,16 @@ Implementierung konsistent zu sein, vor allem in den Bezeichnungen.
 - Die Implementierung wurde strukturiert und feature-driven durchgeführt, was die Übersichtlichkeit
   verbessert hat.
 - Die neuen Tools haben zu mehr Effizienz und Klarheit beigetragen.
+- Fehler aus Sprint 1 entdeckt und besser gemacht: nicht nur Kompexitätsmetriken, sondern auch Abhängigkeiten,
+  Codezeilen und Testabdeckung berücksichtigt.
 
 **Was lief nicht so gut?**
 
-- 
+-
 
 **Was werde ich im nächsten Sprint anders machen?**
 
-- 
+-
 
 **Lessons Learned:**
 
