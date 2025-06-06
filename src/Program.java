@@ -29,7 +29,7 @@ public class Program {
             }
         }).start();
 
-        tempSim.start();
+        //tempSim.start();
 
         new Thread(() -> {
             while (true) {

@@ -32,19 +32,31 @@ public class BatteryStateController {
         double[] voltages = calib.getVoltageCalib();
         int[] socValues = calib.getSoCCalib();
 
+        validateCalibrationData(voltages, socValues);
+
+        if (voltage >= voltages[0]) {
+            return socValues[0];
+        }
+
+        if (voltage <= voltages[voltages.length - 1]) {
+            return socValues[socValues.length - 1];
+        }
+
+        return interpolateBetweenPoints(voltage, voltages, socValues);
+    }
+
+    private void validateCalibrationData(double[] voltages, int[] socValues) {
         if (voltages == null || socValues == null || voltages.length != socValues.length) {
             throw new IllegalStateException("Calibration data is not initialized.");
         }
+    }
 
-        if (voltage >= voltages[0]) return socValues[0];
-        if (voltage <= voltages[voltages.length - 1]) return socValues[socValues.length - 1];
-
+    private int interpolateBetweenPoints(double voltage, double[] voltages, int[] socValues) {
         for (int i = 1; i < voltages.length; i++) {
             if (voltage >= voltages[i]) {
                 return interpolate(voltage, voltages[i], voltages[i - 1], socValues[i], socValues[i - 1]);
             }
         }
-
         return 0;
     }
 

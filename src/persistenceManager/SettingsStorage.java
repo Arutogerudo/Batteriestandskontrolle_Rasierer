@@ -1,5 +1,6 @@
 package persistenceManager;
 
+import java.io.UncheckedIOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.io.IOException;
@@ -53,36 +54,48 @@ public class SettingsStorage {
     }
 
     private void writeCalibVoltageToSoCToDisc() {
+        validateVoltageRange();
+        String csvContent = buildCsvContent();
+
         try {
-            StringBuilder content = new StringBuilder();
-            content.append("Voltage,SoC\n");
+            Files.writeString(CALIB_TXT_FILE, csvContent, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            handleWriteError(e);
+        }
+    }
 
-            for (int i = 0; i < voltage.length; i++) {
-                if (voltage[i] < MIN_VOLTAGE || voltage[i] > MAX_VOLTAGE) {
-                    throw new IllegalArgumentException("Voltage must be between 3 and 4.2.");
-                }
+    private void validateVoltageRange() {
+        for (double v : voltage) {
+            if (v < MIN_VOLTAGE || v > MAX_VOLTAGE) {
+                throw new IllegalArgumentException("Voltage must be between 3 and 4.2.");
+            }
+        }
+    }
 
-                content
+    private String buildCsvContent() {
+        StringBuilder content = new StringBuilder("Voltage,SoC\n");
+
+        for (int i = 0; i < voltage.length; i++) {
+            content
                     .append(voltage[i])
                     .append(",")
                     .append(stateOfCharge[i])
                     .append("\n");
-            }
-
-            Files.writeString(CALIB_TXT_FILE, content.toString(), StandardCharsets.UTF_8);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
         }
+
+        return content.toString();
+    }
+
+    private void handleWriteError(IOException e) {
+        e.printStackTrace();
+        throw new UncheckedIOException("Failed to write calibration data to disk.", e);
     }
 
     private void writeLowBatteryThresholdToDisc() {
         try {
             Files.writeString(THRESHOLD_TXT_FILE, String.valueOf(lowBatteryThreshold), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
+            handleWriteError(e);
         }
     }
 

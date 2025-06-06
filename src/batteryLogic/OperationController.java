@@ -20,31 +20,38 @@ public class OperationController {
         OperationStates opState = handler.getOperatingState();
 
         if (!tempSim.isTemperatureInSafeRange()) {
-            if (opState == OperationStates.OPERATING) {
-                handler.setOperatingState(OperationStates.OFF);
-                simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
-            } else if (chargingState == ChargingStates.CHARGING) {
-                simulator.setState(ChargingStates.CHARGE_STOP_BC_TEMP);
-            }
+            handleUnsafeTemperature(simulator, handler, chargingState, opState);
             return;
         }
 
-        boolean isChargingOrProtection = chargingState == ChargingStates.CHARGING
-                || chargingState == ChargingStates.OVERLOAD_PROTECTION
-                || chargingState == ChargingStates.CHARGE_STOP_BC_TEMP;
-
-        if (!isChargingOrProtection) {
-            if (opState == OperationStates.OFF) {
-                simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
-            } else if (opState == OperationStates.OPERATING) {
-                simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
-            }
+        if (!isChargingOrInProtection(chargingState)) {
+            handleNoChargingOrProtectionState(simulator, opState);
         } else {
-            if (chargingState != ChargingStates.OVERLOAD_PROTECTION && chargingState != ChargingStates.CHARGE_STOP_BC_TEMP) {
-                simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
-            }
             handler.setOperatingState(OperationStates.OFF);
         }
+    }
+
+    private void handleUnsafeTemperature(VoltageSimulator simulator, InteractionHandler handler, ChargingStates chargingState, OperationStates opState) {
+        if (opState == OperationStates.OPERATING) {
+            handler.setOperatingState(OperationStates.OFF);
+            simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
+        } else if (chargingState == ChargingStates.CHARGING) {
+            simulator.setState(ChargingStates.CHARGE_STOP_BC_TEMP);
+        }
+    }
+
+    private void handleNoChargingOrProtectionState(VoltageSimulator simulator, OperationStates opState) {
+        if (opState == OperationStates.OFF) {
+            simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
+        } else if (opState == OperationStates.OPERATING) {
+            simulator.setState(ChargingStates.DISCHARGING_ACTIVE);
+        }
+    }
+
+    private boolean isChargingOrInProtection(ChargingStates state) {
+        return state == ChargingStates.CHARGING ||
+               state == ChargingStates.OVERLOAD_PROTECTION ||
+               state == ChargingStates.CHARGE_STOP_BC_TEMP;
     }
 
 }

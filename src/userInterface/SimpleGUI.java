@@ -59,7 +59,7 @@ public class SimpleGUI {
         boolean showPercentage;
         showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
         operationController.updateOperationState(simulator, tempSim, handler, chargingDetector);
-        visualOutputController.updateDisplay(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage);
+        visualOutputController.updateVisuals(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage);
     }
 
     private void setupPanel(LEDPanel led, JLabel statusLabel){

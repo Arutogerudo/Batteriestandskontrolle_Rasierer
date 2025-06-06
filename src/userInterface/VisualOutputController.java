@@ -33,7 +33,7 @@ public class VisualOutputController {
         batteryController = new BatteryStateController(simulator);
         chargingDetector = new ChargingDetection(simulator);
         this.handler = handler;
-        updateDisplay(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
+        updateVisuals(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
     }
 
     LEDController getLedController() {
@@ -44,29 +44,39 @@ public class VisualOutputController {
         return displayed;
     }
 
-    void updateDisplay(int percent, boolean showPercentage) {
-        if (showPercentage) {
-            displayed.setText(percent + "%");
-        } else {
-            displayed.setText("");
-        }
-
+    void updateVisuals(int percent, boolean showPercentage) {
+        updateTextDisplay(percent, showPercentage);
         ChargingStates currentState = chargingDetector.getChargingState();
 
+        handleChargingStateTransition(currentState);
+        updateLEDState(currentState, percent);
+
+        previousChargingState = currentState;
+    }
+
+    private void updateTextDisplay(int percent, boolean showPercentage) {
+        displayed.setText(showPercentage ? percent + "%" : "");
+    }
+
+    private void handleChargingStateTransition(ChargingStates currentState) {
         if (currentState == ChargingStates.CHARGING && previousChargingState != ChargingStates.CHARGING) {
             handler.setDisplayState(DisplayStates.OFF);
         }
+    }
+
+    private void updateLEDState(ChargingStates currentState, int percent) {
+        LEDMode mode;
 
         if (currentState == ChargingStates.CHARGING) {
-            ledController.controlLED(percent == 100 ? LEDMode.FULL_CHARGE : LEDMode.CHARGING);
+            mode = (percent == 100) ? LEDMode.FULL_CHARGE : LEDMode.CHARGING;
         } else if (currentState == ChargingStates.OVERLOAD_PROTECTION) {
-            ledController.controlLED(LEDMode.FULL_CHARGE);
+            mode = LEDMode.FULL_CHARGE;
         } else if (batteryController.isLowBattery()) {
-            ledController.controlLED(LEDMode.WARNING);
+            mode = LEDMode.WARNING;
         } else {
-            ledController.controlLED(LEDMode.OFF);
+            mode = LEDMode.OFF;
         }
 
-        previousChargingState = currentState;
+        ledController.controlLED(mode);
     }
 }

@@ -7,9 +7,9 @@ public class VoltageSimulator {
     private double voltage;
     private ChargingStates state;
 
-    private static final double ACTIVE_DISCHARGE_RATE = 0.0004;
+    private static final double ACTIVE_DISCHARGE_RATE = 0.004;
     private static final double PASSIVE_DISCHARGE_RATE = 0.00001;
-    private static final double CHARGE_RATE = 0.00033;
+    private static final double CHARGE_RATE = 0.0033;
 
     private static final double MIN_VOLTAGE = 3.0;
     private static final double START_VOLTAGE = 4.2;
@@ -36,20 +36,31 @@ public class VoltageSimulator {
      * Simulates the passage of time, updating the voltage based on the current state.
      */
     public void tick() {
+        updateVoltageBasedOnState();
+        clampVoltage();
+    }
+
+    private void updateVoltageBasedOnState() {
         switch (state) {
             case DISCHARGING_ACTIVE:
                 voltage -= ACTIVE_DISCHARGE_RATE;
                 break;
-            case DISCHARGING_PASSIVE, OVERLOAD_PROTECTION:
+            case DISCHARGING_PASSIVE:
+            case OVERLOAD_PROTECTION:
                 voltage -= PASSIVE_DISCHARGE_RATE;
                 break;
             case CHARGING:
                 voltage += CHARGE_RATE;
                 break;
         }
+    }
 
-        if (voltage > MAX_VOLTAGE) voltage = MAX_VOLTAGE;
-        if (voltage < MIN_VOLTAGE) voltage = MIN_VOLTAGE;
+    private void clampVoltage() {
+        if (voltage > MAX_VOLTAGE) {
+            voltage = MAX_VOLTAGE;
+        } else if (voltage < MIN_VOLTAGE) {
+            voltage = MIN_VOLTAGE;
+        }
     }
 
     double getVoltage() {

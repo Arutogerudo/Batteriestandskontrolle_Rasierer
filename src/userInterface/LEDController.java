@@ -31,14 +31,12 @@ public class LEDController {
     }
 
     void controlLED(LEDMode mode) {
-        if (mode == currentMode) {
-            return;
-        } else {
-            turnOff();
-        }
+        if (mode == currentMode) return;
+
+        turnOff();
+
         switch (mode) {
             case OFF:
-                turnOff();
                 break;
             case WARNING:
                 blinkTimer.setDelay(WARNING_DELAY);
@@ -52,6 +50,7 @@ public class LEDController {
                 turnOn();
                 break;
         }
+
         currentMode = mode;
     }
 
