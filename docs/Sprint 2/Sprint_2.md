@@ -71,10 +71,7 @@ weitere Testfälle ergänzt, um die vollständige Abdeckung aller Hauptanforderu
 
 [Test](Test2.md)
 
-# TODO: Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
-
 # TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
-
 # TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
 
 ### Schritt 6: Review & Retro

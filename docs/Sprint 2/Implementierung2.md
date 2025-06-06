@@ -13,20 +13,20 @@
 | 2.5            | BAT-14     | userInterface, hardwareAbstraction | `InteractionHandler`                               | setState()                                      | BB3         |
 | 2.6            | BAT-15     | userInterface                      | `SimpleGUI`                                        |                                                 | UX3         |
 | 2.7            | BAT-16     | userInterface                      | `SimpleGUI`                                        |                                                 | UX2         |
-| 2.8            | BAT-17     | userInterface                      | `SimpleGUI`                                        | updateLEDState()                                |             |
+| 2.8            | BAT-17     | userInterface                      | `SimpleGUI`                                        | updateLEDState()                                | UX-5        |
 | 2.9            | BAT-18     | userInterface                      | `SimpleGUI`                                        |                                                 | UX4         |
 | 2.10           | BAT-19     | userInterface                      | `SimpleGUI`                                        | getDisplayState()                               | BB5         |
 | 3.1            | BAT-20     | persistenceManager                 | `SettingsStorage`, `VoltageSimulator`              | calculateStateOfCharge()                        | UT1, UT2    |
 | 3.2            | BAT-21     | persistenceManager                 | `SettingsStorage`                                  | readCalibVoltageToSoCFromDisc()                 |             |
-| 4.1            | BAT-26     | batteryLogic, userInterface        | `BatteryStateController`, `VisualOutputController` | isLowBattery()                                  |             |
-| 4.3            | BAT-28     | userInterface                      | `LEDController`, `VisualOutputController`          | startBlinking(), setLEDState()                  |             |
-| 5.1            | BAT-29     | userInterface                      | `VisualOutputController`, `LEDController`          | updateOperationState()                          |             |
-| 5.2            | BAT-30     | userInterface                      | `VisualOutputController`, `LEDController`          | updateOperationState()                          |             |
-| 5.3            | BAT-31     | userInterface, batteryLogic        | `VisualOutputController`, `OperationController`    | setLEDState(), updateOperationState()           |             |
-| 5.4            | BAT-32     | hardwareAbstraction                | `ChargingDetection`                                | getChargingState(), listenForChargingCommands() |             |
+| 4.1            | BAT-26     | batteryLogic, userInterface        | `BatteryStateController`, `VisualOutputController` | isLowBattery()                                  | UT-4, BB-6  |
+| 4.3            | BAT-28     | userInterface                      | `LEDController`, `VisualOutputController`          | startBlinking(), setLEDState()                  | UX-6        |
+| 5.1            | BAT-29     | userInterface                      | `VisualOutputController`, `LEDController`          | updateOperationState()                          | BB-7        |
+| 5.2            | BAT-30     | userInterface                      | `VisualOutputController`, `LEDController`          | updateOperationState()                          | BB-8        |
+| 5.3            | BAT-31     | userInterface, batteryLogic        | `VisualOutputController`, `OperationController`    | setLEDState(), updateOperationState()           | BB-9        |
+| 5.4            | BAT-32     | hardwareAbstraction                | `ChargingDetection`                                | getChargingState(), listenForChargingCommands() | UX-7        |
 | 5.6            | BAT-34     | userInterface                      | `LEDController`                                    | stopBlinking(), turnOff()                       |             |
-| 6.2            | BAT-36     | batteryLogic                       | `OperationController`                              |                                                 |             |
-| 6.3            | BAT-37     | hardwareAbstraction, batteryLogic  | `TemperatureSimulator`, `OperationController`      |                                                 |             |
+| 6.2            | BAT-36     | batteryLogic                       | `OperationController`                              |                                                 | BB-10       |
+| 6.3            | BAT-37     | hardwareAbstraction, batteryLogic  | `TemperatureSimulator`, `OperationController`      |                                                 | BB-11       |
 
 ## Code-Metriken
 

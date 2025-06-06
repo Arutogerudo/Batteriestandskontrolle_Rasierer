@@ -45,6 +45,19 @@
 
 ---
 
+### UT4 – Niedriger Batteriestand korrekt erkannt
+
+* **Ziel:** Prüfung, ob `isLowBattery()` bei SoC < Threshold korrekt `true` zurückliefert
+* **Ausgangszustand:** LEDMode = 'OFF', OperationState = 'OFF' | 'OPERATING', ChargingState = 'DISCHARGING'
+* **Ereignis (Zustandsübergang):** state of charge fällt unter Schwellwert durch Spannungsabfall in Simulator
+* **Eingabe:** Spannung = 3.2 V
+* **Erwartete Reaktion:** `isLowBattery()` gibt `true` zurück
+* **Erwarteter Folgezustand:** LEDMode = 'WARNING'
+* **Klasse:** `BatteryStateController.isLowBattery()`
+* **Requirement:** 4.1
+
+---
+
 ## **Usability Tests**
 
 ### UX1 – Keine Zusatzbedienung erforderlich
@@ -97,6 +110,42 @@
 * **Erwartete Reaktion:** Anzeige lesbar ohne besondere Anstrengung (große Schrift, hoher Kontrast)
 * **Erwarteter Folgezustand:** siehe Ausgangszustand
 * **Requirement:** 2.9
+
+---
+
+### UX5 – Farben auch bei Farbenblindheit unterscheidbar
+
+* **Ziel:** Bewertung der Anzeige mit Farbsimulator für verschiedene Typen der Farbenblindheit
+* **Ausgangszustand:** jeden LEDMode-Zustand einmal testen
+* **Ereignis (Zustandsübergang):** keiner
+* **Vorgehen:** Tests mit Simulationssoftware (https://www.color-blindness.com/coblis-color-blindness-simulator/)
+* **Erwartete Reaktion:** Nutzer können Farben eindeutig unterscheiden (ggf. nur durch Helligkeit/Blinkmuster)
+* **Erwarteter Folgezustand:** siehe Ausgangszustand
+* **Requirement:** 2.8
+
+---
+
+### UX6 – Blinkende rote Warnanzeige ist eindeutig wahrnehmbar
+
+* **Ziel:** Nutzer erkennt visuelle Warnung bei niedrigem Ladezustand zuverlässig
+* **Ausgangszustand:** LEDMode = 'OFF', OperationState = 'OFF' | 'OPERATING', ChargingState = 'DISCHARGING'
+* **Ereignis (Zustandsübergang):** state of charge fällt unter Schwellwert (10 %)
+* **Vorgehen:** Nutzer beobachten das System in typischer Umgebung
+* **Erwartete Reaktion:** Rote blinkende LED wird bemerkt und als Warnung verstanden
+* **Erwarteter Folgezustand:** LEDMode = 'WARNING'
+* **Requirement:** 4.3
+
+---
+
+### UX7 – LED-Zustände sind intuitiv unterscheidbar
+
+* **Ziel:** Bewertung, ob LED-Zustände (rot blinkend, blau leuchtend, gelb blinkend, aus) verständlich sind
+* **Ausgangszustand:** Gerät wird in allen Ladezuständen durchlaufen
+* **Ereignis (Zustandsübergang):** Wechsel der Lademodi
+* **Vorgehen:** Nutzer erhalten kurze Einführung, danach Interpretation der LED ohne Erklärung
+* **Erwartete Reaktion:** Ratenquote ≥ 95 %, Nutzer erkennen Zustand korrekt
+* **Erwarteter Folgezustand:** siehe Ausgangszustand
+* **Requirement:** 5.4
 
 ---
 
@@ -163,3 +212,74 @@
     'DISCHARGING_PASSIVE' | 'DISCHARGING_ACTIVE'
 * **Requirement:** 2.10
 
+---
+
+### BB6 – Warnung bei niedrigem SoC durch blinkende rote LED
+
+* **Ziel:** Prüfung, ob die Warn-LED bei SoC < Schwellwert zuverlässig blinkt
+* **Ausgangszustand:** LEDMode = 'OFF', OperationState = 'OFF' | 'OPERATING', ChargingState = 'DISCHARGING'
+* **Ereignis (Zustandsübergang):** Spannung fällt unter Schwelle (z.B. auf 8 %)
+* **Eingabe:** Spannung simuliert über Simulator
+* **Erwartete Reaktion:** LED blinkt rot
+* **Erwarteter Folgezustand:** LEDMode = 'WARNING'
+* **Requirement:** 4.1
+
+---
+
+### BB7 – Ladeanzeige: langsam gelbes Blinken beim Laden
+
+* **Ziel:** Prüfung der Ladeaktivitätsanzeige bei aktivem Ladevorgang
+* **Ausgangszustand:** kein Ladevorgang aktiv, LEDMode = 'OFF' | 'WARNING'
+* **Ereignis (Zustandsübergang):** `start`-Kommando per Konsole
+* **Vorgehen:** LED beobachten, während Ladevorgang startet
+* **Erwartete Reaktion:** LED blinkt gelb im langsamen Takt
+* **Erwarteter Folgezustand:** ChargingState = `CHARGING`
+* **Requirement:** 5.1
+
+---
+
+### BB8 – Ladeanzeige: dauerhaft blau bei vollem Akku
+
+* **Ziel:** Prüfung der Ladeabschlussanzeige
+* **Ausgangszustand:** ChargingState = `CHARGING`, LEDMode = 'CHARGING'
+* **Ereignis (Zustandsübergang):** Spannung steigt über Ladeschwelle (z.B. 4.2 V)
+* **Vorgehen:** Ladevorgang aktiv halten, bis Akku voll
+* **Erwartete Reaktion:** LED leuchtet durchgängig blau
+* **Erwarteter Folgezustand:** LEDMode = `FULL_CHARGE`
+* **Requirement:** 5.2
+
+---
+
+### BB9 – Kein Ladevorgang bei Ladefehler (Kabel nicht erkannt)
+
+* **Ziel:** System erkennt, dass kein korrektes Laden möglich ist
+* **Ausgangszustand:** ChargingState = `DISCHARGING'
+* **Ereignis (Zustandsübergang):** `start`-Kommando, aber keine physische Verbindung (oder falsches Kommando)
+* **Vorgehen:** 
+* **Erwartete Reaktion:** keine Reaktion oder Fehleranzeige, kein Ladevorgang sichtbar
+* **Erwarteter Folgezustand:** ChargingState bleibt `DISCHARGING'
+* **Requirement:** 5.3
+
+---
+
+### BB10 – Überladeschutz: Ladevorgang wird gestoppt bei 100 %
+
+* **Ziel:** Prüfung, ob der Ladevorgang bei Erreichen der maximalen Spannung beendet wird
+* **Ausgangszustand:** Akku bei ca. 95 %
+* **Ereignis (Zustandsübergang):** Spannung steigt über Maximalwert (4.2 V)
+* **Vorgehen:** Ladevorgang laufen lassen
+* **Erwartete Reaktion:** ChargingState wird auf 'DISCHARGING_PASSIVE' geändert, aber LED bleibt an
+* **Erwarteter Folgezustand:** LEDMode = `FULL_CHARGE`, ChargingState = `DISCHARGING_PASSIVE`
+* **Requirement:** 6.2
+
+---
+
+### BB11 – Temperaturüberwachung: Ladevorgang pausiert bei Überhitzung
+
+* **Ziel:** Prüfung, ob Ladeprozess unterbrochen wird, wenn die Temperatur zu hoch ist
+* **Ausgangszustand:** ChargingState = `CHARGING`, Temperatur im Simulator im sicheren Bereich
+* **Ereignis (Zustandsübergang):** Temperatur steigt über sicheren Wert
+* **Vorgehen:** Temperatur im Simulator erhöhen
+* **Erwartete Reaktion:** Ladevorgang pausiert, LED blinkt weiterhin gelb, aber Anzeige zeigt keine Steigung des Ladeprozents
+* **Erwarteter Folgezustand:** ChargingState = `DISCHARGING_PASSIVE`
+* **Requirement:** 6.3
