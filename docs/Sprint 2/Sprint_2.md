@@ -61,19 +61,18 @@ Implementierung konsistent zu sein, vor allem in den Bezeichnungen.
 
 [Implementierung](Implementierung2.md)
 
-# TODO: Doku Design updaten mit neuen Grafiken + Dokumentieren
 # TODO: Traceability-Matrix erstellen / updaten aus Sprint 1 (Anforderungen, Jira-Issues, Klassen, Schnittstellen, Testfälle)
+
+### Schritt 5: Test
 
 # TODO: Code Review - Code-Qualität, Lesbarkeit, Verständlichkeit, ...
 # TODO: Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
 # TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
 # TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
 
-# TODO: Review durchführen
-
-### Schritt 5: Test
-
 ### Schritt 6: Review & Retro
+
+# TODO: Review durchführen
 
 **Was lief gut?**
 
