@@ -61,22 +61,12 @@ Implementierung konsistent zu sein, vor allem in den Bezeichnungen.
 
 [Implementierung](Implementierung2.md)
 
-# TODO: Code-Metriken erstellen & dokumentieren - Komplexität, Abhängigkeiten, Testabdeckung, ... 
-
-# TODO: Code Review - Code-Qualität, Lesbarkeit, Verständlichkeit, ...
-
-# TODO: Klassendiagramm erzeugen (PlantUML Parser)
-
-# TODO: Zustands- und Sequenzdiagramme überarbeiten (Abläufe, Bezeichnungen, ...)
-
 # TODO: Doku Design updaten mit neuen Grafiken + Dokumentieren
-
 # TODO: Traceability-Matrix erstellen / updaten aus Sprint 1 (Anforderungen, Jira-Issues, Klassen, Schnittstellen, Testfälle)
 
-# TODO: im Urlaub - Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
-
+# TODO: Code Review - Code-Qualität, Lesbarkeit, Verständlichkeit, ...
+# TODO: Testfälle erstellen (Unit-Tests, User-Tests, GUI-Tests, ...)
 # TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
-
 # TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
 
 # TODO: Review durchführen

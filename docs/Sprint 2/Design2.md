@@ -64,9 +64,26 @@ Umstieg auf Plant-UML für Klassendiagramme, da nach Implementierung automatisch
 
 ![Klassendiagramm](../referenziert/Design/Klassendiagramm_2.png)
 
-## Zustandsdiagramm Warnung
+Im Vergleich zur ursprünglichen Planung wurde das Klassendiagramm in der finalen Umsetzung angepasst. Die Änderungen
+ergeben sich vor allem aus folgenden Gründen:
 
-![Zustandsdiagramm Warnung](../referenziert/Design/Zustandsdiagramm_Warnung.png)
+- Reduktion der Methodenkomplexität:
+  Um die Lesbarkeit und Wartbarkeit zu verbessern, wurden komplexe Methoden in kleinere Einheiten zerlegt. Dadurch
+  entstanden mehrere zusätzliche Hilfsmethoden und Hilfsklassen.
+
+- Entkopplung über Interfaces:
+  Zur Vermeidung zyklischer Abhängigkeiten und zur Verbesserung der Testbarkeit wurden einige direkte Klassenzugriffe
+  durch Interfaces ersetzt. Dies betrifft insbesondere die Kommunikation zwischen Modulen mit wechselseitiger Logik.
+
+Das aktuelle Klassendiagramm wurde mit dem PlantUML Parser Plugin in IntelliJ generiert. Dadurch gibt es optische
+Abweichungen zum ursprünglichen Klassendiagramm, um manuellen Mehraufwand zu vermeiden. Aus demselben Grund wurden die
+schon oben eingezeichneten Beziehungen zwischen den Klassen weggelassen.
+
+![Klassendiagramm](../referenziert/Design/Klassendiagramm2final.png)
+
+## Zustandsdiagramm LED Steuerung inkl. Warnung
+
+![Zustandsdiagramm LED Steuerung inkl. Warnung](../referenziert/Design/Zustandsdiagramm_LED.png)
 
 ## Sequenzdiagramm Auslösen der Warnung
 
