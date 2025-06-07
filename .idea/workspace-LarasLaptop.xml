@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="47d84cea-c748-4774-82a9-24654f14b43f" name="Changes" comment="Small changes, Urlaubsvorbereitung: aktueller Stand dokumentieren &amp; nächste Schritte für Sprint 2 planen" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2xJWE4spR8yuKUVpMGmgHvVd7Rp" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Program.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.BatteryStateControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/laraa/Dokumente/github-copilot-intellij/lib/plugin-ideavim.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lara\OneDrive - Technische Hochschule Deggendorf\Studium\Semester 4\Software Engineering\Projekt - Batteriestandkontrolle Rasierer\Batteriestandskontrolle_Rasierer\docs\Sprint 1" />
+      <recent name="C:\Users\Lara\OneDrive - Technische Hochschule Deggendorf\Studium\Semester 4\Software Engineering\Projekt - Batteriestandkontrolle Rasierer\Batteriestandskontrolle_Rasierer\src" />
+      <recent name="C:\Users\Lara\OneDrive - Technische Hochschule Deggendorf\Studium\Semester 4\Software Engineering\Projekt - Batteriestandkontrolle Rasierer\Batteriestandskontrolle_Rasierer\Dokumentation\referenziert\Implementierung" />
+    </key>
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="userInterface.LEDPanel" />
+      <recent name="batteryLogic.TemperatureSimulator" />
+      <recent name="hardwareAbstraction.ChargingDetection" />
+      <recent name="userInterface.LEDController" />
+      <recent name="userInterface.SimpleGUI" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BatteryStateControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Batteriestandskontrolle_Rasierer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.BatteryStateControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BatteryStateControllerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="47d84cea-c748-4774-82a9-24654f14b43f" name="Changes" comment="" />
+      <created>1747656541432</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747656541432</updated>
+      <workItem from="1747656542500" duration="294000" />
+      <workItem from="1747656855735" duration="46000" />
+      <workItem from="1747656940302" duration="11000" />
+      <workItem from="1747656956761" duration="2172000" />
+      <workItem from="1747659201621" duration="14872000" />
+      <workItem from="1747894239085" duration="12957000" />
+      <workItem from="1748084218137" duration="22446000" />
+      <workItem from="1748113529157" duration="429000" />
+      <workItem from="1748114012445" duration="2013000" />
+      <workItem from="1748119062532" duration="1180000" />
+    </task>
+    <task id="LOCAL-00001" summary="Small Changes&#10;delete sonar related things - decision not to use (overshoot), adaption to new IDE (IntelliJ)">
+      <option name="closed" value="true" />
+      <created>1747657833900</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747657833900</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Small Changes&#10;Anfang Code-Review, Doku verfeinert, Doku Implementierung">
+      <option name="closed" value="true" />
+      <created>1747664356723</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747664356723</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Test&#10;Code Review basierend auf Checklist, Dokumentation der Tests, Planung, Durchführung und Ergebnisse, small changes">
+      <option name="closed" value="true" />
+      <created>1747671029158</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747671029158</updated>
+    </task>
+    <task id="LOCAL-00004" summary="BAT-51: Toleranz in Messung in Testergebnisse.md eingebaut">
+      <option name="closed" value="true" />
+      <created>1747671945044</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747671945044</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Review und Retrospektive">
+      <option name="closed" value="true" />
+      <created>1747685546704</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747685546704</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Dokumentation nacharbeiten&#10;Anpassen der Testfälle (Zustände und Zustandsübergänge mit aufgenommen), Vorgehen bei einzelnen Schritten für Sprint 1 dokumentiert">
+      <option name="closed" value="true" />
+      <created>1747899665222</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747899665222</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Sprint 2 Sprint Planning">
+      <option name="closed" value="true" />
+      <created>1747907895190</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747907895190</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Sprint 2 Recherche&#10;BAT-105&#10;BAT-134">
+      <option name="closed" value="true" />
+      <created>1747909075713</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1747909075713</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Sprint 2 Architektur&#10;Verantwortlichkeiten der Komponenten in Sprint 1 ergänzt, Zuordnung Requirements zu Komponenten, Schnittstellendoku erweitert&#10;BAT-115&#10;BAT-142">
+      <option name="closed" value="true" />
+      <created>1747911517767</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747911517767</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Sprint 2 Design&#10;Designentscheidungen für neue Funktionalitäten getroffen, Klassendiagramm mit den neuen Requirements erweitert, Zustandsdiagramme: Warnung, Ladezustände, Sequenzdiagramme: vollständige Ladung, Warnung">
+      <option name="closed" value="true" />
+      <created>1747983949079</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1747983949079</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Sprint 2 Design&#10;Kleine Änderungen im Klassendiagramm (enums raus, Beziehungen angepasst)">
+      <option name="closed" value="true" />
+      <created>1747984337336</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1747984337336</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Sprint 2 Implementierung&#10;BAT-26, BAT-27 : Umsetzung des Zustandsdiagramm der Warnung / Anpassung der Warnung, Anpassen der Farbpalette (BAT-17)">
+      <option name="closed" value="true" />
+      <created>1748097651054</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748097651054</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Sprint 2 Implementierung&#10;Anpassen der Farbpalette (BAT-17)">
+      <option name="closed" value="true" />
+      <created>1748097691123</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748097691123</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Sprint 2 Implementierung&#10;BAT-32 Ladezustandserkennung über Kommandozeile">
+      <option name="closed" value="true" />
+      <created>1748099344846</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1748099344846</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Sprint 2 Implementierung&#10;BAT-29, BAT-30 Ladeanzeige integriert, BAT-36 Anfänge implementiert">
+      <option name="closed" value="true" />
+      <created>1748105613445</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748105613445</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Sprint 2 Implementierung&#10;BAT-36 Überladungsschutz integriert">
+      <option name="closed" value="true" />
+      <created>1748105944168</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748105944168</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Sprint 2 Implementierung&#10;Displayanzeige an die Ladelogik angepasst">
+      <option name="closed" value="true" />
+      <created>1748109107371</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748109107371</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Sprint 2 Implementierung&#10;BAT-37 Temperatursimulator implementiert, Temperaturchecks inkl. Behandlung bei &quot;extremen Temperaturen&quot; integriert">
+      <option name="closed" value="true" />
+      <created>1748111492136</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748111492136</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Sprint 2 Code Review">
+      <option name="closed" value="true" />
+      <created>1748113207763</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1748113207763</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Small changes, Urlaubsvorbereitung: aktueller Stand dokumentieren &amp; nächste Schritte für Sprint 2 planen">
+      <option name="closed" value="true" />
+      <created>1748156215402</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748156215402</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Small Changes&#10;delete sonar related things - decision not to use (overshoot), adaption to new IDE (IntelliJ)" />
+    <MESSAGE value="Small Changes&#10;Anfang Code-Review, Doku verfeinert, Doku Implementierung" />
+    <MESSAGE value="Test&#10;Code Review basierend auf Checklist, Dokumentation der Tests, Planung, Durchführung und Ergebnisse, small changes" />
+    <MESSAGE value="BAT-51: Toleranz in Messung in Testergebnisse.md eingebaut" />
+    <MESSAGE value="Review und Retrospektive" />
+    <MESSAGE value="Dokumentation nacharbeiten&#10;Anpassen der Testfälle (Zustände und Zustandsübergänge mit aufgenommen), Vorgehen bei einzelnen Schritten für Sprint 1 dokumentiert" />
+    <MESSAGE value="Sprint 2 Sprint Planning" />
+    <MESSAGE value="Sprint 2 Recherche&#10;BAT-105&#10;BAT-134" />
+    <MESSAGE value="Sprint 2 Architektur&#10;Verantwortlichkeiten der Komponenten in Sprint 1 ergänzt, Zuordnung Requirements zu Komponenten, Schnittstellendoku erweitert&#10;BAT-115&#10;BAT-142" />
+    <MESSAGE value="Sprint 2 Design&#10;Designentscheidungen für neue Funktionalitäten getroffen, Klassendiagramm mit den neuen Requirements erweitert, Zustandsdiagramme: Warnung, Ladezustände, Sequenzdiagramme: vollständige Ladung, Warnung" />
+    <MESSAGE value="Sprint 2 Design&#10;Kleine Änderungen im Klassendiagramm (enums raus, Beziehungen angepasst)" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;BAT-26, BAT-27 : Umsetzung des Zustandsdiagramm der Warnung / Anpassung der Warnung (" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;BAT-26, BAT-27 : Umsetzung des Zustandsdiagramm der Warnung / Anpassung der Warnung, Anpassen der Farbpalette (BAT-17)" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;Anpassen der Farbpalette (BAT-17)" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;BAT-32 Ladezustandserkennung über Kommandozeile" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;BAT-29, BAT-30 Ladeanzeige integriert, BAT-36 Anfänge implementiert" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;BAT-36 Überladungsschutz integriert" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;Displayanzeige an die Ladelogik angepasst" />
+    <MESSAGE value="Sprint 2 Implementierung&#10;BAT-37 Temperatursimulator implementiert, Temperaturchecks inkl. Behandlung bei &quot;extremen Temperaturen&quot; integriert" />
+    <MESSAGE value="Sprint 2 Code Review" />
+    <MESSAGE value="Small changes, Urlaubsvorbereitung: aktueller Stand dokumentieren &amp; nächste Schritte für Sprint 2 planen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small changes, Urlaubsvorbereitung: aktueller Stand dokumentieren &amp; nächste Schritte für Sprint 2 planen" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

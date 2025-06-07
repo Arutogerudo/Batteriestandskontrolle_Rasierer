@@ -69,6 +69,14 @@ public class VoltageSimulator implements IVoltageSimulator {
     }
 
     /**
+     * This method is used for testing purposes to set the voltage of the simulator.
+     * @param voltage the voltage to set for the simulator.
+     */
+    public void setVoltage(double voltage) {
+        this.voltage = voltage;
+    }
+
+    /**
      * Returns the current Charging state (Charging, Discharging)
      * @return Current Charging state.
      */

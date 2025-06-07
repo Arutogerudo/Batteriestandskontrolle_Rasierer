@@ -1,19 +1,25 @@
 package tests;
 
 import batteryLogic.BatteryStateController;
+import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class BatteryStateControllerTest {
 
     private BatteryStateController controller;
+    private VoltageSensor sensor;
+    private VoltageSimulator simulator;
 
     @BeforeEach
     void setup() {
-        VoltageSimulator simulator = new VoltageSimulator();
+        this.simulator = new VoltageSimulator();
+        this.sensor = new VoltageSensor(simulator);
         controller = new BatteryStateController(simulator);
+
     }
 
     /*
@@ -52,6 +58,17 @@ class BatteryStateControllerTest {
         assertEquals(0, soc, 5);
         soc = controller.calculateStateOfCharge(3.9);
         assertEquals(70, soc, 5);
+    }
+
+    /*
+     * Test case UT4 for the BatteryStateController class.
+     * This test covers the functionality of the isLowBattery method with a voltage sensor.
+     */
+    @Test
+    void testIsLowBattery_whenVoltageLow_shouldReturnTrue() {
+        simulator.setVoltage(3.2);
+
+        assertTrue(controller.isLowBattery());
     }
 }
 
