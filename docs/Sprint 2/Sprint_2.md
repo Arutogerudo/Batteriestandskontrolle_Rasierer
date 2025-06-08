@@ -71,32 +71,35 @@ weitere Testfälle ergänzt, um die vollständige Abdeckung aller Hauptanforderu
 
 [Test](Test2.md)
 
-# TODO: Testfälle ausführen (Unit-Tests, User-Tests, GUI-Tests, ...)
-# TODO: Testfälle dokumentieren (Ergebnisse, Abdeckung, ...)
-
 ### Schritt 6: Review & Retro
-
-# TODO: Review durchführen
 
 **Was lief gut?**
 
 - Alle Anforderungen wurden umgesetzt.
 - Die Recherche zu Beginn, um wichtige Informationen zu sammeln, war sehr hilfreich.
 - Der Zeitplan wurde eingehalten.
-- Die Implementierung wurde strukturiert und feature-driven durchgeführt, was die Übersichtlichkeit
-  verbessert hat.
+- Die Implementierung wurde strukturiert und feature-driven durchgeführt, was die Übersichtlichkeit verbessert hat.
 - Die neuen Tools haben zu mehr Effizienz und Klarheit beigetragen.
 - Fehler aus Sprint 1 entdeckt und besser gemacht: nicht nur Kompexitätsmetriken, sondern auch Abhängigkeiten,
   Codezeilen und Testabdeckung berücksichtigt.
+- Die Tests wurden bereits während der Implementierung durchgeführt, was die Qualität des Codes verbessert hat.
+- Die Dokumentation wurde konsequent aktualisiert und ist vollständig.
+- Die Dokumentation ist sehr gut strukturiert und übersichtlich, was es ermöglicht hat direkt nach meinem Urlaub während
+  des Sprints weiterzuarbeiten.
 
 **Was lief nicht so gut?**
 
--
+- Aus der Design- und Architekturphase wurden nicht alle Aspekte 1:1 in der Implementierung umgesetzt und mussten
+  nachträglich angepasst werden.
 
 **Was werde ich im nächsten Sprint anders machen?**
 
--
+- Die Design- und Architekturphase noch gründlicher durchführen, um spätere Anpassungen zu vermeiden.
 
 **Lessons Learned:**
 
-- 
+- Funktionierende Abläufe und klare Strukturen erleichtern die Arbeit erheblich.
+- Die kontinuierliche Dokumentation und Aktualisierung der Architektur und des Designs während des Sprints ist
+  entscheidend für die Nachvollziehbarkeit und Qualität des Codes.
+- Die frühzeitige Identifikation und Behebung von Fehlern während der Implementierung spart Zeit und Aufwand in späteren
+  Phasen.
