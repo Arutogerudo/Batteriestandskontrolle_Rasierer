@@ -1,24 +1,20 @@
 package tests;
 
 import batteryLogic.BatteryStateController;
-import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class BatteryStateControllerTest {
 
     private BatteryStateController controller;
-    private VoltageSensor sensor;
     private VoltageSimulator simulator;
 
     @BeforeEach
     void setup() {
         this.simulator = new VoltageSimulator();
-        this.sensor = new VoltageSensor(simulator);
-        controller = BatteryStateController.getInstance(simulator);
+        controller = BatteryStateController.getInstance();
 
     }
 

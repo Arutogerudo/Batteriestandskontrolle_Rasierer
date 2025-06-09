@@ -5,12 +5,7 @@ import java.util.Random;
 /**
  * Simulates Temperature Sensor.
  */
-public class TemperatureSimulator extends Thread implements ITemperatureSimulator {
-    private static final double LOWER_TEMP_LIMIT = 15.0;
-    private static final double UPPER_TEMP_LIMIT = 45.0;
-    private static final double NORMAL_TEMP = 25.0;
-    private static final int RANDOM_RANGE = 41;
-    private static final int UPDATE_TIME = 5000;
+public class TemperatureSimulator extends Thread implements ITemperatureSimulator, BatteryLogicConstants {
     private double temperature;
 
     /**

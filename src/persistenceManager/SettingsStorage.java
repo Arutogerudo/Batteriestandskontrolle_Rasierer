@@ -59,6 +59,9 @@ public class SettingsStorage {
         setChargeCycleCount(0);
     }
 
+    /**
+     * Writes the voltage, state of charge, and runtime calibration data to disk.
+     */
     public void writeCalibVoltageToSoCToRuntimeToDisc() {
         validateVoltageRange();
         String csvContent = buildCsvContent();
@@ -70,6 +73,11 @@ public class SettingsStorage {
         }
     }
 
+    /**
+     * Sets the runtime calibration values.
+     *
+     * @param runtime array of runtime calibration values
+     */
     public void setRuntimeCalib(double[] runtime){
         this.runtime = runtime;
     }
@@ -111,6 +119,11 @@ public class SettingsStorage {
         }
     }
 
+    /**
+     * Sets a new low battery threshold value and persists it to disk.
+     *
+     * @param threshold the threshold value in percentage (0-100)
+     */
     public void setLowBatteryThreshold(int threshold) {
         lowBatteryThreshold = threshold;
         writeLowBatteryThresholdToDisc();
@@ -137,28 +150,31 @@ public class SettingsStorage {
      */
     public CalibrationData readCalibVoltageToSoCToRuntimeFromDisc() {
         try {
-            List<String> lines = Files.readAllLines(CALIB_TXT_FILE, StandardCharsets.UTF_8);
-            int size = lines.size() - 1;
+            List<String> lines = Files.readAllLines(CALIB_TXT_FILE, StandardCharsets.UTF_8).subList(1, Files.readAllLines(CALIB_TXT_FILE).size());
 
-            double[] voltage = new double[size];
-            int[] stateOfCharge = new int[size];
-            double[] runtime = new double[size];
+            double[] voltage = new double[lines.size()];
+            int[] stateOfCharge = new int[lines.size()];
+            double[] runtime = new double[lines.size()];
 
-            for (int i = 1; i < lines.size(); i++) {
+            for (int i = 0; i < lines.size(); i++) {
                 String[] parts = lines.get(i).split(",");
-                voltage[i - 1] = Double.parseDouble(parts[0].trim());
-                stateOfCharge[i - 1] = Integer.parseInt(parts[1].trim());
-                runtime[i - 1] = Double.parseDouble(parts[2].trim());
+                voltage[i] = Double.parseDouble(parts[0].trim());
+                stateOfCharge[i] = Integer.parseInt(parts[1].trim());
+                runtime[i] = Double.parseDouble(parts[2].trim());
             }
 
             return new CalibrationData(voltage, stateOfCharge, runtime);
-
         } catch (IOException e) {
             handleWriteOrReadError(e);
             return null;
         }
     }
 
+    /**
+     * Sets and saves the current battery charge cycle count.
+     *
+     * @param count the number of charge cycles
+     */
     public void setChargeCycleCount(int count) {
         try {
             Files.writeString(CYCLE_COUNT_FILE, String.valueOf(count), StandardCharsets.UTF_8);
@@ -167,6 +183,11 @@ public class SettingsStorage {
         }
     }
 
+    /**
+     * Reads the stored charge cycle count from disk.
+     *
+     * @return the number of charge cycles, or -1 on failure
+     */
     public int readChargeCycleCount() {
         try {
             String content = Files.readString(CYCLE_COUNT_FILE, StandardCharsets.UTF_8);

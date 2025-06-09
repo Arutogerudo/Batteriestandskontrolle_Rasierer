@@ -31,14 +31,14 @@ public class ButtonInput {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                long duration = System.currentTimeMillis() - pressStartTime;
-                if (duration >= 1000) {
-                    handler.handleButtonPress("longPress");
-                } else {
-                    handler.handleButtonPress("shortPress");
-                }
-                inactivityTimer.restart();
+                handleMouseRelease(handler);
             }
         });
+    }
+
+    private void handleMouseRelease(InteractionHandler handler) {
+        long duration = System.currentTimeMillis() - pressStartTime;
+        handler.handleButtonPress(duration >= 1000 ? "longPress" : "shortPress");
+        inactivityTimer.restart();
     }
 }

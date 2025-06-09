@@ -7,8 +7,7 @@ import persistenceManager.SettingsStorage;
 /**
  * Singleton-Klasse zur Verwaltung des Batteriezustands und zur Berechnung des Ladezustands (SoC)
  */
-public class BatteryStateController {
-    private static final double UNDERVOLTAGE_LIMIT = 2.8;
+public class BatteryStateController implements BatteryLogicConstants {
     private static BatteryStateController instance;
 
     private final VoltageSensor voltageSensor;
@@ -16,12 +15,8 @@ public class BatteryStateController {
     private final SettingsStorage storage;
     private int lowBatteryThreshold;
 
-    int chargeCycleCount = 0;
+    int chargeCycleCount;
     private boolean dischargedDetected = false;
-
-    private static final int DISCHARGED_THRESHOLD = 20;
-    private static final int FULLY_CHARGED_THRESHOLD = 80;
-
 
     /**
      * Privater Konstruktor, um Singleton zu erzwingen.
@@ -37,16 +32,24 @@ public class BatteryStateController {
     }
 
     /**
-     * Gibt die Singleton-Instanz zurück oder erstellt sie bei Bedarf.
+     * Erstellt die Singleton-Instanz.
      * @param simulator Der Simulator, der für die Initialisierung benötigt wird (nur beim ersten Aufruf erforderlich)
-     * @return Die Singleton-Instanz von BatteryStateController
      */
-    public static synchronized BatteryStateController getInstance(VoltageSimulator simulator) {
+    public static synchronized void initInstance(VoltageSimulator simulator) {
         if (instance == null) {
             instance = new BatteryStateController(simulator);
         }
+    }
+
+    /**
+     * Gibt die Singleton-Instanz zurück.
+     * @return Die Singleton-Instanz.
+     */
+    public static BatteryStateController getInstance() {
+        if (instance == null) throw new IllegalStateException("Instance not initialized");
         return instance;
     }
+
 
     /**
      * Berechnet den Ladezustand (SoC) basierend auf der Spannung.
@@ -56,7 +59,7 @@ public class BatteryStateController {
     public int calculateStateOfCharge(double voltage) {
         double[] voltages = calib.getVoltageCalib();
         int[] socValues = calib.getSoCCalib();
-        return calculateInterpolatedValue(voltage, voltages, socValues);
+        return InterpolationUtils.calculateInterpolatedValue(voltage, voltages, socValues);
     }
 
     /**
@@ -67,104 +70,61 @@ public class BatteryStateController {
     public double calculateRemainingRuntime(double voltage) {
         double[] voltages = calib.getVoltageCalib();
         double[] runtimes = calib.getRuntime();
-        return calculateInterpolatedValue(voltage, voltages, runtimes);
+        return InterpolationUtils.calculateInterpolatedValue(voltage, voltages, runtimes);
     }
 
-    private int calculateInterpolatedValue(double voltage, double[] voltages, int[] values) {
-        validateCalibrationData(voltages, values);
-
-        if (voltage >= voltages[0]) {
-            return values[0];
-        }
-
-        if (voltage <= voltages[voltages.length - 1]) {
-            return values[values.length - 1];
-        }
-
-        return interpolateBetweenPoints(voltage, voltages, values);
-    }
-
-
-
-    private void validateCalibrationData(double[] voltages, int[] socValues_or_runtimes) {
-        if (voltages == null || socValues_or_runtimes == null || voltages.length != socValues_or_runtimes.length) {
-            throw new IllegalStateException("Calibration data is not initialized.");
-        }
-    }
-
-    private void validateCalibrationData(double[] voltages, double[] socValues_or_runtimes) {
-        if (voltages == null || socValues_or_runtimes == null || voltages.length != socValues_or_runtimes.length) {
-            throw new IllegalStateException("Calibration data is not initialized.");
-        }
-    }
-
-    private int interpolateBetweenPoints(double voltage, double[] voltages, int[] ys) {
-        for (int i = 1; i < voltages.length; i++) {
-            if (voltage >= voltages[i]) {
-                return interpolate(voltage, voltages[i], voltages[i - 1], ys[i], ys[i - 1]);
-            }
-        }
-        return 0;
-    }
-
-    private int interpolate(double x, double x0, double x1, int y0, int y1){
-        return (int) (y0 + (y1 - y0) * (x - x0) / (x1 - x0));
-    }
-
-    private double calculateInterpolatedValue(double voltage, double[] voltages, double[] values) {
-        validateCalibrationData(voltages, values);
-
-        if (voltage >= voltages[0]) {
-            return values[0];
-        }
-
-        if (voltage <= voltages[voltages.length - 1]) {
-            return values[values.length - 1];
-        }
-
-        return interpolateBetweenPoints(voltage, voltages, values);
-    }
-
-    private double interpolateBetweenPoints(double voltage, double[] voltages, double[] ys) {
-        for (int i = 1; i < voltages.length; i++) {
-            if (voltage >= voltages[i]) {
-                return interpolate(voltage, voltages[i], voltages[i - 1], ys[i], ys[i - 1]);
-            }
-        }
-        return 0.0;
-    }
-
-    private double interpolate(double x, double x0, double x1, double y0, double y1){
-        return y0 + (y1 - y0) * (x - x0) / (x1 - x0);
-    }
-
-
+    /**
+     * Checks if the current battery state of charge (SoC) is below the defined low battery threshold.
+     *
+     * @return {@code true} if SoC is below the threshold, otherwise {@code false}.
+     */
     public boolean isLowBattery(){
         return calculateStateOfCharge(voltageSensor.readVoltage()) <= lowBatteryThreshold;
     }
 
+    /**
+     * Updates the low battery threshold and persists the new value to storage.
+     *
+     * @param newThreshold The new threshold value for low battery detection.
+     */
     public void updateLowBatteryThreshold(int newThreshold){
         lowBatteryThreshold = newThreshold;
         storage.setLowBatteryThreshold(newThreshold);
     }
 
+    /**
+     * Checks if the current battery voltage has fallen below the critical undervoltage limit.
+     *
+     * @return {@code true} if the current voltage is below the undervoltage limit, otherwise {@code false}.
+     */
     public boolean isUndervoltageDetected(){
         return voltageSensor.readVoltage() < UNDERVOLTAGE_LIMIT;
     }
 
+    /**
+     * Monitors the charge cycle by tracking when a full discharge and subsequent full charge occurs.
+     * Increments the charge cycle count and stores it persistently.
+     */
     public void monitorChargeCycle() {
         int soc = calculateStateOfCharge(voltageSensor.readVoltage());
 
-        if (!dischargedDetected && soc <= DISCHARGED_THRESHOLD) {
+        if (isNewDischargeDetected(soc)) {
             dischargedDetected = true;
+            return;
         }
 
-        if (dischargedDetected && soc >= FULLY_CHARGED_THRESHOLD) {
+        if (isNewChargeCycleComplete(soc)) {
             chargeCycleCount++;
             dischargedDetected = false;
             storage.setChargeCycleCount(chargeCycleCount);
         }
     }
 
+    private boolean isNewDischargeDetected(int soc) {
+        return !dischargedDetected && soc <= DISCHARGED_THRESHOLD;
+    }
 
+    private boolean isNewChargeCycleComplete(int soc) {
+        return dischargedDetected && soc >= FULLY_CHARGED_THRESHOLD;
+    }
 }

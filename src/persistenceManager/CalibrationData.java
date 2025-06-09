@@ -12,6 +12,7 @@ public class CalibrationData {
      * Constructor for CalibrationData.
      * @param voltage Array of calibration voltage values.
      * @param stateOfCharge Array of calibration state of charge values.
+     * @param runtime Array of calibrated runtime values.
      */
     public CalibrationData(double[] voltage, int[] stateOfCharge, double[] runtime) {
         if (voltage.length != stateOfCharge.length || voltage.length != runtime.length) {
@@ -38,6 +39,10 @@ public class CalibrationData {
         return stateOfCharge;
     }
 
+    /**
+     * Returns the calibration data of the remaining running time.
+     * @return Array of calibration runtime.
+     */
     public double[] getRuntime() {
         return runtime;
     }

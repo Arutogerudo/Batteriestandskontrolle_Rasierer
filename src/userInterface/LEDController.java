@@ -6,9 +6,7 @@ import java.awt.*;
 /**
  * Controller of a simple LED panel that can be used to represent the state of a battery.
  */
-public class LEDController {
-    private static final int WARNING_DELAY = 500;
-    private static final int CHARGING_DELAY = 1000;
+public class LEDController implements UIConstants {
     private final LEDPanel led;
     private final Timer blinkTimer;
     private boolean blinkState;
@@ -34,27 +32,24 @@ public class LEDController {
         if (mode == currentMode) return;
 
         turnOff();
-
-        switch (mode) {
-            case OFF:
-                break;
-            case WARNING:
-                blinkTimer.setDelay(WARNING_DELAY);
-                startBlinking(Color.RED);
-                break;
-            case CHARGING:
-                blinkTimer.setDelay(CHARGING_DELAY);
-                startBlinking(Color.YELLOW);
-                break;
-            case FULL_CHARGE:
-                turnOn(Color.BLUE);
-                break;
-            case UNDERVOLTAGE:
-                turnOn(Color.RED);
-        }
-
+        applyMode(mode);
         currentMode = mode;
     }
+
+    private void applyMode(LEDMode mode) {
+        switch (mode) {
+            case WARNING -> blink(WARNING_DELAY, Color.RED);
+            case CHARGING -> blink(CHARGING_DELAY, Color.YELLOW);
+            case FULL_CHARGE -> turnOn(Color.BLUE);
+            case UNDERVOLTAGE -> turnOn(Color.RED);
+        }
+    }
+
+    private void blink(int delay, Color color) {
+        blinkTimer.setDelay(delay);
+        startBlinking(color);
+    }
+
 
     private void turnOn(Color color) {
         stopBlinking();

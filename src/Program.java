@@ -1,3 +1,4 @@
+import batteryLogic.BatteryStateController;
 import batteryLogic.TemperatureSimulator;
 import hardwareAbstraction.*;
 import userInterface.*;
@@ -12,6 +13,7 @@ public class Program {
      */
     public static void main(String[] args) {
         VoltageSimulator simulator = new VoltageSimulator();
+        BatteryStateController.initInstance(simulator);
         TemperatureSimulator tempSim = new TemperatureSimulator();
         SimpleGUI gui = new SimpleGUI(simulator, tempSim);
         simulator.setState(ChargingStates.DISCHARGING_PASSIVE);

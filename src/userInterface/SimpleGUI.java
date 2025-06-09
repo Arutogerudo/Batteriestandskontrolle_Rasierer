@@ -16,14 +16,7 @@ import java.util.Objects;
 /**
  * This class represents a simple GUI for the battery status check of a shaver.
  */
-public class SimpleGUI {
-    private static final int WIDTH_SCREEN = 250;
-    private static final int HEIGHT_SCREEN = 350;
-    private static final int WIDTH_HEIGHT_BUTTON = 125;
-    private static final int VGAP = 20;
-    private static final int TEXT_SIZE = 80;
-    private static final int HEIGHT_TOGGLE = 30;
-    private static final int THRESHOLD_30 = 30;
+public class SimpleGUI implements UIConstants {
     private final VisualOutputController visualOutputController;
     private final OperationController operationController;
     private static JButton button;
@@ -51,7 +44,7 @@ public class SimpleGUI {
         handler = new InteractionHandler();
         new ButtonInput(button, handler);
 
-        batteryController = BatteryStateController.getInstance(simulator);
+        batteryController = BatteryStateController.getInstance();
         visualOutputController = new VisualOutputController(simulator, handler, batteryController);
         operationController = new OperationController(simulator, tempSim, handler, chargingDetector);
         calibrationManager = new CalibrationManager(batteryController);
@@ -71,51 +64,67 @@ public class SimpleGUI {
         updateShaveReadyIcon();
     }
 
-    private void setupPanel(LEDPanel led, JLabel statusLabel){
-        JFrame display = new JFrame("Display Rasierapparat");
-        display.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
-        display.getContentPane().setBackground(Color.BLACK);
-        display.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        display.setLayout(new BorderLayout());
+    private void setupPanel(LEDPanel led, JLabel statusLabel) {
+        JFrame display = createMainFrame();
+        JPanel topPanel = createTopPanel(statusLabel);
+        JPanel middlePanel = createMiddlePanel();
+        JPanel bottomPanel = createBottomPanel(led);
 
-        ImageIcon originalImage = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/powerIcon.jpg")));
-        ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(WIDTH_HEIGHT_BUTTON, WIDTH_HEIGHT_BUTTON, Image.SCALE_SMOOTH));
-        button.setIcon(scaledImage);
-        button.setPreferredSize(new Dimension(WIDTH_HEIGHT_BUTTON, WIDTH_HEIGHT_BUTTON));
+        display.add(topPanel, BorderLayout.NORTH);
+        display.add(middlePanel, BorderLayout.CENTER);
+        display.add(bottomPanel, BorderLayout.SOUTH);
+        display.setVisible(true);
+    }
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, VGAP));
-        bottomPanel.setBackground(Color.BLACK);
-        bottomPanel.add(button);
+    private JFrame createMainFrame() {
+        JFrame frame = new JFrame("Display Rasierapparat");
+        frame.setSize(WIDTH_SCREEN, HEIGHT_SCREEN);
+        frame.getContentPane().setBackground(Color.BLACK);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        return frame;
+    }
 
-        JPanel topPanel = new JPanel();
-        topPanel.setBackground(Color.BLACK);
-        topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+    private JPanel createTopPanel(JLabel statusLabel) {
         statusLabel.setForeground(Color.WHITE);
         statusLabel.setFont(new Font("SansSerif", Font.PLAIN, TEXT_SIZE));
-        topPanel.add(statusLabel);
 
-        JPanel ledContainer = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        ledContainer.setBackground(Color.BLACK);
-        ledContainer.add(led);
-        bottomPanel.add(ledContainer, BorderLayout.EAST);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panel.setBackground(Color.BLACK);
+        panel.add(statusLabel);
+        return panel;
+    }
 
-        JPanel middlePanel = new JPanel();
-        middlePanel.setBackground(Color.BLACK);
-        middlePanel.setLayout(new BorderLayout());
-        middlePanel.setBorder(new EmptyBorder(0, 20, 0, 20));
+    private JPanel createMiddlePanel() {
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/rasur_moeglich_icon.jpeg")));
-        Image scaledImageShavingReady = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        shaveReadyIcon.setIcon(new ImageIcon(scaledImageShavingReady));
+        Image scaled = icon.getImage().getScaledInstance(SHAVER_ICON_SIZE, SHAVER_ICON_SIZE, Image.SCALE_SMOOTH);
+        shaveReadyIcon.setIcon(new ImageIcon(scaled));
         updateShaveReadyIcon();
-        middlePanel.add(setupThresholdToggle(), BorderLayout.EAST);
-        middlePanel.add(shaveReadyIcon, BorderLayout.WEST);
 
-        display.add(bottomPanel, BorderLayout.SOUTH);
-        display.add(middlePanel, BorderLayout.CENTER);
-        display.add(topPanel, BorderLayout.NORTH);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(Color.BLACK);
+        panel.setBorder(new EmptyBorder(0, SIDE_BORDER, 0, SIDE_BORDER));
+        panel.add(setupThresholdToggle(), BorderLayout.EAST);
+        panel.add(shaveReadyIcon, BorderLayout.WEST);
+        return panel;
+    }
 
-        display.setVisible(true);
+    private JPanel createBottomPanel(LEDPanel led) {
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/powerIcon.jpg")));
+        Image scaled = icon.getImage().getScaledInstance(WIDTH_HEIGHT_BUTTON, WIDTH_HEIGHT_BUTTON, Image.SCALE_SMOOTH);
+        button.setIcon(new ImageIcon(scaled));
+        button.setPreferredSize(new Dimension(WIDTH_HEIGHT_BUTTON, WIDTH_HEIGHT_BUTTON));
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, VGAP));
+        buttonPanel.setBackground(Color.BLACK);
+        buttonPanel.add(button);
+
+        JPanel ledPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+        ledPanel.setBackground(Color.BLACK);
+        ledPanel.add(led);
+
+        buttonPanel.add(ledPanel);
+        return buttonPanel;
     }
 
     private JToggleButton setupThresholdToggle() {

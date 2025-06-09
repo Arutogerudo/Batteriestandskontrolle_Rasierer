@@ -6,12 +6,6 @@ package hardwareAbstraction;
 public class VoltageSimulator implements IVoltageSimulator {
     private double voltage;
     private ChargingStates state;
-
-    private static final double CHARGE_RATE = 0.0033;
-    private static final double ACTIVE_DISCHARGE_RATE = 0.004;
-    private static final double PASSIVE_DISCHARGE_RATE = 0.0001;
-    private static final double POWER_SAVING_MODE = 0.00001;
-
     private static final double START_VOLTAGE = 4.2;
 
     /**
@@ -40,21 +34,7 @@ public class VoltageSimulator implements IVoltageSimulator {
     }
 
     private void updateVoltageBasedOnState() {
-        switch (state) {
-            case DISCHARGING_ACTIVE:
-                voltage -= ACTIVE_DISCHARGE_RATE;
-                break;
-            case DISCHARGING_PASSIVE:
-            case OVERLOAD_PROTECTION:
-                voltage -= PASSIVE_DISCHARGE_RATE;
-                break;
-            case CHARGING:
-                voltage += CHARGE_RATE;
-                break;
-            case UNDERVOLTAGE_PROTECTION:
-                voltage -= POWER_SAVING_MODE;
-                break;
-        }
+        voltage += state.getVoltageChange();
     }
 
     double getVoltage() {

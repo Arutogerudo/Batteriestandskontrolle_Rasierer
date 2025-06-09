@@ -13,5 +13,8 @@ public enum DisplayStates {
      * Display is showing the state of charge.
      */
     STATE_OF_CHARGE,
+    /**
+     * Display is showing the remaining running time in minutes.
+     */
     REMAINING_TIME
 }

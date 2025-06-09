@@ -22,10 +22,12 @@ public class VisualOutputController {
     private final InteractionHandler handler;
 
     /**
-     * Constructor for VisualOutputController.
+     * Constructs a VisualOutputController to manage the visual output components,
+     * such as display labels and LED indicators, based on battery state and user interactions.
      *
-     * @param simulator The voltage simulator used to read the battery voltage.
-     * @param handler   interaction handler to switch display off when charge is starting
+     * @param simulator the voltage simulator used to simulate battery voltage readings
+     * @param handler the interaction handler managing user input or external events
+     * @param batteryController the controller responsible for calculating battery state of charge and runtime
      */
     public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler, BatteryStateController batteryController) {
         displayed = new JLabel();
@@ -72,20 +74,14 @@ public class VisualOutputController {
     }
 
     private void updateLEDState(ChargingStates currentState, int percent) {
-        LEDMode mode;
-
-        if (currentState == ChargingStates.CHARGING) {
-            mode = (percent == 100) ? LEDMode.FULL_CHARGE : LEDMode.CHARGING;
-        } else if (currentState == ChargingStates.OVERLOAD_PROTECTION) {
-            mode = LEDMode.FULL_CHARGE;
-        } else if (currentState == ChargingStates.UNDERVOLTAGE_PROTECTION) {
-            mode = LEDMode.UNDERVOLTAGE;
-        } else if (batteryController.isLowBattery()) {
-            mode = LEDMode.WARNING;
-        } else {
-            mode = LEDMode.OFF;
-        }
+        LEDMode mode = switch (currentState) {
+            case CHARGING -> (percent == 100) ? LEDMode.FULL_CHARGE : LEDMode.CHARGING;
+            case OVERLOAD_PROTECTION -> LEDMode.FULL_CHARGE;
+            case UNDERVOLTAGE_PROTECTION -> LEDMode.UNDERVOLTAGE;
+            default -> batteryController.isLowBattery() ? LEDMode.WARNING : LEDMode.OFF;
+        };
 
         ledController.controlLED(mode);
     }
+
 }

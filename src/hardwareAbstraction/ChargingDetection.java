@@ -18,7 +18,7 @@ public class ChargingDetection implements IChargingDetection {
      */
     public ChargingDetection(VoltageSimulator simulator){
         this.simulator = simulator;
-        this.batteryController = BatteryStateController.getInstance(simulator);
+        this.batteryController = BatteryStateController.getInstance();
     }
 
     /**
