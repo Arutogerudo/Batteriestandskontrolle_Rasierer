@@ -1,19 +1,18 @@
 package hardwareAbstraction;
 
 /**
- * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge. But increased speed by factor 10.
+ * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge. But all rates increased speed by factor 10 for testing purposes.
  */
 public class VoltageSimulator implements IVoltageSimulator {
     private double voltage;
     private ChargingStates state;
 
-    private static final double ACTIVE_DISCHARGE_RATE = 0.004;
-    private static final double PASSIVE_DISCHARGE_RATE = 0.00001;
     private static final double CHARGE_RATE = 0.0033;
+    private static final double ACTIVE_DISCHARGE_RATE = 0.004;
+    private static final double PASSIVE_DISCHARGE_RATE = 0.0001;
+    private static final double POWER_SAVING_MODE = 0.00001;
 
-    private static final double MIN_VOLTAGE = 3.0;
     private static final double START_VOLTAGE = 4.2;
-    private static final double MAX_VOLTAGE = START_VOLTAGE;
 
     /**
      * Creates a VoltageSimulator.
@@ -38,7 +37,6 @@ public class VoltageSimulator implements IVoltageSimulator {
      */
     public void tick() {
         updateVoltageBasedOnState();
-        clampVoltage();
     }
 
     private void updateVoltageBasedOnState() {
@@ -53,14 +51,9 @@ public class VoltageSimulator implements IVoltageSimulator {
             case CHARGING:
                 voltage += CHARGE_RATE;
                 break;
-        }
-    }
-
-    private void clampVoltage() {
-        if (voltage > MAX_VOLTAGE) {
-            voltage = MAX_VOLTAGE;
-        } else if (voltage < MIN_VOLTAGE) {
-            voltage = MIN_VOLTAGE;
+            case UNDERVOLTAGE_PROTECTION:
+                voltage -= POWER_SAVING_MODE;
+                break;
         }
     }
 
@@ -70,6 +63,7 @@ public class VoltageSimulator implements IVoltageSimulator {
 
     /**
      * This method is used for testing purposes to set the voltage of the simulator.
+     *
      * @param voltage the voltage to set for the simulator.
      */
     public void setVoltage(double voltage) {
@@ -78,6 +72,7 @@ public class VoltageSimulator implements IVoltageSimulator {
 
     /**
      * Returns the current Charging state (Charging, Discharging)
+     *
      * @return Current Charging state.
      */
     public ChargingStates getState() {

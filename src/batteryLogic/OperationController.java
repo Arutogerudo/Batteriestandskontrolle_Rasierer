@@ -64,7 +64,8 @@ public class OperationController {
     private boolean isChargingOrInProtection(ChargingStates state) {
         return state == ChargingStates.CHARGING ||
                state == ChargingStates.OVERLOAD_PROTECTION ||
-               state == ChargingStates.CHARGE_STOP_BC_TEMP;
+               state == ChargingStates.CHARGE_STOP_BC_TEMP ||
+               state == ChargingStates.UNDERVOLTAGE_PROTECTION;
     }
 
 }

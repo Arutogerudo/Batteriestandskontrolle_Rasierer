@@ -23,6 +23,7 @@ public enum ChargingStates {
     /**
      * Battery´s temperature is not in ok range, so the charge is paused.
      */
-    CHARGE_STOP_BC_TEMP
+    CHARGE_STOP_BC_TEMP,
+    UNDERVOLTAGE_PROTECTION
 }
 

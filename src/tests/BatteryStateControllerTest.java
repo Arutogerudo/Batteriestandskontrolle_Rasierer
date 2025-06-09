@@ -18,7 +18,7 @@ class BatteryStateControllerTest {
     void setup() {
         this.simulator = new VoltageSimulator();
         this.sensor = new VoltageSensor(simulator);
-        controller = new BatteryStateController(simulator);
+        controller = BatteryStateController.getInstance(simulator);
 
     }
 

@@ -47,16 +47,18 @@ public class LEDController {
                 startBlinking(Color.YELLOW);
                 break;
             case FULL_CHARGE:
-                turnOn();
+                turnOn(Color.BLUE);
                 break;
+            case UNDERVOLTAGE:
+                turnOn(Color.RED);
         }
 
         currentMode = mode;
     }
 
-    private void turnOn() {
+    private void turnOn(Color color) {
         stopBlinking();
-        led.setLEDState(Color.BLUE, true);
+        led.setLEDState(color, true);
     }
 
     private void turnOff() {

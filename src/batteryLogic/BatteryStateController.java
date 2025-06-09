@@ -5,19 +5,22 @@ import persistenceManager.CalibrationData;
 import persistenceManager.SettingsStorage;
 
 /**
- * This class is responsible for managing the battery state and calculating the state of charge (SoC)
+ * Singleton-Klasse zur Verwaltung des Batteriezustands und zur Berechnung des Ladezustands (SoC)
  */
 public class BatteryStateController {
+    private static final double UNDERVOLTAGE_LIMIT = 2.8;
+    private static BatteryStateController instance;
+
     private final VoltageSensor voltageSensor;
     private final CalibrationData calib;
     private final SettingsStorage storage;
     private int lowBatteryThreshold;
 
     /**
-     *  Creates BatteryStateController.
-     * @param simulator The voltage simulator used to read the battery voltage
+     * Privater Konstruktor, um Singleton zu erzwingen.
+     * @param simulator Der Spannungssimulator zum Auslesen der Batteriespannung
      */
-    public BatteryStateController(VoltageSimulator simulator){
+    private BatteryStateController(VoltageSimulator simulator) {
         voltageSensor = new VoltageSensor(simulator);
         storage = SettingsStorage.getInstance();
         calib = storage.readCalibVoltageToSoCFromDisc();
@@ -25,9 +28,21 @@ public class BatteryStateController {
     }
 
     /**
-     * Calculates the state of charge (SoC) based on the given voltage.
-     * @param voltage The voltage to be converted to SoC
-     * @return The state of charge (SoC) as a percentage
+     * Gibt die Singleton-Instanz zurück oder erstellt sie bei Bedarf.
+     * @param simulator Der Simulator, der für die Initialisierung benötigt wird (nur beim ersten Aufruf erforderlich)
+     * @return Die Singleton-Instanz von BatteryStateController
+     */
+    public static synchronized BatteryStateController getInstance(VoltageSimulator simulator) {
+        if (instance == null) {
+            instance = new BatteryStateController(simulator);
+        }
+        return instance;
+    }
+
+    /**
+     * Berechnet den Ladezustand (SoC) basierend auf der Spannung.
+     * @param voltage Spannung in Volt
+     * @return Ladezustand als Prozentwert
      */
     public int calculateStateOfCharge(double voltage) {
         double[] voltages = calib.getVoltageCalib();
@@ -65,10 +80,6 @@ public class BatteryStateController {
         return (int) (y0 + (y1 - y0) * (x - x0) / (x1 - x0));
     }
 
-    /**
-     * Checks if the battery is low based on the current state of charge (SoC).
-     * @return If the current state of charge (SoC) is below the low battery threshold
-     */
     public boolean isLowBattery(){
         return calculateStateOfCharge(voltageSensor.readVoltage()) <= lowBatteryThreshold;
     }
@@ -76,5 +87,9 @@ public class BatteryStateController {
     public void updateLowBatteryThreshold(int newThreshold){
         lowBatteryThreshold = newThreshold;
         storage.setLowBatteryThreshold(newThreshold);
+    }
+
+    public boolean isUndervoltageDetected(){
+        return voltageSensor.readVoltage() < UNDERVOLTAGE_LIMIT;
     }
 }

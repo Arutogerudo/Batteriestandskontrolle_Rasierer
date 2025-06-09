@@ -25,7 +25,7 @@ public class VisualOutputController {
      * Constructor for VisualOutputController.
      *
      * @param simulator The voltage simulator used to read the battery voltage.
-     * @param handler interaction handler to switch display off when charge is starting
+     * @param handler   interaction handler to switch display off when charge is starting
      */
     public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler, BatteryStateController batteryController) {
         displayed = new JLabel();
@@ -71,6 +71,8 @@ public class VisualOutputController {
             mode = (percent == 100) ? LEDMode.FULL_CHARGE : LEDMode.CHARGING;
         } else if (currentState == ChargingStates.OVERLOAD_PROTECTION) {
             mode = LEDMode.FULL_CHARGE;
+        } else if (currentState == ChargingStates.UNDERVOLTAGE_PROTECTION) {
+            mode = LEDMode.UNDERVOLTAGE;
         } else if (batteryController.isLowBattery()) {
             mode = LEDMode.WARNING;
         } else {

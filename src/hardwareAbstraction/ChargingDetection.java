@@ -1,5 +1,7 @@
 package hardwareAbstraction;
 
+import batteryLogic.BatteryStateController;
+
 import java.util.Scanner;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Scanner;
 public class ChargingDetection implements IChargingDetection {
     private static final double FULL_CHARGE_VOLTAGE = 4.2;
     private final VoltageSimulator simulator;
+    private final BatteryStateController batteryController;
 
     /**
      * Creates an instance to detect the charging state.
@@ -15,6 +18,7 @@ public class ChargingDetection implements IChargingDetection {
      */
     public ChargingDetection(VoltageSimulator simulator){
         this.simulator = simulator;
+        this.batteryController = BatteryStateController.getInstance(simulator);
     }
 
     /**
@@ -45,8 +49,12 @@ public class ChargingDetection implements IChargingDetection {
      */
     @Override
     public ChargingStates getChargingState(){
-        if (simulator.getVoltage() >= FULL_CHARGE_VOLTAGE) {
+        if (simulator.getVoltage() >= FULL_CHARGE_VOLTAGE && simulator.getState() == ChargingStates.CHARGING) {
+            simulator.setState(ChargingStates.OVERLOAD_PROTECTION);
             return ChargingStates.OVERLOAD_PROTECTION;
+        } else if (batteryController.isUndervoltageDetected()) {
+            simulator.setState(ChargingStates.UNDERVOLTAGE_PROTECTION);
+            return ChargingStates.UNDERVOLTAGE_PROTECTION;
         }
         return simulator.getState();
     }
