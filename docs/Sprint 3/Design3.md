@@ -57,12 +57,16 @@ Legende:
 |--------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------|
 | `SettingsStorage`        | Singleton      | Gewährleistet zentralen und konsistenten Zugriff auf gespeicherte Werte                                                    |
 | `InteractionHandler`     | Command        | Leichtere Erweiterbarkeit und Wartbarkeit, Commands können getestet und protokolliert werden ohne den Handler zu verändern |
-| `BatteryStateController` | Observer       | Notifiziert andere Komponenten (LED, GUI), wenn sich Ladezustand oder Fehlermeldungen ändern                               |
-| `VisualOutputController` | Observer       | Reagiert auf Änderungen im Ladezustand, z.B. um Anzeige zu aktualisieren                                                   |
-| `LEDController`          | Observer       | Blinkt oder ändert Farbe, wenn sich Ladeaktivität oder Fehlerstatus ändert                                                 |
-| `SimpleGUI`              | Observer       | Aktualisiert Textanzeigen bei Änderungen im SoC oder Ladezustand                                                           |
-| `VoltageSimulator`       | State          | Verwaltet Ladezustände wie `Charging`, `Idle`, `Overheated` – jeweils mit unterschiedlichem Verhalten                      |
-| `OperationController`    | State          | System hat verschiedene Betriebsmodi (z.B. Laden, Anzeige, Fehler), die eigenes Verhalten ausprägen                        |
+| `BatteryStateController` | Singleton      | Batteriezustand zentral und konsistent im gesamten System verwalten                                                        |
 | `CalibrationManager`     | Observer       | ermöglicht lose Kopplung zwischen der Logik zur Ladezyklusverfolgung und den reaktiven Komponenten                         |
 
-evtl. BatteryStateController Singleton
+nicht genutzte Designpatterns inkl. Begründung:
+
+| Klasse                   | Design-Pattern | Grund                                                                                                                                                        |
+|--------------------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `BatteryStateController` | Observer       | unnötig und überkompliziert, da nur jeweils eine Klasse die Lesemethoden aufruft                                                                             |
+| `VisualOutputController` | Observer       | einziger Aufrufer der isLowBattery() Methode, daher Beobachter überflüssig                                                                                   |
+| `LEDController`          | Observer       | Anzeige wird direkt gesteuert (z.B. durch VisualOutputController) -> einfacher ohne Entkopplung                                                              |
+| `SimpleGUI`              | Observer       | soll nicht auf Änderungen reagieren, sondern zentral die Initialisierung und Aktualisierung der GUI steuern und damit die Kontrolle über den Ablauf behalten |
+| `VoltageSimulator`       | State          | reine Hilfsklasse -> überkompliziert diese nach dem Statepattern umzusetzen                                                                                  |
+| `OperationController`    | State          | modelliert keinen eigenen Zustandsautomaten, sondern vermittelt nur zwischen Komponenten                                                                     |

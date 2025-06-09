@@ -15,13 +15,16 @@ public class SettingsStorage {
 
     private static final double MIN_VOLTAGE = 3;
     private static final double MAX_VOLTAGE = 4.2;
-    private static final double[] INITIAL_VOLTAGE_CALIB = new double[] { 4.2, 4.0, 3.75, 3.5, 3.0 };
+    private static final double[] INITIAL_VOLTAGE_CALIB = new double[] { 4.2, 3.9, 3.6, 3.3, 3.0 };
     private static final int[] INITIAL_SOC_CALIB = new int[] { 100, 80, 50, 20, 0 };
+    private static final int[] INITIAL_RUNTIME_CALIB = new int[] { 50, 40, 25, 10, 0 };
+
     private static SettingsStorage instance;
 
     private int lowBatteryThreshold;
     private double[] voltage;
     private int[] stateOfCharge;
+    private int[] runtime;
 
     private static final Path CALIB_TXT_FILE = Paths.get("src", "resources", "calibVoltageToSoC.txt");
     private static final Path THRESHOLD_TXT_FILE = Paths.get("src", "resources", "threshold.txt");
@@ -46,6 +49,7 @@ public class SettingsStorage {
     private void initialCalibration() {
         voltage = INITIAL_VOLTAGE_CALIB;
         stateOfCharge = INITIAL_SOC_CALIB;
+        runtime = INITIAL_RUNTIME_CALIB;
     }
 
     private void saveSettings() {
@@ -80,6 +84,8 @@ public class SettingsStorage {
                     .append(voltage[i])
                     .append(",")
                     .append(stateOfCharge[i])
+                    .append(",")
+                    .append(runtime[i])
                     .append("\n");
         }
 
@@ -130,14 +136,16 @@ public class SettingsStorage {
 
             double[] voltage = new double[size];
             int[] stateOfCharge = new int[size];
+            int[] runtime = new int[size];
 
             for (int i = 1; i < lines.size(); i++) {
                 String[] parts = lines.get(i).split(",");
                 voltage[i - 1] = Double.parseDouble(parts[0].trim());
                 stateOfCharge[i - 1] = Integer.parseInt(parts[1].trim());
+                runtime[i - 1] = Integer.parseInt(parts[2].trim());
             }
 
-            return new CalibrationData(voltage, stateOfCharge);
+            return new CalibrationData(voltage, stateOfCharge, runtime);
 
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();

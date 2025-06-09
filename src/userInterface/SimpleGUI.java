@@ -17,10 +17,10 @@ import java.util.Objects;
  */
 public class SimpleGUI {
     private static final int WIDTH_SCREEN = 200;
-    private static final int HEIGHT_SCREEN = 375;
+    private static final int HEIGHT_SCREEN = 350;
     private static final int WIDTH_HEIGHT_BUTTON = 140;
     private static final int VGAP = 20;
-    private static final int TEXT_SIZE = 80;
+    private static final int TEXT_SIZE = 60;
     private static final int HEIGHT_TOGGLE = 30;
     private static final int THRESHOLD_30 = 30;
     private final VisualOutputController visualOutputController;
@@ -58,10 +58,10 @@ public class SimpleGUI {
      * Updates the GUI based on the current state of the battery and user interactions.
      */
     public void update(){
-        boolean showPercentage;
-        showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
+        boolean showPercentage = handler.getDisplayState() == DisplayStates.STATE_OF_CHARGE;
+        boolean showRemainingRuntime = handler.getDisplayState() == DisplayStates.REMAINING_TIME;
         operationController.updateOperationState();
-        visualOutputController.updateVisuals(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage);
+        visualOutputController.updateVisuals(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage, batteryController.calculateRemainingRuntime(sensor.readVoltage()), showRemainingRuntime);
     }
 
     private void setupPanel(LEDPanel led, JLabel statusLabel){

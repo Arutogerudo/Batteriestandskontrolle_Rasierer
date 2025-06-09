@@ -47,30 +47,46 @@ public class BatteryStateController {
     public int calculateStateOfCharge(double voltage) {
         double[] voltages = calib.getVoltageCalib();
         int[] socValues = calib.getSoCCalib();
+        return calculateInterpolatedValue(voltage, voltages, socValues);
+    }
 
-        validateCalibrationData(voltages, socValues);
+    /**
+     * Berechnet die geschätzte Restlaufzeit (in Minuten) basierend auf der Spannung.
+     * @param voltage aktuelle Batteriespannung
+     * @return geschätzte Restlaufzeit in Minuten
+     */
+    public int calculateRemainingRuntime(double voltage) {
+        double[] voltages = calib.getVoltageCalib();
+        int[] runtimes = calib.getRuntime();
+        return calculateInterpolatedValue(voltage, voltages, runtimes);
+    }
+
+    private int calculateInterpolatedValue(double voltage, double[] voltages, int[] values) {
+        validateCalibrationData(voltages, values);
 
         if (voltage >= voltages[0]) {
-            return socValues[0];
+            return values[0];
         }
 
         if (voltage <= voltages[voltages.length - 1]) {
-            return socValues[socValues.length - 1];
+            return values[values.length - 1];
         }
 
-        return interpolateBetweenPoints(voltage, voltages, socValues);
+        return interpolateBetweenPoints(voltage, voltages, values);
     }
 
-    private void validateCalibrationData(double[] voltages, int[] socValues) {
-        if (voltages == null || socValues == null || voltages.length != socValues.length) {
+
+
+    private void validateCalibrationData(double[] voltages, int[] socValues_or_runtimes) {
+        if (voltages == null || socValues_or_runtimes == null || voltages.length != socValues_or_runtimes.length) {
             throw new IllegalStateException("Calibration data is not initialized.");
         }
     }
 
-    private int interpolateBetweenPoints(double voltage, double[] voltages, int[] socValues) {
+    private int interpolateBetweenPoints(double voltage, double[] voltages, int[] ys) {
         for (int i = 1; i < voltages.length; i++) {
             if (voltage >= voltages[i]) {
-                return interpolate(voltage, voltages[i], voltages[i - 1], socValues[i], socValues[i - 1]);
+                return interpolate(voltage, voltages[i], voltages[i - 1], ys[i], ys[i - 1]);
             }
         }
         return 0;

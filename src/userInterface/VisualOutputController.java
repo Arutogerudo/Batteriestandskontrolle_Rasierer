@@ -33,7 +33,8 @@ public class VisualOutputController {
         this.batteryController = batteryController;
         chargingDetector = new ChargingDetection(simulator);
         this.handler = handler;
-        updateVisuals(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
+        double voltage = new VoltageSensor(simulator).readVoltage();
+        updateVisuals(batteryController.calculateStateOfCharge(voltage), false, batteryController.calculateRemainingRuntime(voltage), false);
     }
 
     LEDController getLedController() {
@@ -44,8 +45,14 @@ public class VisualOutputController {
         return displayed;
     }
 
-    void updateVisuals(int percent, boolean showPercentage) {
-        updateTextDisplay(percent, showPercentage);
+    void updateVisuals(int percent, boolean showPercentage, int remainingTime, boolean showRemainingTime) {
+        if (showPercentage) {
+            updateTextDisplay(percent + "%");
+        } else if (showRemainingTime) {
+            updateTextDisplay(remainingTime + "Min.");
+        } else {
+            updateTextDisplay(" ");
+        }
         ChargingStates currentState = chargingDetector.getChargingState();
 
         handleChargingStateTransition(currentState);
@@ -54,8 +61,8 @@ public class VisualOutputController {
         previousChargingState = currentState;
     }
 
-    private void updateTextDisplay(int percent, boolean showPercentage) {
-        displayed.setText(showPercentage ? percent + "%" : " ");
+    private void updateTextDisplay(String value) {
+        displayed.setText(value);
     }
 
     private void handleChargingStateTransition(ChargingStates currentState) {

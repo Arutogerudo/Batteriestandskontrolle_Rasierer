@@ -12,5 +12,6 @@ public enum DisplayStates {
     /**
      * Display is showing the state of charge.
      */
-    STATE_OF_CHARGE
+    STATE_OF_CHARGE,
+    REMAINING_TIME
 }

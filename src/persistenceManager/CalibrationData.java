@@ -6,15 +6,20 @@ package persistenceManager;
 public class CalibrationData {
     private final double[] voltage;
     private final int[] stateOfCharge;
+    private final int[] runtime;
 
     /**
      * Constructor for CalibrationData.
      * @param voltage Array of calibration voltage values.
      * @param stateOfCharge Array of calibration state of charge values.
      */
-    public CalibrationData(double[] voltage, int[] stateOfCharge) {
+    public CalibrationData(double[] voltage, int[] stateOfCharge, int[] runtime) {
+        if (voltage.length != stateOfCharge.length || voltage.length != runtime.length) {
+            throw new IllegalArgumentException("All arrays must have the same length.");
+        }
         this.voltage = voltage;
         this.stateOfCharge = stateOfCharge;
+        this.runtime = runtime;
     }
 
     /**
@@ -31,6 +36,10 @@ public class CalibrationData {
      */
     public int[] getSoCCalib(){
         return stateOfCharge;
+    }
+
+    public int[] getRuntime() {
+        return runtime;
     }
 }
 
