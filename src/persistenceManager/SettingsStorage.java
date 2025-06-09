@@ -19,7 +19,7 @@ public class SettingsStorage {
     private static final int[] INITIAL_SOC_CALIB = new int[] { 100, 80, 50, 20, 0 };
     private static SettingsStorage instance;
 
-    private final int lowBatteryThreshold;
+    private int lowBatteryThreshold;
     private double[] voltage;
     private int[] stateOfCharge;
 
@@ -98,6 +98,12 @@ public class SettingsStorage {
             handleWriteError(e);
         }
     }
+
+    public void setLowBatteryThreshold(int threshold) {
+        lowBatteryThreshold = threshold;
+        writeLowBatteryThresholdToDisc();
+    }
+
 
     /**
      * Reads the low battery threshold from the disk.

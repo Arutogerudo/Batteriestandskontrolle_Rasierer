@@ -64,3 +64,5 @@ Legende:
 | `VoltageSimulator`       | State          | Verwaltet Ladezustände wie `Charging`, `Idle`, `Overheated` – jeweils mit unterschiedlichem Verhalten                      |
 | `OperationController`    | State          | System hat verschiedene Betriebsmodi (z.B. Laden, Anzeige, Fehler), die eigenes Verhalten ausprägen                        |
 | `CalibrationManager`     | Observer       | ermöglicht lose Kopplung zwischen der Logik zur Ladezyklusverfolgung und den reaktiven Komponenten                         |
+
+evtl. BatteryStateController Singleton

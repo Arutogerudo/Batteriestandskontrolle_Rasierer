@@ -27,10 +27,10 @@ public class VisualOutputController {
      * @param simulator The voltage simulator used to read the battery voltage.
      * @param handler interaction handler to switch display off when charge is starting
      */
-    public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler) {
+    public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler, BatteryStateController batteryController) {
         displayed = new JLabel();
         ledController = new LEDController();
-        batteryController = new BatteryStateController(simulator);
+        this.batteryController = batteryController;
         chargingDetector = new ChargingDetection(simulator);
         this.handler = handler;
         updateVisuals(batteryController.calculateStateOfCharge(new VoltageSensor(simulator).readVoltage()), false);
@@ -55,7 +55,7 @@ public class VisualOutputController {
     }
 
     private void updateTextDisplay(int percent, boolean showPercentage) {
-        displayed.setText(showPercentage ? percent + "%" : "");
+        displayed.setText(showPercentage ? percent + "%" : " ");
     }
 
     private void handleChargingStateTransition(ChargingStates currentState) {

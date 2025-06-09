@@ -10,7 +10,8 @@ import persistenceManager.SettingsStorage;
 public class BatteryStateController {
     private final VoltageSensor voltageSensor;
     private final CalibrationData calib;
-    private final int lowBatteryThreshold;
+    private final SettingsStorage storage;
+    private int lowBatteryThreshold;
 
     /**
      *  Creates BatteryStateController.
@@ -18,7 +19,7 @@ public class BatteryStateController {
      */
     public BatteryStateController(VoltageSimulator simulator){
         voltageSensor = new VoltageSensor(simulator);
-        SettingsStorage storage = persistenceManager.SettingsStorage.getInstance();
+        storage = SettingsStorage.getInstance();
         calib = storage.readCalibVoltageToSoCFromDisc();
         lowBatteryThreshold = storage.readLowBatteryThresholdFromDisc();
     }
@@ -70,5 +71,10 @@ public class BatteryStateController {
      */
     public boolean isLowBattery(){
         return calculateStateOfCharge(voltageSensor.readVoltage()) <= lowBatteryThreshold;
+    }
+
+    public void updateLowBatteryThreshold(int newThreshold){
+        lowBatteryThreshold = newThreshold;
+        storage.setLowBatteryThreshold(newThreshold);
     }
 }

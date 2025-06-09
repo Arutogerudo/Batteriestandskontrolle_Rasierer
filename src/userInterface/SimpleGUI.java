@@ -7,6 +7,7 @@ import hardwareAbstraction.ButtonInput;
 import hardwareAbstraction.ChargingDetection;
 import hardwareAbstraction.VoltageSensor;
 import hardwareAbstraction.VoltageSimulator;
+import persistenceManager.SettingsStorage;
 
 import java.awt.*;
 import java.util.Objects;
@@ -16,16 +17,21 @@ import java.util.Objects;
  */
 public class SimpleGUI {
     private static final int WIDTH_SCREEN = 200;
-    private static final int HEIGHT_SCREEN = 350;
+    private static final int HEIGHT_SCREEN = 375;
     private static final int WIDTH_HEIGHT_BUTTON = 140;
     private static final int VGAP = 20;
     private static final int TEXT_SIZE = 80;
+    private static final int HEIGHT_TOGGLE = 30;
+    private static final int THRESHOLD_30 = 30;
     private final VisualOutputController visualOutputController;
     private final OperationController operationController;
     private static JButton button;
     private final VoltageSensor sensor;
     private final InteractionHandler handler;
     private final BatteryStateController batteryController;
+    private final SettingsStorage settingsStorage;
+    private JToggleButton thresholdToggle;
+
 
     /**
      * Constructor for the SimpleGUI class.
@@ -35,6 +41,7 @@ public class SimpleGUI {
     public SimpleGUI(VoltageSimulator simulator, TemperatureSimulator tempSim){
         this.sensor = new VoltageSensor(simulator);
         ChargingDetection chargingDetector = new ChargingDetection(simulator);
+        settingsStorage = SettingsStorage.getInstance();
 
         button = new JButton();
 
@@ -42,7 +49,7 @@ public class SimpleGUI {
         new ButtonInput(button, handler);
 
         batteryController = new BatteryStateController(simulator);
-        visualOutputController = new VisualOutputController(simulator, handler);
+        visualOutputController = new VisualOutputController(simulator, handler, batteryController);
         operationController = new OperationController(simulator, tempSim, handler, chargingDetector);
         setupPanel(visualOutputController.getLedController().getLedPanel(), visualOutputController.getDisplayed());
     }
@@ -88,7 +95,34 @@ public class SimpleGUI {
 
         display.add(bottomPanel, BorderLayout.SOUTH);
         display.add(topPanel, BorderLayout.NORTH);
+        setupThresholdToggle(display);
 
         display.setVisible(true);
     }
+
+    private void setupThresholdToggle(JFrame display) {
+        thresholdToggle = new JToggleButton();
+        int currentThreshold = settingsStorage.readLowBatteryThresholdFromDisc();
+        boolean is30 = currentThreshold == HEIGHT_TOGGLE;
+        thresholdToggle.setSelected(is30);
+        thresholdToggle.setText(is30 ? "30%" : "10%");
+        thresholdToggle.addActionListener(e -> {
+            boolean selected = thresholdToggle.isSelected();
+            int newThreshold = selected ? HEIGHT_TOGGLE : 10;
+            thresholdToggle.setText(selected ? "30%" : "10%");
+            batteryController.updateLowBatteryThreshold(newThreshold);
+        });
+        thresholdToggle.setPreferredSize(new Dimension(2 * HEIGHT_TOGGLE, HEIGHT_TOGGLE));
+
+        JPanel togglePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        togglePanel.setBackground(Color.BLACK);
+        togglePanel.add(new JLabel("Warnschwelle:", JLabel.CENTER) {{
+            setForeground(Color.WHITE);
+        }}); // evtl. rausnehmen
+        togglePanel.add(thresholdToggle);
+
+        display.add(togglePanel, BorderLayout.CENTER);
+    }
+
+
 }
