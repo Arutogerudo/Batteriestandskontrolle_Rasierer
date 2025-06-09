@@ -16,6 +16,7 @@ Requirement-Abdeckungsgrad erreicht, das marktreif und anwenderfreundlich ist.
 - Req. 3.3: Rekalibrierung nach Ladezyklen
 - Req. 3.4: Anzeigetoleranz
 - Req. 3.5: Alterungsrobustheit
+- Req. 3.6: Ressourcenschonende Kalibrierung
 - Req. 4.2: Warnschwelle einstellbar
 - Req. 5.5: mögliche Rasur während Laden signalisieren
 - Req. 6.1: Unterspannungsschutz

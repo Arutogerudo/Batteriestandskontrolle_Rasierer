@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+title Knopfinteraktion
+
+skinparam state {
+    BackgroundColor White
+    BorderColor Black
+}
+
+[*] --> Knopfinteraktion
+
+state Knopfinteraktion {
+
+    [*] --> OperatingStates.OFF
+    OperatingStates.OFF --> OperatingStates.OPERATING : 2
+    OperatingStates.OPERATING --> OperatingStates.OFF : 2
+
+    [*] --> DisplayStates.OFF
+    DisplayStates.OFF --> DisplayStates.STATE_OF_CHARGE : 1, 2
+    DisplayStates.STATE_OF_CHARGE --> DisplayStates.OFF : 4
+    DisplayStates.STATE_OF_CHARGE --> DisplayStates.REMAINING_TIME : 1
+    DisplayStates.REMAINING_TIME --> DisplayStates.STATE_OF_CHARGE : 1
+    DisplayStates.REMAINING_TIME --> DisplayStates.OFF : 4
+}
+
+@enduml

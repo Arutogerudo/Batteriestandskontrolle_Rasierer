@@ -1,0 +1,225 @@
+@startuml
+left to right direction
+class batteryLogic.TemperatureSimulator {
+- double temperature
+- Random random
++ void run()
+- void setTemperature(double)
++ boolean isTemperatureInSafeRange()
+}
+
+
+class hardwareAbstraction.VoltageSimulator {
+- double voltage
+- ChargingStates state
++ void setState(ChargingStates)
++ void tick()
+- void updateVoltageBasedOnState()
+- void clampVoltage()
+~ double getVoltage()
++ ChargingStates getState()
+}
+
+
+interface batteryLogic.IInteractionHandler {
+~ OperationStates getOperatingState()
+~ void setOperatingState(OperationStates)
+}
+
+class userInterface.LEDController {
+- LEDPanel led
+- Timer blinkTimer
+- boolean blinkState
+- Color blinkColor
+- LEDMode currentMode
+~ LEDPanel getLedPanel()
+~ void controlLED(LEDMode)
+- void turnOn()
+- void turnOff()
+- void startBlinking(Color)
+- void stopBlinking()
+}
+
+class batteryLogic.InteractionHandler {
+- OperationStates operationState
+- DisplayStates displayState
+- Map<String,ButtonCommand> commandMap
++ void handleButtonPress(String)
++ DisplayStates getDisplayState()
++ OperationStates getOperatingState()
++ void setOperatingState(OperationStates)
++ void setDisplayState(DisplayStates)
++ boolean isShavingPossible()
+}
+
+class batteryLogic.CalibrationManager {
+- int chargeCycleCount
+- final int RECALIBRATION_THRESHOLD = 100
++ void incrementChargeCycle()
++ int getChargeCycleCount()
++ boolean checkRecalibrationNeeded()
+}
+
+
+
+interface hardwareAbstraction.IChargingDetection {
+~ ChargingStates getChargingState()
+}
+
+class persistenceManager.CalibrationData {
+- double[] voltage
+- int[] stateOfCharge
++ double[] getVoltageCalib()
++ int[] getSoCCalib()
+}
+
+class batteryLogic.LongPressCommand {
++ void execute(CommandContext)
+}
+
+interface hardwareAbstraction.IVoltageSimulator {
+~ void setState(ChargingStates)
+}
+
+class userInterface.LEDPanel {
+- Color ledColor
+~ void setLEDState(Color,boolean)
+# void paintComponent(Graphics)
+}
+
+
+class batteryLogic.InactivityCommand {
++ void execute(CommandContext)
+}
+
+class hardwareAbstraction.ButtonInput {
+- long pressStartTime
+- Timer inactivityTimer
+}
+
+class hardwareAbstraction.ChargingDetection {
+- VoltageSimulator simulator
++ void listenForChargingCommands()
++ ChargingStates getChargingState()
+}
+
+
+interface batteryLogic.ButtonCommand {
+~ void execute(CommandContext)
+}
+
+interface batteryLogic.CommandContext {
+~ OperationStates getOperatingState()
+~ void setOperatingState(OperationStates)
+~ DisplayStates getDisplayState()
+~ void setDisplayState(DisplayStates)
+}
+
+class hardwareAbstraction.VoltageSensor {
+- VoltageSimulator simulator
++ double readVoltage()
+}
+
+
+class userInterface.VisualOutputController {
+- LEDController ledController
+- JLabel displayed
+- BatteryStateController batteryController
+- ChargingDetection chargingDetector
+- ChargingStates previousChargingState
+- InteractionHandler handler
+~ LEDController getLedController()
+~ JLabel getDisplayed()
+~ void updateVisuals(int,boolean)
+- void updateTextDisplay(int,boolean)
+- void handleChargingStateTransition(ChargingStates)
+- void updateLEDState(ChargingStates,int)
+}
+
+class userInterface.SimpleGUI {
+- VisualOutputController visualOutputController
+- OperationController operationController
+- {static} JButton button
+- VoltageSimulator simulator
+- VoltageSensor sensor
+- InteractionHandler handler
+- BatteryStateController batteryController
+- ChargingDetection chargingDetector
+- TemperatureSimulator tempSim
++ void update()
+- void setupPanel(LEDPanel,JLabel)
+}
+
+
+class batteryLogic.BatteryStateController {
+- VoltageSensor voltageSensor
+- CalibrationData calib
+- int lowBatteryThreshold
++ int calculateStateOfCharge(double)
+- void validateCalibrationData(double[],int[])
+- int interpolateBetweenPoints(double,double[],int[])
+- int interpolate(double,double,double,int,int)
++ boolean isLowBattery()
++ int getRemainingTime()
++ void setLowBatteryThreshold(int)
++ int getLowBatteryThreshold()
++ boolean isUndervoltageDetected()
+}
+
+
+class batteryLogic.OperationController {
+- IVoltageSimulator simulator
+- ITemperatureSimulator tempSim
+- IInteractionHandler handler
+- IChargingDetection chargingDetector
++ void updateOperationState()
+- void handleUnsafeTemperature(VoltageSimulator,InteractionHandler,ChargingStates,OperationStates)
+- void handleNoChargingOrProtectionState(VoltageSimulator,OperationStates)
+- boolean isChargingOrInProtection(ChargingStates)
+}
+
+
+class persistenceManager.SettingsStorage {
+- {static} SettingsStorage instance
+- int lowBatteryThreshold
+- double[] voltage
+- int[] stateOfCharge
++ {static} SettingsStorage getInstance()
+- void initialCalibration()
+- void saveSettings()
+- void writeCalibVoltageToSoCToDisc()
+- void validateVoltageRange()
+- String buildCsvContent()
+- void handleWriteError(IOException)
+- void writeLowBatteryThresholdToDisc()
++ int readLowBatteryThresholdFromDisc()
++ CalibrationData readCalibVoltageToSoCFromDisc()
+}
+
+
+class batteryLogic.ShortPressCommand {
++ void execute(CommandContext)
+}
+
+interface batteryLogic.ITemperatureSimulator {
+~ boolean isTemperatureInSafeRange()
+}
+
+
+
+batteryLogic.ITemperatureSimulator <|.. batteryLogic.TemperatureSimulator
+hardwareAbstraction.IVoltageSimulator <|.. hardwareAbstraction.VoltageSimulator
+batteryLogic.CommandContext <|.. batteryLogic.InteractionHandler
+batteryLogic.IInteractionHandler <|.. batteryLogic.InteractionHandler
+batteryLogic.ButtonCommand <|.. batteryLogic.LongPressCommand
+batteryLogic.ButtonCommand <|.. batteryLogic.InactivityCommand
+hardwareAbstraction.IChargingDetection <|.. hardwareAbstraction.ChargingDetection
+batteryLogic.ButtonCommand <|.. batteryLogic.ShortPressCommand
+batteryLogic.CalibrationManager --> persistenceManager.SettingsStorage
+batteryLogic.BatteryStateController --> persistenceManager.CalibrationData
+userInterface.SimpleGUI --> userInterface.LEDController
+batteryLogic.BatteryStateController --> persistenceManager.SettingsStorage
+batteryLogic.OperationController --> persistenceManager.SettingsStorage
+userInterface.VisualOutputController --> batteryLogic.BatteryStateController
+batteryLogic.BatteryStateController --> hardwareAbstraction.VoltageSensor
+@enduml
