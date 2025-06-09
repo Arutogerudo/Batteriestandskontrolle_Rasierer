@@ -28,7 +28,7 @@ public class CalibrationManager implements BatteryLogicConstants {
      * The updated calibration data is then saved persistently.
      */
     public void recalibrateIfNeeded() {
-        if (batteryController.chargeCycleCount < CYCLE_THRESHOLD) return;
+        if (batteryController.getChargeCycleCount() < CYCLE_THRESHOLD) return;
 
         CalibrationData oldCalib = storage.readCalibVoltageToSoCToRuntimeFromDisc();
         if (oldCalib == null) {
@@ -36,10 +36,10 @@ public class CalibrationManager implements BatteryLogicConstants {
             return;
         }
 
-        storage.setRuntimeCalib(adjustRuntime(oldCalib.getRuntime(), batteryController.chargeCycleCount));
+        storage.setRuntimeCalib(adjustRuntime(oldCalib.getRuntime(), batteryController.getChargeCycleCount()));
         storage.writeCalibVoltageToSoCToRuntimeToDisc();
-        System.out.println("Kalibrierung wurde nach " + batteryController.chargeCycleCount + " Zyklen angepasst.");
-        batteryController.chargeCycleCount = 0;
+        System.out.println("Kalibrierung wurde nach " + batteryController.getChargeCycleCount() + " Zyklen angepasst.");
+        batteryController.resetChargeCycleCount();
     }
 
 

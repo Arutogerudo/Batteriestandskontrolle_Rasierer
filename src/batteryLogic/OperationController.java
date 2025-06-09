@@ -34,18 +34,18 @@ public class OperationController {
         OperationStates opState = handler.getOperatingState();
 
         if (!tempSim.isTemperatureInSafeRange()) {
-            handleUnsafeTemperature((VoltageSimulator) simulator, (InteractionHandler) handler, chargingState, opState);
+            handleUnsafeTemperature(simulator, handler, chargingState, opState);
             return;
         }
 
         if (!isChargingOrInProtection(chargingState)) {
-            handleNoChargingOrProtectionState((VoltageSimulator) simulator, opState);
+            handleNoChargingOrProtectionState(simulator, opState);
         } else {
             handler.setOperatingState(OperationStates.OFF);
         }
     }
 
-    private void handleUnsafeTemperature(VoltageSimulator simulator, InteractionHandler handler, ChargingStates chargingState, OperationStates opState) {
+    private void handleUnsafeTemperature(IVoltageSimulator simulator, IInteractionHandler handler, ChargingStates chargingState, OperationStates opState) {
         if (opState == OperationStates.OPERATING) {
             handler.setOperatingState(OperationStates.OFF);
             simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
@@ -54,7 +54,7 @@ public class OperationController {
         }
     }
 
-    private void handleNoChargingOrProtectionState(VoltageSimulator simulator, OperationStates opState) {
+    private void handleNoChargingOrProtectionState(IVoltageSimulator simulator, OperationStates opState) {
         if (opState == OperationStates.OFF) {
             simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
         } else if (opState == OperationStates.OPERATING) {

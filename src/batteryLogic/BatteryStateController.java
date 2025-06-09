@@ -10,25 +10,23 @@ import persistenceManager.SettingsStorage;
 public class BatteryStateController implements BatteryLogicConstants {
     private static BatteryStateController instance;
 
+    private final BatteryStateCalculator calculator;
+    private final BatteryChargeCycleMonitor cycleMonitor;
     private final VoltageSensor voltageSensor;
     private final CalibrationData calib;
-    private final SettingsStorage storage;
-    private int lowBatteryThreshold;
-
-    int chargeCycleCount;
-    private boolean dischargedDetected = false;
+    private final BatteryThresholdManager thresholdManager;
 
     /**
      * Privater Konstruktor, um Singleton zu erzwingen.
      * @param simulator Der Spannungssimulator zum Auslesen der Batteriespannung
      */
     private BatteryStateController(VoltageSimulator simulator) {
+        calculator = new BatteryStateCalculator();
+        cycleMonitor = new BatteryChargeCycleMonitor();
         voltageSensor = new VoltageSensor(simulator);
-        storage = SettingsStorage.getInstance();
+        SettingsStorage storage = SettingsStorage.getInstance();
         calib = storage.readCalibVoltageToSoCToRuntimeFromDisc();
-        lowBatteryThreshold = storage.readLowBatteryThresholdFromDisc();
-
-        chargeCycleCount = storage.readChargeCycleCount();
+        thresholdManager = new BatteryThresholdManager(calculator, voltageSensor);
     }
 
     /**
@@ -50,16 +48,13 @@ public class BatteryStateController implements BatteryLogicConstants {
         return instance;
     }
 
-
     /**
      * Berechnet den Ladezustand (SoC) basierend auf der Spannung.
      * @param voltage Spannung in Volt
      * @return Ladezustand als Prozentwert
      */
     public int calculateStateOfCharge(double voltage) {
-        double[] voltages = calib.getVoltageCalib();
-        int[] socValues = calib.getSoCCalib();
-        return InterpolationUtils.calculateInterpolatedValue(voltage, voltages, socValues);
+        return calculator.calculateStateOfCharge(voltage, calib);
     }
 
     /**
@@ -68,9 +63,7 @@ public class BatteryStateController implements BatteryLogicConstants {
      * @return geschätzte Restlaufzeit in Minuten
      */
     public double calculateRemainingRuntime(double voltage) {
-        double[] voltages = calib.getVoltageCalib();
-        double[] runtimes = calib.getRuntime();
-        return InterpolationUtils.calculateInterpolatedValue(voltage, voltages, runtimes);
+        return calculator.calculateRemainingRuntime(voltage, calib);
     }
 
     /**
@@ -79,7 +72,7 @@ public class BatteryStateController implements BatteryLogicConstants {
      * @return {@code true} if SoC is below the threshold, otherwise {@code false}.
      */
     public boolean isLowBattery(){
-        return calculateStateOfCharge(voltageSensor.readVoltage()) <= lowBatteryThreshold;
+        return thresholdManager.isLowBattery(calib);
     }
 
     /**
@@ -88,8 +81,7 @@ public class BatteryStateController implements BatteryLogicConstants {
      * @param newThreshold The new threshold value for low battery detection.
      */
     public void updateLowBatteryThreshold(int newThreshold){
-        lowBatteryThreshold = newThreshold;
-        storage.setLowBatteryThreshold(newThreshold);
+        thresholdManager.updateLowBatteryThreshold(newThreshold);
     }
 
     /**
@@ -98,7 +90,7 @@ public class BatteryStateController implements BatteryLogicConstants {
      * @return {@code true} if the current voltage is below the undervoltage limit, otherwise {@code false}.
      */
     public boolean isUndervoltageDetected(){
-        return voltageSensor.readVoltage() < UNDERVOLTAGE_LIMIT;
+        return thresholdManager.isUndervoltageDetected();
     }
 
     /**
@@ -106,25 +98,14 @@ public class BatteryStateController implements BatteryLogicConstants {
      * Increments the charge cycle count and stores it persistently.
      */
     public void monitorChargeCycle() {
-        int soc = calculateStateOfCharge(voltageSensor.readVoltage());
-
-        if (isNewDischargeDetected(soc)) {
-            dischargedDetected = true;
-            return;
-        }
-
-        if (isNewChargeCycleComplete(soc)) {
-            chargeCycleCount++;
-            dischargedDetected = false;
-            storage.setChargeCycleCount(chargeCycleCount);
-        }
+        cycleMonitor.monitorChargeCycle(voltageSensor, calib, calculator);
     }
 
-    private boolean isNewDischargeDetected(int soc) {
-        return !dischargedDetected && soc <= DISCHARGED_THRESHOLD;
+    public int getChargeCycleCount() {
+        return cycleMonitor.chargeCycleCount;
     }
 
-    private boolean isNewChargeCycleComplete(int soc) {
-        return dischargedDetected && soc >= FULLY_CHARGED_THRESHOLD;
+    public void resetChargeCycleCount() {
+        cycleMonitor.chargeCycleCount = 0;
     }
 }
