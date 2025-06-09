@@ -6,7 +6,7 @@ package persistenceManager;
 public class CalibrationData {
     private final double[] voltage;
     private final int[] stateOfCharge;
-    private final double[] runtime;
+    private double[] runtime;
 
     /**
      * Constructor for CalibrationData.
@@ -28,7 +28,7 @@ public class CalibrationData {
      * @return Array of calibration voltage values.
      */
     public double[] getVoltageCalib(){
-        return voltage;
+        return voltage.clone();
     }
 
     /**
@@ -36,7 +36,7 @@ public class CalibrationData {
      * @return Array of calibration state of charge values.
      */
     public int[] getSoCCalib(){
-        return stateOfCharge;
+        return stateOfCharge.clone();
     }
 
     /**
@@ -44,7 +44,11 @@ public class CalibrationData {
      * @return Array of calibration runtime.
      */
     public double[] getRuntime() {
-        return runtime;
+        return runtime.clone();
+    }
+
+    void setRuntimeCalib(double[] runtime){
+        this.runtime = runtime;
     }
 }
 
