@@ -29,6 +29,7 @@ public class OperationController {
      * Updates the operation state of the shaver based on the last interactions. This update is directly applied to the simulator.
      */
     public void updateOperationState() {
+        chargingDetector.updateBcProtectionStates();
         ChargingStates chargingState = chargingDetector.getChargingState();
         OperationStates opState = handler.getOperatingState();
 

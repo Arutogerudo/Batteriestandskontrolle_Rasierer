@@ -17,7 +17,7 @@ public class Program {
         TemperatureSimulator tempSim = new TemperatureSimulator();
         SimpleGUI gui = new SimpleGUI(simulator, tempSim);
         simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
-        ChargingDetection chargingDetection = new ChargingDetection(simulator);
+        ChargingCommandListener chargingCommandListener = new ChargingCommandListener(new ChargingDetection(simulator));
 
         new Thread(() -> {
             while (true) {
@@ -41,7 +41,7 @@ public class Program {
 
         new Thread(() -> {
             while (true) {
-                chargingDetection.listenForChargingCommands();
+                chargingCommandListener.listenForChargingCommands();
             }
         }).start();
         

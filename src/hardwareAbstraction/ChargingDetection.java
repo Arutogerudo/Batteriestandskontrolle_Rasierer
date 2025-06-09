@@ -2,8 +2,6 @@ package hardwareAbstraction;
 
 import batteryLogic.BatteryStateController;
 
-import java.util.Scanner;
-
 /**
  * Integrates logic to detect charge cable.
  */
@@ -21,26 +19,8 @@ public class ChargingDetection implements IChargingDetection {
         this.batteryController = BatteryStateController.getInstance();
     }
 
-    /**
-     * Listener on commandline to recognize plugin and unplug of charge cable.
-     */
-    public void listenForChargingCommands() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            String input = scanner.nextLine().trim().toLowerCase();
-            switch (input) {
-                case "start":
-                    simulator.setState(ChargingStates.CHARGING);
-                    System.out.println("🔌 Laden gestartet");
-                    break;
-                case "stop":
-                    simulator.setState(ChargingStates.DISCHARGING_PASSIVE);
-                    System.out.println("🔋 Laden gestoppt");
-                    break;
-                default:
-                    System.out.println("Unbekannter Befehl. Nutze 'start' oder 'stop'.");
-            }
-        }
+    void setChargingState(ChargingStates state){
+        simulator.setState(state);
     }
 
     /**
@@ -49,13 +29,14 @@ public class ChargingDetection implements IChargingDetection {
      */
     @Override
     public ChargingStates getChargingState(){
+        return simulator.getState();
+    }
+
+    public void updateBcProtectionStates(){
         if (simulator.getVoltage() >= FULL_CHARGE_VOLTAGE && simulator.getState() == ChargingStates.CHARGING) {
             simulator.setState(ChargingStates.OVERLOAD_PROTECTION);
-            return ChargingStates.OVERLOAD_PROTECTION;
         } else if (batteryController.isUndervoltageDetected()) {
             simulator.setState(ChargingStates.UNDERVOLTAGE_PROTECTION);
-            return ChargingStates.UNDERVOLTAGE_PROTECTION;
         }
-        return simulator.getState();
     }
 }

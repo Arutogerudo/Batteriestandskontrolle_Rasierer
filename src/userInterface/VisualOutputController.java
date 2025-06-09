@@ -55,6 +55,7 @@ public class VisualOutputController {
         } else {
             updateTextDisplay(" ");
         }
+        chargingDetector.updateBcProtectionStates();
         ChargingStates currentState = chargingDetector.getChargingState();
 
         handleChargingStateTransition(currentState);
