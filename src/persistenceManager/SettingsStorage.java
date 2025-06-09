@@ -1,13 +1,5 @@
 package persistenceManager;
 
-import java.io.UncheckedIOException;
-import java.nio.file.Paths;
-import java.util.List;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 /**
  * Singleton class to manage settings related to battery calibration and low battery threshold.
  */
