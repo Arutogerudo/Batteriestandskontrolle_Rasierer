@@ -16,6 +16,13 @@ public class BatteryStateController {
     private final SettingsStorage storage;
     private int lowBatteryThreshold;
 
+    int chargeCycleCount = 0;
+    private boolean dischargedDetected = false;
+
+    private static final int DISCHARGED_THRESHOLD = 20;
+    private static final int FULLY_CHARGED_THRESHOLD = 80;
+
+
     /**
      * Privater Konstruktor, um Singleton zu erzwingen.
      * @param simulator Der Spannungssimulator zum Auslesen der Batteriespannung
@@ -23,8 +30,10 @@ public class BatteryStateController {
     private BatteryStateController(VoltageSimulator simulator) {
         voltageSensor = new VoltageSensor(simulator);
         storage = SettingsStorage.getInstance();
-        calib = storage.readCalibVoltageToSoCFromDisc();
+        calib = storage.readCalibVoltageToSoCToRuntimeFromDisc();
         lowBatteryThreshold = storage.readLowBatteryThresholdFromDisc();
+
+        chargeCycleCount = storage.readChargeCycleCount();
     }
 
     /**
@@ -55,9 +64,9 @@ public class BatteryStateController {
      * @param voltage aktuelle Batteriespannung
      * @return geschätzte Restlaufzeit in Minuten
      */
-    public int calculateRemainingRuntime(double voltage) {
+    public double calculateRemainingRuntime(double voltage) {
         double[] voltages = calib.getVoltageCalib();
-        int[] runtimes = calib.getRuntime();
+        double[] runtimes = calib.getRuntime();
         return calculateInterpolatedValue(voltage, voltages, runtimes);
     }
 
@@ -83,6 +92,12 @@ public class BatteryStateController {
         }
     }
 
+    private void validateCalibrationData(double[] voltages, double[] socValues_or_runtimes) {
+        if (voltages == null || socValues_or_runtimes == null || voltages.length != socValues_or_runtimes.length) {
+            throw new IllegalStateException("Calibration data is not initialized.");
+        }
+    }
+
     private int interpolateBetweenPoints(double voltage, double[] voltages, int[] ys) {
         for (int i = 1; i < voltages.length; i++) {
             if (voltage >= voltages[i]) {
@@ -96,6 +111,34 @@ public class BatteryStateController {
         return (int) (y0 + (y1 - y0) * (x - x0) / (x1 - x0));
     }
 
+    private double calculateInterpolatedValue(double voltage, double[] voltages, double[] values) {
+        validateCalibrationData(voltages, values);
+
+        if (voltage >= voltages[0]) {
+            return values[0];
+        }
+
+        if (voltage <= voltages[voltages.length - 1]) {
+            return values[values.length - 1];
+        }
+
+        return interpolateBetweenPoints(voltage, voltages, values);
+    }
+
+    private double interpolateBetweenPoints(double voltage, double[] voltages, double[] ys) {
+        for (int i = 1; i < voltages.length; i++) {
+            if (voltage >= voltages[i]) {
+                return interpolate(voltage, voltages[i], voltages[i - 1], ys[i], ys[i - 1]);
+            }
+        }
+        return 0.0;
+    }
+
+    private double interpolate(double x, double x0, double x1, double y0, double y1){
+        return y0 + (y1 - y0) * (x - x0) / (x1 - x0);
+    }
+
+
     public boolean isLowBattery(){
         return calculateStateOfCharge(voltageSensor.readVoltage()) <= lowBatteryThreshold;
     }
@@ -108,4 +151,20 @@ public class BatteryStateController {
     public boolean isUndervoltageDetected(){
         return voltageSensor.readVoltage() < UNDERVOLTAGE_LIMIT;
     }
+
+    public void monitorChargeCycle() {
+        int soc = calculateStateOfCharge(voltageSensor.readVoltage());
+
+        if (!dischargedDetected && soc <= DISCHARGED_THRESHOLD) {
+            dischargedDetected = true;
+        }
+
+        if (dischargedDetected && soc >= FULLY_CHARGED_THRESHOLD) {
+            chargeCycleCount++;
+            dischargedDetected = false;
+            storage.setChargeCycleCount(chargeCycleCount);
+        }
+    }
+
+
 }

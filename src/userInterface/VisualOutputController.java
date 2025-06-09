@@ -45,11 +45,11 @@ public class VisualOutputController {
         return displayed;
     }
 
-    void updateVisuals(int percent, boolean showPercentage, int remainingTime, boolean showRemainingTime) {
+    void updateVisuals(int percent, boolean showPercentage, double remainingTime, boolean showRemainingTime) {
         if (showPercentage) {
             updateTextDisplay(percent + "%");
         } else if (showRemainingTime) {
-            updateTextDisplay(remainingTime + "Min.");
+            updateTextDisplay((int)remainingTime + "Min");
         } else {
             updateTextDisplay(" ");
         }

@@ -6,14 +6,14 @@ package persistenceManager;
 public class CalibrationData {
     private final double[] voltage;
     private final int[] stateOfCharge;
-    private final int[] runtime;
+    private final double[] runtime;
 
     /**
      * Constructor for CalibrationData.
      * @param voltage Array of calibration voltage values.
      * @param stateOfCharge Array of calibration state of charge values.
      */
-    public CalibrationData(double[] voltage, int[] stateOfCharge, int[] runtime) {
+    public CalibrationData(double[] voltage, int[] stateOfCharge, double[] runtime) {
         if (voltage.length != stateOfCharge.length || voltage.length != runtime.length) {
             throw new IllegalArgumentException("All arrays must have the same length.");
         }
@@ -38,7 +38,7 @@ public class CalibrationData {
         return stateOfCharge;
     }
 
-    public int[] getRuntime() {
+    public double[] getRuntime() {
         return runtime;
     }
 }

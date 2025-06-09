@@ -1,6 +1,7 @@
 package userInterface;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import batteryLogic.*;
 import hardwareAbstraction.ButtonInput;
@@ -16,11 +17,11 @@ import java.util.Objects;
  * This class represents a simple GUI for the battery status check of a shaver.
  */
 public class SimpleGUI {
-    private static final int WIDTH_SCREEN = 200;
+    private static final int WIDTH_SCREEN = 250;
     private static final int HEIGHT_SCREEN = 350;
-    private static final int WIDTH_HEIGHT_BUTTON = 140;
+    private static final int WIDTH_HEIGHT_BUTTON = 125;
     private static final int VGAP = 20;
-    private static final int TEXT_SIZE = 60;
+    private static final int TEXT_SIZE = 80;
     private static final int HEIGHT_TOGGLE = 30;
     private static final int THRESHOLD_30 = 30;
     private final VisualOutputController visualOutputController;
@@ -31,6 +32,8 @@ public class SimpleGUI {
     private final BatteryStateController batteryController;
     private final SettingsStorage settingsStorage;
     private JToggleButton thresholdToggle;
+    private final JLabel shaveReadyIcon = new JLabel();
+    private final CalibrationManager calibrationManager;
 
 
     /**
@@ -51,6 +54,7 @@ public class SimpleGUI {
         batteryController = BatteryStateController.getInstance(simulator);
         visualOutputController = new VisualOutputController(simulator, handler, batteryController);
         operationController = new OperationController(simulator, tempSim, handler, chargingDetector);
+        calibrationManager = new CalibrationManager(batteryController);
         setupPanel(visualOutputController.getLedController().getLedPanel(), visualOutputController.getDisplayed());
     }
 
@@ -62,6 +66,9 @@ public class SimpleGUI {
         boolean showRemainingRuntime = handler.getDisplayState() == DisplayStates.REMAINING_TIME;
         operationController.updateOperationState();
         visualOutputController.updateVisuals(batteryController.calculateStateOfCharge(sensor.readVoltage()), showPercentage, batteryController.calculateRemainingRuntime(sensor.readVoltage()), showRemainingRuntime);
+        batteryController.monitorChargeCycle();
+        calibrationManager.recalibrateIfNeeded();
+        updateShaveReadyIcon();
     }
 
     private void setupPanel(LEDPanel led, JLabel statusLabel){
@@ -93,15 +100,28 @@ public class SimpleGUI {
         ledContainer.add(led);
         bottomPanel.add(ledContainer, BorderLayout.EAST);
 
+        JPanel middlePanel = new JPanel();
+        middlePanel.setBackground(Color.BLACK);
+        middlePanel.setLayout(new BorderLayout());
+        middlePanel.setBorder(new EmptyBorder(0, 20, 0, 20));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/resources/rasur_moeglich_icon.jpeg")));
+        Image scaledImageShavingReady = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        shaveReadyIcon.setIcon(new ImageIcon(scaledImageShavingReady));
+        updateShaveReadyIcon();
+        middlePanel.add(setupThresholdToggle(), BorderLayout.EAST);
+        middlePanel.add(shaveReadyIcon, BorderLayout.WEST);
+
         display.add(bottomPanel, BorderLayout.SOUTH);
+        display.add(middlePanel, BorderLayout.CENTER);
         display.add(topPanel, BorderLayout.NORTH);
-        setupThresholdToggle(display);
 
         display.setVisible(true);
     }
 
-    private void setupThresholdToggle(JFrame display) {
+    private JToggleButton setupThresholdToggle() {
         thresholdToggle = new JToggleButton();
+        thresholdToggle.setBackground(Color.BLACK);
+        thresholdToggle.setForeground(Color.WHITE);
         int currentThreshold = settingsStorage.readLowBatteryThresholdFromDisc();
         boolean is30 = currentThreshold == HEIGHT_TOGGLE;
         thresholdToggle.setSelected(is30);
@@ -113,16 +133,11 @@ public class SimpleGUI {
             batteryController.updateLowBatteryThreshold(newThreshold);
         });
         thresholdToggle.setPreferredSize(new Dimension(2 * HEIGHT_TOGGLE, HEIGHT_TOGGLE));
-
-        JPanel togglePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        togglePanel.setBackground(Color.BLACK);
-        togglePanel.add(new JLabel("Warnschwelle:", JLabel.CENTER) {{
-            setForeground(Color.WHITE);
-        }}); // evtl. rausnehmen
-        togglePanel.add(thresholdToggle);
-
-        display.add(togglePanel, BorderLayout.CENTER);
+        return thresholdToggle;
     }
 
+    private void updateShaveReadyIcon() {
+        shaveReadyIcon.setVisible(batteryController.calculateRemainingRuntime(sensor.readVoltage()) >= 5);
+    }
 
 }

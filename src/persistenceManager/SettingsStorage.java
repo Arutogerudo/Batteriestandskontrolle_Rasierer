@@ -17,17 +17,18 @@ public class SettingsStorage {
     private static final double MAX_VOLTAGE = 4.2;
     private static final double[] INITIAL_VOLTAGE_CALIB = new double[] { 4.2, 3.9, 3.6, 3.3, 3.0 };
     private static final int[] INITIAL_SOC_CALIB = new int[] { 100, 80, 50, 20, 0 };
-    private static final int[] INITIAL_RUNTIME_CALIB = new int[] { 50, 40, 25, 10, 0 };
+    private static final double[] INITIAL_RUNTIME_CALIB = new double[] { 50, 40, 25, 10, 0 };
 
     private static SettingsStorage instance;
 
     private int lowBatteryThreshold;
     private double[] voltage;
     private int[] stateOfCharge;
-    private int[] runtime;
+    private double[] runtime;
 
     private static final Path CALIB_TXT_FILE = Paths.get("src", "resources", "calibVoltageToSoC.txt");
     private static final Path THRESHOLD_TXT_FILE = Paths.get("src", "resources", "threshold.txt");
+    private static final Path CYCLE_COUNT_FILE = Paths.get("src", "resources", "cyclecount.txt");
 
     private SettingsStorage() {
         lowBatteryThreshold = 10;
@@ -53,19 +54,24 @@ public class SettingsStorage {
     }
 
     private void saveSettings() {
-        writeCalibVoltageToSoCToDisc();
+        writeCalibVoltageToSoCToRuntimeToDisc();
         writeLowBatteryThresholdToDisc();
+        setChargeCycleCount(0);
     }
 
-    private void writeCalibVoltageToSoCToDisc() {
+    public void writeCalibVoltageToSoCToRuntimeToDisc() {
         validateVoltageRange();
         String csvContent = buildCsvContent();
 
         try {
             Files.writeString(CALIB_TXT_FILE, csvContent, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            handleWriteError(e);
+            handleWriteOrReadError(e);
         }
+    }
+
+    public void setRuntimeCalib(double[] runtime){
+        this.runtime = runtime;
     }
 
     private void validateVoltageRange() {
@@ -92,16 +98,16 @@ public class SettingsStorage {
         return content.toString();
     }
 
-    private void handleWriteError(IOException e) {
+    private void handleWriteOrReadError(IOException e) {
         e.printStackTrace();
-        throw new UncheckedIOException("Failed to write calibration data to disk.", e);
+        throw new UncheckedIOException("Failed to write data to disk or read data from disk.", e);
     }
 
     private void writeLowBatteryThresholdToDisc() {
         try {
             Files.writeString(THRESHOLD_TXT_FILE, String.valueOf(lowBatteryThreshold), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            handleWriteError(e);
+            handleWriteOrReadError(e);
         }
     }
 
@@ -119,8 +125,8 @@ public class SettingsStorage {
         try {
             String content = Files.readString(THRESHOLD_TXT_FILE, StandardCharsets.UTF_8);
             return Integer.parseInt(content.trim());
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            handleWriteOrReadError(e);
             return -1;
         }
     }
@@ -129,27 +135,46 @@ public class SettingsStorage {
      * Reads the voltage calibration data from the disk.
      * @return the voltage calibration data
      */
-    public CalibrationData readCalibVoltageToSoCFromDisc() {
+    public CalibrationData readCalibVoltageToSoCToRuntimeFromDisc() {
         try {
             List<String> lines = Files.readAllLines(CALIB_TXT_FILE, StandardCharsets.UTF_8);
             int size = lines.size() - 1;
 
             double[] voltage = new double[size];
             int[] stateOfCharge = new int[size];
-            int[] runtime = new int[size];
+            double[] runtime = new double[size];
 
             for (int i = 1; i < lines.size(); i++) {
                 String[] parts = lines.get(i).split(",");
                 voltage[i - 1] = Double.parseDouble(parts[0].trim());
                 stateOfCharge[i - 1] = Integer.parseInt(parts[1].trim());
-                runtime[i - 1] = Integer.parseInt(parts[2].trim());
+                runtime[i - 1] = Double.parseDouble(parts[2].trim());
             }
 
             return new CalibrationData(voltage, stateOfCharge, runtime);
 
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            handleWriteOrReadError(e);
             return null;
         }
     }
+
+    public void setChargeCycleCount(int count) {
+        try {
+            Files.writeString(CYCLE_COUNT_FILE, String.valueOf(count), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            handleWriteOrReadError(e);
+        }
+    }
+
+    public int readChargeCycleCount() {
+        try {
+            String content = Files.readString(CYCLE_COUNT_FILE, StandardCharsets.UTF_8);
+            return Integer.parseInt(content.trim());
+        } catch (IOException e) {
+            handleWriteOrReadError(e);
+            return -1;
+        }
+    }
+
 }

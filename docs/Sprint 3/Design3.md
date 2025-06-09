@@ -23,6 +23,13 @@ und 100% liegt. Das heißt, dass der Akku auf mindestens 10% geladen sein muss, 
 
 Einblenden eines Icons eines Rasierers mit einem Haken dran auf dem Display unter der Prozentanzeige.
 
+### nach wie vielen Ladezyklen wird rekalibriert
+
+Nach 250 Ladezyklen, da alle 1000 Ladezyklen die maximale Kapazität um 20% abnimmt. Das bedeutet, dass sie pro
+Ladezyklus um 0,02% abnimmt. Um in der 5% Toleranz zu bleiben (Req. 3.4) muss daher alle 250 Ladezyklen die Umrechnung
+der Spannung in die Restlaufzeit neu kalibriert werden. Die Kapazitätsabnahme wird vereinfacht als linearer Zusammenhang
+angenommen.
+
 ## Klassendiagramm
 
 ![Klassendiagramm](../referenziert/Design/Klassendiagramm3.png)
@@ -58,7 +65,6 @@ Legende:
 | `SettingsStorage`        | Singleton      | Gewährleistet zentralen und konsistenten Zugriff auf gespeicherte Werte                                                    |
 | `InteractionHandler`     | Command        | Leichtere Erweiterbarkeit und Wartbarkeit, Commands können getestet und protokolliert werden ohne den Handler zu verändern |
 | `BatteryStateController` | Singleton      | Batteriezustand zentral und konsistent im gesamten System verwalten                                                        |
-| `CalibrationManager`     | Observer       | ermöglicht lose Kopplung zwischen der Logik zur Ladezyklusverfolgung und den reaktiven Komponenten                         |
 
 nicht genutzte Designpatterns inkl. Begründung:
 
@@ -70,3 +76,4 @@ nicht genutzte Designpatterns inkl. Begründung:
 | `SimpleGUI`              | Observer       | soll nicht auf Änderungen reagieren, sondern zentral die Initialisierung und Aktualisierung der GUI steuern und damit die Kontrolle über den Ablauf behalten |
 | `VoltageSimulator`       | State          | reine Hilfsklasse -> überkompliziert diese nach dem Statepattern umzusetzen                                                                                  |
 | `OperationController`    | State          | modelliert keinen eigenen Zustandsautomaten, sondern vermittelt nur zwischen Komponenten                                                                     |
+| `CalibrationManager`     | Observer       | einziger Aufrufer ist SimpleGUI -> einfacher ohne Entkopplung                                                                                                |
