@@ -178,3 +178,28 @@ Akkus sollten in einem Temperaturbereich zwischen 5 und 50 °C geladen werden. A
 Brandgefahr kommen. Bei Temperaturen unter -20 °C kann die Leistung und Lebensdauer des Akkus stark beeinträchtigt
 werden.
 
+# Sprint 3
+
+### Umrechnung SoC auf Restlaufzeit (Req. 2.3)
+
+[Task: Umrechnung SoC auf Restlaufzeit recherchieren](https://uniprojectslara.atlassian.net/browse/BAT-144)
+
+Zu Beginn entspricht 100% SoC einer Restlaufzeit von 50 Minuten. Mit steigendem Alter des Akkus nimmt die Restlaufzeit
+immer weiter ab. Nach ca. 1000 Ladezyklen beträgt die Kapazität des Akkus nur noch 80% der ursprünglichen Kapazität.
+Diese Abnahme der Kapazität muss bei der Umrechnung von SoC auf Restlaufzeit berücksichtigt werden. Sie verläuft
+eigentlich nicht linear, wird hier aber vereinfacht als linear angenommen.
+
+Die tatsächliche Akkukapazität hängt von der Ladegeschwindigkeit, der durchschnittlichen Temperatur des Akkus, des SoCs
+während der Lagerung des Akkus, der Anzahl der Ladezyklen und vielen weiteren Faktoren ab.
+
+### Strategien zur Rekalibrierung (Req. 3.3)
+
+[Task: Strategien zur Rekalibrierung recherchieren](https://uniprojectslara.atlassian.net/browse/BAT-150)
+
+- Fortlaufende Kalibrierung: Der Akku wird kontinuierlich überwacht und die verbleibende Akkukapazität wird regelmäßig
+  angepasst, um die Genauigkeit zu gewährleisten. Dies kann durch Interpolation und Einbeziehung der Anzahl von
+  Ladezyklen umgesetzt werden.
+- Manuelle Kalibrierung: Der Benutzer kann den Akku manuell kalibrieren, indem er ihn vollständig entlädt und dann
+  wieder auflädt. Dies kann durch eine spezielle Funktion im Gerät unterstützt werden.
+- Automatische Kalibrierung in regelmäßigen Abständen: Das Gerät führt in regelmäßigen Abständen eine Kalibrierung durch,
+  um die Genauigkeit der Anzeige zu gewährleisten. Dies kann z. B. alle 30 Ladezyklen oder alle 3 Monate erfolgen.

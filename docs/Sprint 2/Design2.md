@@ -104,9 +104,9 @@ schon oben eingezeichneten Beziehungen zwischen den Klassen weggelassen.
 | `SettingsStorage`        | Singleton      | Gewährleistet zentralen und konsistenten Zugriff auf gespeicherte Werte                                                    |
 | `InteractionHandler`     | Command        | Leichtere Erweiterbarkeit und Wartbarkeit, Commands können getestet und protokolliert werden ohne den Handler zu verändern |
 | `BatteryStateController` | Observer       | Notifiziert andere Komponenten (LED, GUI), wenn sich Ladezustand oder Fehlermeldungen ändern                               |
-| `VisualOutputController` | Observer       | Reagiert auf Änderungen im Ladezustand, z. B. um Anzeige zu aktualisieren                                                  |
+| `VisualOutputController` | Observer       | Reagiert auf Änderungen im Ladezustand, z.B. um Anzeige zu aktualisieren                                                   |
 | `LEDController`          | Observer       | Blinkt oder ändert Farbe, wenn sich Ladeaktivität oder Fehlerstatus ändert                                                 |
 | `SimpleGUI`              | Observer       | Aktualisiert Textanzeigen bei Änderungen im SoC oder Ladezustand                                                           |
 | `VoltageSimulator`       | State          | Verwaltet Ladezustände wie `Charging`, `Idle`, `Overheated` – jeweils mit unterschiedlichem Verhalten                      |
-| `OperationController`    | State          | System hat verschiedene Betriebsmodi (z. B. Laden, Anzeige, Fehler), die eigenes Verhalten ausprägen                       |
+| `OperationController`    | State          | System hat verschiedene Betriebsmodi (z.B. Laden, Anzeige, Fehler), die eigenes Verhalten ausprägen                        |
 

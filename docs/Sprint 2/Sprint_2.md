@@ -5,7 +5,7 @@
 Zu Beginn des zweiten Sprints habe ich die relevanten Anforderungen (Requirements) ausgewählt. Konkret
 wurde die folgende Kernfunktion identifiziert und berücksichtigt:
 
-- Ladeerkennung und -statusanzeige
+- Ladeerkennung und -statusanzeige, Warnung bei niedrigem Batteriestand
 
 Bei der Auswahl der Anforderungen wurde bewusst auf eine realistische und zielgerichtete Planung geachtet. Anforderungen
 mit der Priorität „Kann“ (Nice-to-have) wurden zunächst nicht in den Sprint aufgenommen, um die vorhandenen Ressourcen
@@ -26,7 +26,7 @@ Minimal-Marketable-Product steht. Sprint 3 kann dann für weitere Extras und zur
 - Req. 6.2: Überladeschutz
 - Req. 6.3: Temperaturüberwachung beim Laden
 
-**Sprint-Zeitraum:** 22.05.2025 - 12.06.2025
+**Sprint-Zeitraum:** 22.05.2025 - 08.06.2025
 
 **Sprintziel:**
 
@@ -91,10 +91,14 @@ weitere Testfälle ergänzt, um die vollständige Abdeckung aller Hauptanforderu
 
 - Aus der Design- und Architekturphase wurden nicht alle Aspekte 1:1 in der Implementierung umgesetzt und mussten
   nachträglich angepasst werden.
+- offenes ToDo: Designpatterns sind noch nicht vollständig umgesetzt, da sie erst im nächsten Sprint
+  vollständig integriert werden.
 
 **Was werde ich im nächsten Sprint anders machen?**
 
 - Die Design- und Architekturphase noch gründlicher durchführen, um spätere Anpassungen zu vermeiden.
+- Designpatterns aus Sprint 1 und 2 vollständig umsetzen, um die Wiederverwendbarkeit und Lesbarkeit des Codes zu
+  verbessern.
 
 **Lessons Learned:**
 
