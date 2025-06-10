@@ -4,13 +4,13 @@
 
 ### UT1 – Spannungsgrenzen: Untergrenze
 
-* **Ziel:** Sicherstellen, dass Spannung nicht unter 3.0 V fällt
+* **Ziel:** Sicherstellen, dass Spannung unter 2.8 V in Stromsparmodus wechselt
 * **Ausgangszustand:** DisplayState = 'OFF' | 'STATE_OF_CHARGE', OperationState = 'OPERATING', ChargingState =
   'DISCHARGING_ACTIVE'
-* **Ereignis (Zustandsübergang):** kein relevanter für Testfall
+* **Ereignis (Zustandsübergang):** ChargingState geht auf UNDERVOLTAGE
 * **Eingabe:** Spannung = 2.9 V
-* **Erwartete Reaktion:** Rückgabe- oder Korrekturwert ≥ 3.0 V (z.B. Clamping), ggf. Exception oder Fehlerprotokoll
-* **Erwarteter Folgezustand:** siehe Ausgangszustand
+* **Erwartete Reaktion:** LEDMode = 'UNDERVOLTAGE', ChargingState = 'UNDERVOLTAGE_PROTECTION'
+* **Erwarteter Folgezustand:** ChargingState = 'UNDERVOLTAGE_PROTECTION'
 * **Klasse:** `BatteryStateController`
 * **Requirement:** 3.1
 
@@ -55,6 +55,32 @@
 * **Erwarteter Folgezustand:** LEDMode = 'WARNING'
 * **Klasse:** `BatteryStateController.isLowBattery()`
 * **Requirement:** 4.1
+
+---
+
+### UT5 – Umrechnung von Spannungswerten in Restlaufzeit korrekt durchgeführt
+
+* **Ziel:** Prüfung, ob Spannungswerte korrekt in Restlaufzeit des Rasierers bei Betrieb (in Minuten) umgerechnet werden
+* **Ausgangszustand:** OperationState = 'OPERATING', DisplayState = 'REMAINING_TIME'
+* **Ereignis (Zustandsübergang):** -
+* **Eingabe:** verschiedene Spannungswerte
+* **Erwartete Reaktion:** Umrechnung liefert erwartete Restlaufzeit
+* **Erwarteter Folgezustand:** siehe Ausgangszustand
+* **Klasse:** `BatteryStateController.calculateRemainingRuntime()`
+* **Requirement:** 2.3
+
+---
+
+### UT6 – Rekalibrierung funktioniert wie vorgesehen
+
+* **Ziel:** Prüfung der internen Logik zur Rekalibrierung
+* **Ausgangszustand:** ChargingState = 'CHARGING'
+* **Ereignis (Zustandsübergang):** Rekalibrierungsprozess wird manuell angestoßen
+* **Eingabe:** keine
+* **Erwartete Reaktion:** richtige angepasste Werte in txt file -> einlesen und testen
+* **Erwarteter Folgezustand:** egal
+* **Klasse:** `CalibrationController.recalibrateIfNeeded()`
+* **Requirement:** 3.5
 
 ---
 
@@ -149,6 +175,18 @@
 
 ---
 
+### UX8 – Anzeige bei Spannungsänderung gut lesbar
+
+* **Ziel:** Bewertung der Lesbarkeit der Restlaufzeit-Anzeige bei Spannungsänderung
+* **Ausgangszustand:** OperationState = 'OPERATING', DisplayState = 'REMAINING_TIME'
+* **Ereignis (Zustandsübergang):** Anzeige verändert sich durch Spannungsänderung
+* **Vorgehen:** Nutzer betrachten die Anzeige nach Änderung, bewerten Klarheit und Lesbarkeit
+* **Erwartete Reaktion:** ≥ 90 % der Testpersonen empfinden Anzeige als eindeutig und gut lesbar
+* **Erwarteter Folgezustand:** siehe Ausgangszustand
+* **Requirement:** 2.3
+
+---
+
 ## **Black-Box Tests (Systemverhalten über Ausgabe)**
 
 ### BB1 – Automatische Spannungsmessung
@@ -195,8 +233,9 @@
 * **Ereignis (Zustandsübergang):** kurzer Knopfdruck
 * **Vorgehen:** Knopf kurz drücken
 * **Erwartete Reaktion:** Eindeutige, selbsterklärende Anzeige
-* * **Erwarteter Folgezustand:** DisplayState = 'STATE_OF_CHARGE', OperationState = 'OFF', ChargingState =
-    'DISCHARGING_PASSIVE'
+*
+    * **Erwarteter Folgezustand:** DisplayState = 'STATE_OF_CHARGE', OperationState = 'OFF', ChargingState =
+      'DISCHARGING_PASSIVE'
 * **Requirement:** 2.2
 
 ---
@@ -209,7 +248,7 @@
 * **Vorgehen:** Knopf drücken, schauen ob Anzeige sofort aktiv wird (ohne erkennbare Verzögerung)
 * **Erwartete Reaktion:** Änderung innerhalb < 200 ms (visuell ohne erkennbare Verzögerung)
 * **Erwarteter Folgezustand:** DisplayState = 'STATE_OF_CHARGE', OperationState = 'OFF' | 'OPERATING', ChargingState =
-    'DISCHARGING_PASSIVE' | 'DISCHARGING_ACTIVE'
+  'DISCHARGING_PASSIVE' | 'DISCHARGING_ACTIVE'
 * **Requirement:** 2.10
 
 ---
@@ -255,7 +294,7 @@
 * **Ziel:** System erkennt, dass kein korrektes Laden möglich ist
 * **Ausgangszustand:** ChargingState = `DISCHARGING'
 * **Ereignis (Zustandsübergang):** `start`-Kommando, aber keine physische Verbindung (oder falsches Kommando)
-* **Vorgehen:** 
+* **Vorgehen:**
 * **Erwartete Reaktion:** keine Reaktion oder Fehleranzeige, kein Ladevorgang sichtbar
 * **Erwarteter Folgezustand:** ChargingState bleibt `DISCHARGING'
 * **Requirement:** 5.3
@@ -280,6 +319,69 @@
 * **Ausgangszustand:** ChargingState = `CHARGING`, Temperatur im Simulator im sicheren Bereich
 * **Ereignis (Zustandsübergang):** Temperatur steigt über sicheren Wert
 * **Vorgehen:** Temperatur im Simulator erhöhen
-* **Erwartete Reaktion:** Ladevorgang pausiert, LED blinkt weiterhin gelb, aber Anzeige zeigt keine Steigung des Ladeprozents
+* **Erwartete Reaktion:** Ladevorgang pausiert, LED blinkt weiterhin gelb, aber Anzeige zeigt keine Steigung des
+  Ladeprozents
 * **Erwarteter Folgezustand:** ChargingState = `DISCHARGING_PASSIVE`
 * **Requirement:** 6.3
+
+---
+
+### BB12 – Anzeige erscheint nach entsprechender Knopfinteraktion
+
+* **Ziel:** Prüfung, ob Anzeige erscheint, wenn bei Anzeige des SoC`s erneut der Button kurz gedrückt wird
+* **Ausgangszustand:** DisplayState = 'STATE_OF_CHARGE'
+* **Ereignis (Zustandsübergang):** ShortPressButtonCommand.execute()
+* **Vorgehen:** Knopf wird einmal kurz gedrückt
+* **Erwartete Reaktion:** Anzeige wechselt auf Restlaufleit
+* **Erwarteter Folgezustand:** DisplayState = 'REMAINING_TIME'
+* **Requirement:** 2.3
+
+---
+
+### BB13 – Auslösung der Rekalibrierung nach 250 Zyklen
+
+* **Ziel:** Prüfung, ob Rekalibrierung zum richtigen Zeitpunkt ausgelöst wird
+* **Ausgangszustand:** ChargingState = 'CHARGING'
+* **Ereignis (Zustandsübergang):** 250. mal von unter 20% bis über 80% aufgeladen
+* **Vorgehen:** Ladezyklen auf 249 setzen, einmal ent- und wieder aufladen -> calibration txt file & entsprechende
+  Variablen über Debuggerprüfen
+* **Erwartete Reaktion:** korrekt berechnete angepasste Werte in txt file & richtiges Einlesen in Variablen
+* **Erwarteter Folgezustand:** egal
+* **Requirement:** 3.3
+
+---
+
+### BB14 – LED blinkt rot bei Grenzwertüberschreitung
+
+* **Ziel:** Prüfung, ob LED bei eingestelltem Schwellwert wie erwartet blinkt
+* **Ausgangszustand:** LEDMode = `OFF`, SoC > Schwellwert
+* **Ereignis (Zustandsübergang):** SoC sinkt unter eingestellten kritischen Schwellwert
+* **Vorgehen:** Betrieb des Rasierers für Spannungsabfall, für beide möglichen Schwellwerte testen
+* **Erwartete Reaktion:** LED blinkt rot mit definierter Frequenz
+* **Erwarteter Folgezustand:** LEDMode = `WARNING`
+* **Requirement:** 4.2
+
+---
+
+### BB15 – Anzeige des Signals bei mindestens einer möglichen Rasur
+
+* **Ziel:** Prüfung, ob passendes Symbol erscheint, wenn mindestens eine Rasur möglich ist (calculateRemainingRuntime(voltage) >= 5)
+* **Ausgangszustand:** SoC = 0%
+* **Ereignis (Zustandsübergang):** voltage steigt, so dass calculateRemainingRuntime(voltage) >= 5
+* **Vorgehen:** Spannung im Simulator erhöhen (Laden)
+* **Erwartete Reaktion:** Anzeige-Symbol (z. B. Rasur-Icon) wird eingeblendet
+* **Erwarteter Folgezustand:** ChargingState = 'CHARGING'
+* **Requirement:** 5.5
+
+---
+
+### BB16 – Rote LED bei kritischer Spannung leuchtet dauerhaft
+
+* **Ziel:** Prüfung, ob LED bei kritischer Spannung dauerhaft rot leuchtet
+* **Ausgangszustand:** Spannung im sicheren Bereich
+* **Ereignis (Zustandsübergang):** Spannung sinkt unter kritischen Grenzwert
+* **Vorgehen:** Spannung im Simulator schrittweise absenken (OperationState = 'OPERATING')
+* **Erwartete Reaktion:** LED beginnt dauerhaft rot zu leuchten, wenn voltage < 2.8
+* **Erwarteter Folgezustand:** LEDMode = `UNDERVOLTAGE`
+* **Requirement:** 6.1
+
