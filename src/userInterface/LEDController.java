@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Controller of a simple LED panel that can be used to represent the state of a battery.
  */
-public class LEDController implements UIConstants {
+class LEDController implements UIConstants {
     private final LEDPanel led;
     private final Timer blinkTimer;
     private boolean blinkState;

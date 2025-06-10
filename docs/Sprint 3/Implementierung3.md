@@ -33,7 +33,7 @@
 ### 1. Vorgehen zur Codeoptimierung
 
 Im Rahmen der Qualitätssicherung meines Softwareprojekts zur Batteriestandskontrolle eines Rasierapparats habe ich eine
-umfassende Analyse und Optimierung des Codes durchgeführt. Zunächst erfolgte ein manuelles **Code Review**, um
+umfassende Analyse und Optimierung des Codes durchgeführt. Zunächst erfolgte ein manuelles **Codereview**, um
 überflüssige oder fehleranfällige Strukturen zu identifizieren und zu entfernen. Dabei lag der Fokus insbesondere auf
 der **Einhaltung des Single Responsibility Prinzips (SRP)**: Jede Klasse soll genau eine Verantwortlichkeit besitzen.
 

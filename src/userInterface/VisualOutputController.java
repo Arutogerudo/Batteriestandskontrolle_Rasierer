@@ -29,7 +29,7 @@ public class VisualOutputController {
      * @param handler the interaction handler managing user input or external events
      * @param batteryController the controller responsible for calculating battery state of charge and runtime
      */
-    public VisualOutputController(VoltageSimulator simulator, InteractionHandler handler, BatteryStateController batteryController) {
+    VisualOutputController(VoltageSimulator simulator, InteractionHandler handler, BatteryStateController batteryController) {
         displayed = new JLabel();
         ledController = new LEDController();
         this.batteryController = batteryController;

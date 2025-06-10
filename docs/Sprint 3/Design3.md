@@ -34,6 +34,11 @@ angenommen.
 
 ![Klassendiagramm](../referenziert/Design/Klassendiagramm3.png)
 
+Durch Analyse und darauf basierender Optimierung des Codes mussten einige Anpassungen in der Klassenhierarchie
+vorgenommen werden. Zur Vereinfachung werden hier Interfaces, Enums und Hilfsklassen weggelassen.
+
+![Klassendiagramm final](../referenziert/Design/klassendiagramm3final.png)
+
 ## Zustandsdiagramm Knopfinteraktion
 
 ![Zustandsdiagramm Knopfinteraktion](../referenziert/Design/Zustandsdiagramm_Knopfinteraktion_updatet.png)
@@ -47,6 +52,10 @@ Legende:
 ## Zustandsdiagramm ChargingStates inkl. Schutzmechanismen
 
 ![Zustandsdiagramm ChargingStates](../referenziert/Design/Zustandsdiagramm_ChargingStates.png)
+
+## Zustandsdiagramm LEDMode
+
+![Zustandsdiagramm LEDMode](../referenziert/Design/Zustandsdiagramm_LED_updatet.png)
 
 Legende:
 

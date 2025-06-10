@@ -17,6 +17,9 @@ enum LEDMode {
      * Active in case of completed charge.
      */
     FULL_CHARGE,
+    /**
+     * Active in case of voltage under 2.8.
+     */
     UNDERVOLTAGE
 }
 
