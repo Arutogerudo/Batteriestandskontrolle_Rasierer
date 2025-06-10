@@ -28,59 +28,81 @@
 | 6.2            | BAT-36     | batteryLogic                       | `OperationController`                              |                                                 | BB-10       |
 | 6.3            | BAT-37     | hardwareAbstraction, batteryLogic  | `TemperatureSimulator`, `OperationController`      |                                                 | BB-11       |
 
-## Code-Metriken
+## Analyse und Optimierung der Codequalität
 
-### Komplexität
+### 1. Vorgehen zur Codeoptimierung
 
-Die Codemetriken wurden über das IntelliJ-Plugin "MetricsReloaded" ermittelt. Es wurden Methoden-, Klassen-, Paket-,
-Modul- und Projektmetriken erfasst. Basierend auf den Methodenmetriken wurde der Code nochmals überarbeitet, um die
-Komplexität und Abhängigkeiten zu reduzieren und die Lesbarkeit zu verbessern.
+Im Rahmen der Qualitätssicherung meines Softwareprojekts zur Batteriestandskontrolle eines Rasierapparats habe ich eine
+umfassende Analyse und Optimierung des Codes durchgeführt. Zunächst erfolgte ein manuelles **Code Review**, um
+überflüssige oder fehleranfällige Strukturen zu identifizieren und zu entfernen. Dabei lag der Fokus insbesondere auf
+der **Einhaltung des Single Responsibility Prinzips (SRP)**: Jede Klasse soll genau eine Verantwortlichkeit besitzen.
 
-#### Methodenmetriken
+Im Zuge dessen wurden die ursprünglich zu umfangreichen Klassen `BatteryStateController`, `SettingsStorage`
+und `SimpleGUI` restrukturiert und in kleinere, klar abgegrenzte Einheiten aufgeteilt. So wurde sichergestellt, dass
+jede Klasse eine überschaubare und gut wartbare Funktion erfüllt.
 
-Es wurde die kognitive Komplexität (CogC), die zyklomatische Komplexität (v(G)) sowie strukturelle Metriken wie ev(G)
-und iv(G) berechnet. Der maximale CogC-Wert liegt bei 6 (updateLEDState), was für eine gute Lesbarkeit und
-Verständlichkeit aller Methoden spricht. Die zyklomatische Komplexität (v(G)) ist maximal 6 und nur 6 Methoden haben
-Werte > 3. Das zeigt, dass die meisten Methoden sehr gut und alle zumindest im grünen Bereich sind. Die strukturellen
-Komplexitäten iv(G) und ev(G), ist maximal 3, was für eine gute Modularität spricht.
+Im Anschluss daran wurden mit dem Analysewerkzeug **Metrics Reloaded** die wichtigsten **Codemetriken** erhoben. Dabei
+wurde besonderes Augenmerk auf **Komplexität, Abhängigkeiten, Codeumfang und Dokumentationsabdeckung** gelegt.
 
-#### weitere Metriken
+### 2. Auflösung zyklischer Abhängigkeiten
 
-Die durchgeführten Metrik-Analysen auf Klassen-, Paket-, Modul- und Projektebene zeigen, dass sich alle bewerteten
-Kennzahlen im grünen Bereich befinden. Dies umfasst insbesondere die Klassenmetriken WMC, OCavg und OCmax, welche auf
-eine ausgewogene Methodenanzahl sowie eine geringe bis moderate Komplexität einzelner Methoden hinweisen.
+Während der Analyse wurde eine **zyklische Abhängigkeit zwischen den ChargingStates und dem VoltageSimulator**
+festgestellt. Zur Behebung dieses Designproblems wurde das Interface `VoltageChangeProvider` eingeführt. Dieses sorgt
+für eine saubere Entkopplung der Komponenten und erhöht die Flexibilität und Testbarkeit des Systems.
 
-Auch die Cyclomatic Complexity auf Modul- und Projektebene, gemessen über v(G)avg und v(G)tot, bestätigt die gute
-Strukturierung der Software. Die Komplexität verteilt sich gleichmäßig über alle Ebenen, ohne auffällige Hotspots oder
-kritische Ausreißer.
+### 3. Vereinfachung komplexer Methoden
 
-Zusätzlich belegen die positiven Werte der Paket- und Modulmetriken eine hohe Kohäsion und eine geringe Kopplung
-zwischen Komponenten, was die Wartbarkeit und Erweiterbarkeit der Gesamtarchitektur unterstützt.
+Ein weiteres Augenmerk lag auf der **Reduktion methodischer Komplexität**. Methoden mit Werten über den Grenzwerten (z.
+B. **Cognitive Complexity > 5**) wurden durch das Aufbrechen von Entscheidungsstrukturen und das Auslagern in
+Hilfsmethoden vereinfacht.
 
-### Abhängigkeiten der Pakete und Klassen
+### 4. Ergebnisse der Metrikanalyse
 
-Die Analyse der Abhängigkeitsmetriken mit MetricsReloaded zeigt, dass die Software eine insgesamt flache und gut
-strukturierte Architektur aufweist. Zyklische Abhängigkeiten treten nur in wenigen Klassen auf, insbesondere innerhalb
-der batteryLogic.*Command-Komponenten und dem InteractionHandler. Die durchschnittliche Abhängigkeits-Tiefe (Dpt = 2,65)
-sowie der geringe Anteil zyklischer Klassen (PDcy = 1,09) bestätigen eine wartbare Modulstruktur. Optimierungspotenzial
-besteht in der Reduktion der Zyklen innerhalb der Logik-Komponenten.
+#### 4.1 Komplexitätsmetriken
 
-Die zyklische Abhängigkeit zwischen dem InteractionHandler und den verschiedenen Command-Klassen (ShortPressCommand,
-LongPressCommand, InactivityCommand) wurde durch die Einführung eines CommandContext-Interfaces aufgelöst. Dadurch
-kennen die Commands nur noch eine abstrakte Schnittstelle, nicht aber die konkrete Handler-Implementierung. Dies
-reduziert die Kopplung, verbessert die Testbarkeit und beseitigt zyklische Abhängigkeiten gemäß den Metriken.
+* **Cognitive Complexity (CogC)** misst die Verständlichkeit des Codes aus menschlicher Sicht. Der Maximalwert lag hier
+  bei **5**, die meisten Methoden wiesen Werte von **≤ 3** auf.
+* **Essential Cyclomatic Complexity (ev(G))** gibt die strukturelle Komplexität des Kontrollflusses an. Auch hier wurde
+  ein Maximalwert von **5** erreicht.
+* **Cyclomatic Complexity (v(G))** nach McCabe beschreibt die Anzahl möglicher Ausführungspfade. Der Höchstwert von **6
+  ** trat nur bei einer Methode auf, die Mehrheit lag bei **3 oder weniger**.
+* **iv(G)** (Interval-based Cyclomatic Complexity) blieb ebenfalls unter **5**, ist jedoch weniger relevant.
 
-Im Rahmen der Weiterentwicklung des OperationController wurde eine Entkopplung der Abhängigkeiten durch Einführung von
-Interfaces und den Einsatz von Dependency Injection umgesetzt. Ziel war es, die Klasse flexibler, testbarer und
-wartbarer zu gestalten. Durch die Verwendung von Schnittstellen ist der Controller nun nicht mehr direkt an konkrete
-Implementierungen gebunden, was eine einfache Austauschbarkeit einzelner Komponenten ermöglicht. Zudem verbessert sich
-dadurch die Testbarkeit erheblich, da Abhängigkeiten im Testumfeld leicht durch Mocks ersetzt werden können. Insgesamt
-trägt dieses Vorgehen zu einer sauberen, modularen und zukunftssicheren Softwarearchitektur bei.
+➡️ Diese Werte belegen eine **niedrige methodische Komplexität**, was die Wartbarkeit, Verständlichkeit und Testbarkeit
+deutlich verbessert.
 
-### Codezeilen
+* Auf Klassenebene lag der höchste **Operation Count (OCmax)** unterhalb kritischer Schwellen, was auf eine angemessene
+  interne Methodengröße hinweist.
+* Der **Weighted Methods per Class (WMC)**-Wert blieb **≤ 13**, meist unter **10**, was für übersichtliche und klar
+  strukturierte Klassen spricht.
+* Die durchschnittliche Komplexität pro Package (**v(G)avg**) lag durchgehend unter **2**, was eine **niedrige
+  Komplexität auf Modularitätsebene** bestätigt.
 
-Die Codezeilen wurden über das IntelliJ-Plugin "MetricsReloaded" ermittelt. Die Analyse zeigt, dass die maximale
-Methodenlänge 28 Zeilen beträgt, was für eine gute Lesbarkeit und Verständlichkeit spricht. Die meisten Methoden sind
-deutlich kürzer, was die Wartbarkeit erhöht. Die Klassenlänge variiert zwischen 10 und 110 Zeilen, was
-ebenfalls im grünen Bereich liegt. Alle Klassen zusammen haben 900 Zeilen Code, was für ein überschaubares und
-verständliches Projekt spricht.
+#### 4.2 Abhängigkeitsmetriken
+
+* Es bestehen **keine zyklischen Abhängigkeiten** zwischen Klassen, was durch die gezielte Einführung von Schnittstellen
+  erreicht wurde.
+* Die Werte für **Dcy (Depth of Cycles)** und **Dpt (Depth of Package Tree)** lagen jeweils unter **10**, was auf eine *
+  *angemessen flache, gut strukturierte Architektur** schließen lässt.
+
+#### 4.3 Lines-of-Code-Metriken
+
+* Alle Methoden blieben mit **< 20 NCLOC (Non-Comment Lines of Code)** innerhalb der Clean Code-Empfehlungen.
+* Obwohl einige Klassen **mehr als 50 LOC** umfassen, wurde durch die saubere Einhaltung des **Single Responsibility
+  Prinzips** eine hohe Modularität sichergestellt.
+
+#### 4.4 Dokumentationsabdeckung (JavaDoc)
+
+* Alle **öffentlichen Klassen, Konstruktoren, Methoden und Attribute** wurden mit **JavaDoc-Kommentaren** versehen.
+  Damit wird eine vollständige Dokumentationsabdeckung erzielt, wie sie in gut wartbarer Software empfohlen wird.
+
+---
+
+### 5. Fazit
+
+Durch die Kombination aus **manueller Codeüberprüfung**, **Refactoring nach Clean Code-Prinzipien** und einer *
+*systematischen Metrikanalyse** konnte die Codebasis entscheidend verbessert werden. Der Code weist nun eine **niedrige
+Komplexität**, **saubere Modularität**, **keine zyklischen Abhängigkeiten**, sowie eine **hohe Dokumentationsqualität**
+auf. Damit erfüllt das System zentrale Anforderungen an **Wartbarkeit, Testbarkeit und Lesbarkeit** und ist gut auf
+zukünftige Erweiterungen vorbereitet.
+
