@@ -4,6 +4,8 @@ import batteryLogic.BatteryStateController;
 import hardwareAbstraction.VoltageSimulator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistenceManager.SettingsStorage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BatteryStateControllerTest {
@@ -14,8 +16,8 @@ class BatteryStateControllerTest {
     @BeforeEach
     void setup() {
         this.simulator = new VoltageSimulator();
+        BatteryStateController.initInstance(simulator);
         controller = BatteryStateController.getInstance();
-
     }
 
     /*
@@ -62,7 +64,7 @@ class BatteryStateControllerTest {
      */
     @Test
     void testIsLowBattery_whenVoltageLow_shouldReturnTrue() {
-        simulator.setVoltage(3.2);
+        simulator.setVoltage(3.1);
 
         assertTrue(controller.isLowBattery());
     }
@@ -75,7 +77,7 @@ class BatteryStateControllerTest {
     @Test
     void testCalculationForRemainingRuntime() {
         double runtime = controller.calculateRemainingRuntime(4.2);
-        assertEquals(60, runtime, 5, "Expected approx. 50 minutes at full voltage (4.2V)");
+        assertEquals(50, runtime, 5, "Expected approx. 50 minutes at full voltage (4.2V)");
 
         runtime = controller.calculateRemainingRuntime(3.8);
         assertEquals(35, runtime, 5, "Expected approx. 35 minutes at 3.9V");

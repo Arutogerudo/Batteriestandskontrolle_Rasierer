@@ -1,42 +1,33 @@
 package tests;
 
-import batteryLogic.BatteryStateController;
 import batteryLogic.CalibrationManager;
-import hardwareAbstraction.VoltageSimulator;
 import org.junit.jupiter.api.*;
-import persistenceManager.CalibrationData;
+import persistenceManager.SettingsStorage;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalibrationManagerTest {
 
     private CalibrationManager manager;
+    private SettingsStorage storage;
 
     @BeforeEach
     void setUp() {
-        BatteryStateController.initInstance(new VoltageSimulator());
         manager = CalibrationManager.getInstance();
+        storage = SettingsStorage.getInstance();
+        storage.setChargeCycleCount(500);
     }
 
-//    @Test
-//    void testRecalibrateIfNeeded() throws IOException {
-//        manager.recalibrateIfNeeded();
-//
-//        CalibrationData calib = manager.getCalibrationValues();
-//
-//        // Beispielhafte Annahmen – passe an deine Werte/Logik an
-//        assertTrue(calib.containsKey("voltageOffset"), "voltageOffset sollte gesetzt sein");
-//        assertTrue(calib.containsKey("referenceLevel"), "referenceLevel sollte gesetzt sein");
-//
-//        // Konkrete Werte je nach erwarteter Kalibrierung prüfen
-//        double offset = Double.parseDouble(values.get("voltageOffset"));
-//        assertTrue(offset >= -0.2 && offset <= 0.2, "Offset sollte in realistischem Bereich liegen");
-//
-//        double ref = Double.parseDouble(values.get("referenceLevel"));
-//        assertTrue(ref >= 3.5 && ref <= 4.2, "Referenzlevel sollte plausibel sein");
-//    }
-}
+    @Test
+    void testRecalibrationAdjustsRuntimeAsExpected() {
+        manager.recalibrateIfNeeded();
 
+        double adjustedRuntime = storage.readRuntimeFullChargeFromDisc();
+
+        // DISCOUNT_PER_CYCLE = 0.0002 → 1 - 0.0002*500 = 0.9
+        // Erwartet: 50 * 0.9 = 45
+        assertEquals(45.0, adjustedRuntime, 0.1, "Angepasste Restlaufzeit sollte 45.0 Minuten betragen");
+    }
+}
