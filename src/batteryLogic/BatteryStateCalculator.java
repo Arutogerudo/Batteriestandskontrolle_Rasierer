@@ -1,6 +1,7 @@
 package batteryLogic;
 
 import persistenceManager.CalibrationData;
+import persistenceManager.SettingsStorage;
 
 class BatteryStateCalculator {
 
@@ -12,24 +13,16 @@ class BatteryStateCalculator {
     }
 
     double calculateRemainingRuntime(double voltage, CalibrationData calib) {
-        double[] voltages = calib.getVoltageCalib();
-        double[] runtimes = calib.getRuntime();
-        Double[] runtime = toDoubleArray(runtimes);
-        return InterpolationUtils.calculateInterpolatedValue(voltage, voltages, runtime);
-    }
-
-    private Double[] toDoubleArray(double[] array) {
-        Double[] result = new Double[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i];  // Autoboxing von double zu Double
-        }
-        return result;
+        double[] voltageCalib = calib.getVoltageCalib();
+        double[] voltages = new double[] {voltageCalib[0], voltageCalib[voltageCalib.length - 1]};
+        Double[] runtimes = new Double[] {SettingsStorage.getInstance().readRuntimeFullChargeFromDisc(), 0.0};
+        return InterpolationUtils.calculateInterpolatedValue(voltage, voltages, runtimes);
     }
 
     private Integer[] toIntegerArray(int[] array) {
         Integer[] result = new Integer[array.length];
         for (int i = 0; i < array.length; i++) {
-            result[i] = array[i]; // Autoboxing von int zu Integer
+            result[i] = array[i];
         }
         return result;
     }

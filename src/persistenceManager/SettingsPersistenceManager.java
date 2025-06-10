@@ -9,21 +9,47 @@ import java.nio.file.Paths;
 import java.util.List;
 
 class SettingsPersistenceManager {
-    private int lowBatteryThreshold;
+    public static final int RUNTIME_FULL_CHARGE_INITIAL = 50;
+    private double runtimeFullCharge;
     private static final Path CALIB_TXT_FILE = Paths.get("src", "resources", "calibVoltageToSoC.txt");
     private static final Path THRESHOLD_TXT_FILE = Paths.get("src", "resources", "threshold.txt");
     private static final Path CYCLE_COUNT_FILE = Paths.get("src", "resources", "cyclecount.txt");
+    private static final Path RUNTIME_FULL_CHARGE_TXT_FILE = Paths.get("src", "resources", "runtimeFullCharge.txt");
     private final CalibrationData calibrationData;
 
     SettingsPersistenceManager(CalibrationData calibrationData){
         this.calibrationData = calibrationData;
-        lowBatteryThreshold = 10;
+        runtimeFullCharge = RUNTIME_FULL_CHARGE_INITIAL;
     }
 
     void saveSettings() {
-        writeCalibVoltageToSoCToRuntimeToDisc();
-        writeLowBatteryThresholdToDisc();
+        writeCalibVoltageToSoCToDisc();
+        setLowBatteryThreshold(10);
+        writeRuntimeFullChargeToDisc();
         setChargeCycleCount(0);
+    }
+
+    double readRuntimeFullChargeFromDisc() {
+        try {
+            String content = Files.readString(RUNTIME_FULL_CHARGE_TXT_FILE, StandardCharsets.UTF_8);
+            return Double.parseDouble(content.trim());
+        } catch (IOException e) {
+            handleWriteOrReadError(e);
+            return -1;
+        }
+    }
+
+    void setRuntimeFullCharge(double newRuntimeFullCharge) {
+        runtimeFullCharge = newRuntimeFullCharge;
+        writeRuntimeFullChargeToDisc();
+    }
+
+    private void writeRuntimeFullChargeToDisc() {
+        try {
+            Files.writeString(RUNTIME_FULL_CHARGE_TXT_FILE, String.valueOf(runtimeFullCharge), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            handleWriteOrReadError(e);
+        }
     }
 
     void setChargeCycleCount(int count) {
@@ -55,41 +81,38 @@ class SettingsPersistenceManager {
     }
 
     void setLowBatteryThreshold(int threshold) {
-        lowBatteryThreshold = threshold;
-        writeLowBatteryThresholdToDisc();
+        writeLowBatteryThresholdToDisc(threshold);
     }
 
-    private void writeLowBatteryThresholdToDisc() {
+    private void writeLowBatteryThresholdToDisc(int threshold) {
         try {
-            Files.writeString(THRESHOLD_TXT_FILE, String.valueOf(lowBatteryThreshold), StandardCharsets.UTF_8);
+            Files.writeString(THRESHOLD_TXT_FILE, String.valueOf(threshold), StandardCharsets.UTF_8);
         } catch (IOException e) {
             handleWriteOrReadError(e);
         }
     }
 
-    CalibrationData readCalibVoltageToSoCToRuntimeFromDisc() {
+    CalibrationData readCalibVoltageToSoCFromDisc() {
         try {
             List<String> lines = Files.readAllLines(CALIB_TXT_FILE, StandardCharsets.UTF_8).subList(1, Files.readAllLines(CALIB_TXT_FILE).size());
 
             double[] voltage = new double[lines.size()];
             int[] stateOfCharge = new int[lines.size()];
-            double[] runtime = new double[lines.size()];
 
             for (int i = 0; i < lines.size(); i++) {
                 String[] parts = lines.get(i).split(",");
                 voltage[i] = Double.parseDouble(parts[0].trim());
                 stateOfCharge[i] = Integer.parseInt(parts[1].trim());
-                runtime[i] = Double.parseDouble(parts[2].trim());
             }
 
-            return new CalibrationData(voltage, stateOfCharge, runtime);
+            return new CalibrationData(voltage, stateOfCharge);
         } catch (IOException e) {
             handleWriteOrReadError(e);
             return null;
         }
     }
 
-    void writeCalibVoltageToSoCToRuntimeToDisc() {
+    private void writeCalibVoltageToSoCToDisc() {
         String csvContent = buildCsvContent();
 
         try {
@@ -108,14 +131,11 @@ class SettingsPersistenceManager {
         StringBuilder content = new StringBuilder("Voltage,SoC\n");
         double[] voltage = calibrationData.getVoltageCalib();
         int[] stateOfCharge = calibrationData.getSoCCalib();
-        double[] runtime = calibrationData.getRuntime();
         for (int i = 0; i < voltage.length; i++) {
             content
                     .append(voltage[i])
                     .append(",")
                     .append(stateOfCharge[i])
-                    .append(",")
-                    .append(runtime[i])
                     .append("\n");
         }
 

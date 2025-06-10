@@ -326,9 +326,9 @@
 
 ---
 
-### BB12 – Anzeige erscheint nach entsprechender Knopfinteraktion
+### BB12 – Anzeige Restlaufzeit erscheint nach entsprechender Knopfinteraktion
 
-* **Ziel:** Prüfung, ob Anzeige erscheint, wenn bei Anzeige des SoC`s erneut der Button kurz gedrückt wird
+* **Ziel:** Prüfung, ob Anzeige der Restlaufzeit erscheint, wenn bei Anzeige des SoC`s erneut der Button kurz gedrückt wird
 * **Ausgangszustand:** DisplayState = 'STATE_OF_CHARGE'
 * **Ereignis (Zustandsübergang):** ShortPressButtonCommand.execute()
 * **Vorgehen:** Knopf wird einmal kurz gedrückt

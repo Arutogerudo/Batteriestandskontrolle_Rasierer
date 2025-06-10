@@ -100,12 +100,4 @@ public class BatteryStateController implements BatteryLogicConstants {
     public void monitorChargeCycle() {
         cycleMonitor.monitorChargeCycle(voltageSensor, calib, calculator);
     }
-
-    int getChargeCycleCount() {
-        return cycleMonitor.chargeCycleCount;
-    }
-
-    void resetChargeCycleCount() {
-        cycleMonitor.chargeCycleCount = 0;
-    }
 }

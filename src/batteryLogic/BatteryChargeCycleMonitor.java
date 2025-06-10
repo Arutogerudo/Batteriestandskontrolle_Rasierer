@@ -6,16 +6,15 @@ import persistenceManager.SettingsStorage;
 
 class BatteryChargeCycleMonitor implements BatteryLogicConstants {
     private boolean dischargedDetected = false;
-    int chargeCycleCount;
     private final SettingsStorage storage;
 
     BatteryChargeCycleMonitor(){
         storage = SettingsStorage.getInstance();
-        chargeCycleCount = storage.readChargeCycleCount();
     }
 
     void monitorChargeCycle(VoltageSensor sensor, CalibrationData calib, BatteryStateCalculator calculator) {
         int soc = calculator.calculateStateOfCharge(sensor.readVoltage(), calib);
+        int chargeCycleCount = storage.readChargeCycleCount();
 
         if (isNewDischargeDetected(soc)) {
             dischargedDetected = true;
@@ -23,9 +22,8 @@ class BatteryChargeCycleMonitor implements BatteryLogicConstants {
         }
 
         if (isNewChargeCycleComplete(soc)) {
-            chargeCycleCount++;
+            storage.setChargeCycleCount(++chargeCycleCount);
             dischargedDetected = false;
-            storage.setChargeCycleCount(chargeCycleCount);
         }
     }
 

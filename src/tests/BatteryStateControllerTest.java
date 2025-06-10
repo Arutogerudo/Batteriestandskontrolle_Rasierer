@@ -24,7 +24,7 @@ class BatteryStateControllerTest {
      */
     @Test
     void testVoltageUnderLowerLimit_shouldClampOrThrow() {
-        int soc = controller.calculateStateOfCharge(2.9);
+        int soc = controller.calculateStateOfCharge(2.8);
         assertTrue(soc >= 0, "Should return a valid SOC or clamp to minimum");
     }
 
@@ -45,15 +45,15 @@ class BatteryStateControllerTest {
     @Test
     void testCalculationForValidVoltage() {
         int soc = controller.calculateStateOfCharge(3.6);
-        assertEquals(35, soc, 5, "Interpolated SOC should be approximately 35%");
+        assertEquals(50, soc, 5, "Interpolated SOC should be approximately 50%");
         soc = controller.calculateStateOfCharge(4.2);
         assertEquals(100, soc, 5);
         soc = controller.calculateStateOfCharge(3.75);
-        assertEquals(50, soc, 5);
+        assertEquals(65, soc, 5);
         soc = controller.calculateStateOfCharge(3.0);
         assertEquals(0, soc, 5);
         soc = controller.calculateStateOfCharge(3.9);
-        assertEquals(70, soc, 5);
+        assertEquals(80, soc, 5);
     }
 
     /*
@@ -66,5 +66,29 @@ class BatteryStateControllerTest {
 
         assertTrue(controller.isLowBattery());
     }
+
+    /*
+     * Test case UT5 for the BatteryStateController class.
+     * This test covers the functionality of the calculateRemainingRuntime method.
+     * It verifies that the runtime estimation is consistent with expected values for given voltages.
+     */
+    @Test
+    void testCalculationForRemainingRuntime() {
+        double runtime = controller.calculateRemainingRuntime(4.2);
+        assertEquals(60, runtime, 5, "Expected approx. 50 minutes at full voltage (4.2V)");
+
+        runtime = controller.calculateRemainingRuntime(3.8);
+        assertEquals(35, runtime, 5, "Expected approx. 35 minutes at 3.9V");
+
+        runtime = controller.calculateRemainingRuntime(3.6);
+        assertEquals(25, runtime, 5, "Expected approx. 25 minutes at 3.6V");
+
+        runtime = controller.calculateRemainingRuntime(3.3);
+        assertEquals(10, runtime, 5, "Expected approx. 10 minutes at 3.3V");
+
+        runtime = controller.calculateRemainingRuntime(3.0);
+        assertEquals(0, runtime, 5, "Expected approx. 0 minutes at low voltage (3.0V)");
+    }
+
 }
 

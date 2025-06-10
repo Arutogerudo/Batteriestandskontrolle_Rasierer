@@ -7,15 +7,13 @@ public class SettingsStorage {
 
     private static final double[] INITIAL_VOLTAGE_CALIB = new double[] { 4.2, 3.9, 3.6, 3.3, 3.0 };
     private static final int[] INITIAL_SOC_CALIB = new int[] { 100, 80, 50, 20, 0 };
-    private static final double[] INITIAL_RUNTIME_CALIB = new double[] { 50, 40, 25, 10, 0 };
 
     private static SettingsStorage instance;
 
-    private final CalibrationData calibrationData;
     private final SettingsPersistenceManager persistenceManager;
 
     private SettingsStorage() {
-        calibrationData = new CalibrationData(INITIAL_VOLTAGE_CALIB, INITIAL_SOC_CALIB, INITIAL_RUNTIME_CALIB);
+        CalibrationData calibrationData = new CalibrationData(INITIAL_VOLTAGE_CALIB, INITIAL_SOC_CALIB);
         persistenceManager = new SettingsPersistenceManager(calibrationData);
         persistenceManager.saveSettings();
     }
@@ -32,10 +30,21 @@ public class SettingsStorage {
     }
 
     /**
-     * Writes the voltage, state of charge, and runtime calibration data to disk.
+     * Sets a new runtime value and persists it to disk.
+     *
+     * @param newRuntimeFullCharge the recalibrated operation runtime if the battery is fully charged
      */
-    public void writeCalibVoltageToSoCToRuntimeToDisc() {
-        persistenceManager.writeCalibVoltageToSoCToRuntimeToDisc();
+    public void setRuntimeFullCharge(double newRuntimeFullCharge) {
+        persistenceManager.setRuntimeFullCharge(newRuntimeFullCharge);
+    }
+
+
+    /**
+     * Reads the runtime, which is available if the battery is fully charged, from the disk.
+     * @return the runtime if battery is fully charged
+     */
+    public double readRuntimeFullChargeFromDisc() {
+        return persistenceManager.readRuntimeFullChargeFromDisc();
     }
 
     /**
@@ -61,7 +70,7 @@ public class SettingsStorage {
      * @return the voltage calibration data
      */
     public CalibrationData readCalibVoltageToSoCToRuntimeFromDisc() {
-        return persistenceManager.readCalibVoltageToSoCToRuntimeFromDisc();
+        return persistenceManager.readCalibVoltageToSoCFromDisc();
     }
 
     /**
@@ -80,14 +89,5 @@ public class SettingsStorage {
      */
     public int readChargeCycleCount() {
         return persistenceManager.readChargeCycleCount();
-    }
-
-    /**
-     * Sets the runtime calibration values.
-     *
-     * @param runtime array of runtime calibration values
-     */
-    public void setRuntimeCalib(double[] runtime) {
-        calibrationData.setRuntimeCalib(runtime);
     }
 }

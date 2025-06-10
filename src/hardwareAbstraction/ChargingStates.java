@@ -46,7 +46,7 @@ public enum ChargingStates implements VoltageChangeProvider {
     CHARGE_STOP_BC_TEMP {
         @Override
         public double getVoltageChange() {
-            return 0;
+            return -PASSIVE_DISCHARGE_RATE;
         }
     },
     /**

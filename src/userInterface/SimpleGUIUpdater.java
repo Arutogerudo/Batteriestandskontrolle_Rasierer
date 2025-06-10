@@ -21,7 +21,7 @@ class SimpleGUIUpdater {
         ChargingDetection chargingDetector = new ChargingDetection(simulator);
         this.handler = handler;
         operationController = new OperationController(simulator, tempSim, handler, chargingDetector);
-        calibrationManager = new CalibrationManager(batteryController);
+        calibrationManager = CalibrationManager.getInstance();
         this.visualOutputController = visualOutputController;
         this.panelBuilder = panelBuilder;
     }

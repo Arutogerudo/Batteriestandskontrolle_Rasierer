@@ -8,18 +8,28 @@ import persistenceManager.*;
  */
 public class CalibrationManager implements BatteryLogicConstants {
     private final SettingsStorage storage;
-    private final BatteryStateController batteryController;
+    private int number_recalibrations;
+    private static CalibrationManager instance;
 
     private static final int CYCLE_THRESHOLD = 250;
 
     /**
-     * To initialize the calibration manager.
-     *
-     * @param batteryController The responsible battery controller.
+     * Returns the singleton instance of CalibrationManager.
+     * @return the singleton instance of CalibrationManager
      */
-    public CalibrationManager(BatteryStateController batteryController) {
-        this.batteryController = batteryController;
+    public static synchronized CalibrationManager getInstance() {
+        if (instance == null) {
+            instance = new CalibrationManager();
+        }
+        return instance;
+    }
+
+    /**
+     * To initialize the calibration manager.
+     */
+    private CalibrationManager() {
         this.storage = SettingsStorage.getInstance();
+        number_recalibrations = 1;
     }
 
     /**
@@ -28,29 +38,19 @@ public class CalibrationManager implements BatteryLogicConstants {
      * The updated calibration data is then saved persistently.
      */
     public void recalibrateIfNeeded() {
-        if (batteryController.getChargeCycleCount() < CYCLE_THRESHOLD) return;
-
-        CalibrationData oldCalib = storage.readCalibVoltageToSoCToRuntimeFromDisc();
-        if (oldCalib == null) {
-            System.err.println("Kalibrierdaten konnten nicht gelesen werden.");
+        if (storage.readChargeCycleCount() / CYCLE_THRESHOLD < number_recalibrations){
             return;
         }
 
-        storage.setRuntimeCalib(adjustRuntime(oldCalib.getRuntime(), batteryController.getChargeCycleCount()));
-        storage.writeCalibVoltageToSoCToRuntimeToDisc();
-        System.out.println("Kalibrierung wurde nach " + batteryController.getChargeCycleCount() + " Zyklen angepasst.");
-        batteryController.resetChargeCycleCount();
+        storage.setRuntimeFullCharge(adjustRuntime(storage.readRuntimeFullChargeFromDisc(), storage.readChargeCycleCount() / number_recalibrations));
+        System.out.println("Kalibrierung wurde nach " + storage.readChargeCycleCount() + " Zyklen angepasst.");
+        number_recalibrations++;
     }
 
 
-    private double[] adjustRuntime(double[] oldRuntime, int cycles) {
-        double[] newRuntime = new double[oldRuntime.length];
+    private double adjustRuntime(double oldRuntime, int cycles) {
         double degradationFactor = 1 - DISCOUNT_PER_CYCLE * cycles;
 
-        for (int i = 0; i < oldRuntime.length; i++) {
-            newRuntime[i] = Math.round(oldRuntime[i] * degradationFactor);
-        }
-
-        return newRuntime;
+        return Math.round(oldRuntime * degradationFactor);
     }
 }
