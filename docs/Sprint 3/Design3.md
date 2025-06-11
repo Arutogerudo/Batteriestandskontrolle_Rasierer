@@ -37,7 +37,7 @@ angenommen.
 Durch Analyse und darauf basierender Optimierung des Codes mussten einige Anpassungen in der Klassenhierarchie
 vorgenommen werden. Zur Vereinfachung werden hier Interfaces, Enums und Hilfsklassen weggelassen.
 
-![Klassendiagramm final](../referenziert/Design/klassendiagramm3final.png)
+![Klassendiagramm final](../referenziert/Design/klassendiagramm3_1.png)
 
 ## Zustandsdiagramm Knopfinteraktion
 

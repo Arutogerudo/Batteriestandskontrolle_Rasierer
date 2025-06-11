@@ -9,6 +9,8 @@
   entscheidend für die Nachvollziehbarkeit und Qualität des Codes.
 - Die frühzeitige Identifikation und Behebung von Fehlern während der Implementierung spart Zeit und Aufwand in späteren
   Phasen.
+- Die Dokumentation ist essenziell für eine gelungene Zusammenarbeit im Team und um nach längeren Abwesenheiten schnell
+  wieder reinzukommen und möglichst nahtlos weiterarbeiten zu können.
 - Die Design- bzw. Architekturphase ist die mit Abstand wichtigste Phase, wenn hier gründlich gearbeitet wird, ist die
   Implementierung ein reines Coden ohne erneut über die Logik nachzudenken. Dann passiert es seltener, dass viel
   nachgearbeitet oder rückwirkend angepasst werden muss.
