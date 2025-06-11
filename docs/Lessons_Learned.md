@@ -1,4 +1,4 @@
-# Projekt Lessons Learned
+# Projekt Lessons Learned - Was nehme ich mit?
 
 - Man sollte sich nicht von einer Vielzahl an Anforderungen überfordern lassen.
 - Die richtigen Tools ermöglichen es effizient zu arbeiten, wohingegen die falschen Tools eher neue Hürden schaffen.
