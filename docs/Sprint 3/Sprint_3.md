@@ -21,7 +21,7 @@ Requirement-Abdeckungsgrad erreicht, das marktreif und anwenderfreundlich ist.
 - Req. 5.5: mögliche Rasur während Laden signalisieren
 - Req. 6.1: Unterspannungsschutz
 
-**Sprint-Zeitraum:** 09.06.2025 - 16.06.2025
+**Sprint-Zeitraum:** 09.06.2025 - 11.06.2025
 
 **Sprintziel:**
 
@@ -91,16 +91,31 @@ Qualitätssicherung und Verifikation der Gesamtsystemlogik.
 
 **Was lief gut?**
 
--
+- Alle Anforderungen wurden umgesetzt.
+- Die Recherche zu Beginn, um wichtige Informationen zu sammeln, war sehr hilfreich.
+- Der Zeitplan wurde eingehalten.
+- Die Implementierung wurde strukturiert und feature-driven durchgeführt, was die Übersichtlichkeit verbessert hat.
+- Über die Zeit haben sich gute Abläufe entwickelt, die die Arbeit deutlich effizienter machen.
+- Die Codemetriken wurden sehr intensiv analysiert.
+- Die Testphase wurde konsequent und sehr umfassend durchgeführt.
+- Die Dokumentation wurde konsequent aktualisiert und ist vollständig.
+- "Fehler" der vorangegangenen Sprints (Nicht-Einhaltung des Single-Responsibility Prinzips) wurden ausgemerzt.
 
 **Was lief nicht so gut?**
 
--
+- Aus der Design- und Architekturphase wurden nicht alle Aspekte 1:1 in der Implementierung umgesetzt und mussten
+  nachträglich angepasst werden.
+- Es gab einen eindeutigen Logikfehler in der Implementierungsphase. Dieser ist erst in der Testphase aufgefallen. Die
+  Anpassung des Codes war relativ aufwändig, da die Komponenten (Restlaufzeit, Rekalibrierung) bereits mit anderen
+  verknüpft waren.
 
-**Was werde ich im nächsten Sprint anders machen?**
+**Was würde ich im nächsten Sprint anders machen?**
 
--
+- Obwohl die Design- und Architekturphase in diesem Sprint schon gründlicher als in den vorangegangenen Sprints
+  durchgeführt wurde, sollten sie noch gründlicher durchgeführt werden, um spätere Anpassungen zu vermeiden.
 
 **Lessons Learned:**
 
-- 
+- Die Design- bzw. Architekturphase ist die mit Abstand wichtigste Phase, wenn hier gründlich gearbeitet wird, ist die
+  Implementierung ein reines Coden ohne erneut über die Logik nachzudenken. Dann passiert es seltener, dass viel
+  nachgearbeitet oder rückwirkend angepasst werden muss.
