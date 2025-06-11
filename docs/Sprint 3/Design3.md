@@ -69,11 +69,12 @@ Legende:
 
 ## Designpatterns
 
-| Klasse                   | Design-Pattern | Grund                                                                                                                      |
-|--------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------|
-| `SettingsStorage`        | Singleton      | Gewährleistet zentralen und konsistenten Zugriff auf gespeicherte Werte                                                    |
-| `InteractionHandler`     | Command        | Leichtere Erweiterbarkeit und Wartbarkeit, Commands können getestet und protokolliert werden ohne den Handler zu verändern |
-| `BatteryStateController` | Singleton      | Batteriezustand zentral und konsistent im gesamten System verwalten                                                        |
+| Klasse                   | Design-Pattern | Grund                                                                                                                                                                                              |
+|--------------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `SettingsStorage`        | Singleton      | Gewährleistet zentralen und konsistenten Zugriff auf gespeicherte Werte                                                                                                                            |
+| `InteractionHandler`     | Command        | Leichtere Erweiterbarkeit und Wartbarkeit, Commands können getestet und protokolliert werden ohne den Handler zu verändern                                                                         |
+| `BatteryStateController` | Singleton      | Batteriezustand zentral und konsistent im gesamten System verwalten                                                                                                                                |
+| `CalibManager`           | Singleton      | Da die Anzahl an Rekalibrierungen aufgrund von Overhead nicht persistent gespeichert wird, ist es essenziell, dass es nur eine Instanz gibt, die dementsprechend immer nur einen gültigen Wert hab |
 
 nicht genutzte Designpatterns inkl. Begründung:
 

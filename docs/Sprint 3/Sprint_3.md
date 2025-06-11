@@ -54,9 +54,36 @@ angepasst werden können.
 
 ### Schritt 4: Implementierung
 
+Im Implementierungsprozess traten mehrere Besonderheiten auf, die im Rahmen dieses Sprints gezielt adressiert wurden.
+
+Für die Zählung der Ladezyklen, welche als Grundlage für die Rekalibrierung der Restlaufzeit dient, wurde ein
+vereinfachter Ansatz gewählt: Ein Ladezyklus wird gezählt, wenn der SoC (State of Charge) von unter 20 % auf über 80 %
+ansteigt. Diese Vereinfachung ist für den konkreten Anwendungsfall – akkubetriebene Rasierapparate – praxisnah und
+realistisch, da diese Geräte typischerweise erst bei nahezu leerem Akku und dann vollständig aufgeladen werden.
+
+Des Weiteren wurden in diesem Sprint die im vorangegangenen Sprint geplanten Designpatterns systematisch geprüft. Auf
+Basis der jeweiligen Einsatzkontexte wurde begründet entschieden, welche Patterns sinnvoll implementiert werden und
+welche verworfen werden können, um die Komplexität nicht unnötig zu erhöhen.
+
+Zum Abschluss der Implementierungsphase erfolgte eine umfassende Prüfung aller Klassen im Hinblick auf das
+Single-Responsibility-Prinzip. Dabei wurden drei Klassen identifiziert, bei denen die Verantwortlichkeiten nicht klar
+getrennt waren. Diese Klassen wurden entsprechend in kleinere, spezialisierte Klassen aufgeteilt, um die Wartbarkeit und
+Erweiterbarkeit des Codes langfristig zu verbessern.
+
 [Implementierung](Implementierung3.md)
 
 ### Schritt 5: Test
+
+In der Testphase wurde ein systematisches, mehrstufiges Vorgehen verfolgt, um die Qualität und Funktionalität der
+Implementierung ganzheitlich sicherzustellen. Zunächst wurden auf Basis der Anforderungen gezielt Testfälle definiert,
+die verschiedene Testarten abdecken – darunter Unit Tests zur Prüfung einzelner Komponenten, Blackbox Tests zur
+Validierung des Systemverhaltens aus Anwendersicht sowie Usability Tests zur Bewertung der Nutzerfreundlichkeit.
+
+Die Tests wurden iterativ durchgeführt: Nach jeder identifizierten Abweichung oder jedem Fehler wurden gezielte
+Anpassungen im Code vorgenommen, anschließend erfolgte eine erneute Ausführung aller relevanten Testfälle, auch aus
+früheren Sprints. Dieses inkrementelle Vorgehen stellte sicher, dass sowohl neue als auch bestehende Funktionalitäten
+stabil und korrekt arbeiten. Die Testphase diente damit nicht nur der Fehlererkennung, sondern auch der kontinuierlichen
+Qualitätssicherung und Verifikation der Gesamtsystemlogik.
 
 [Test](Test3.md)
 

@@ -55,11 +55,25 @@ Die folgenden Aspekte werden im Rahmen dieses Testplans **nicht** berücksichtig
 
 [Testfälle](../referenziert/Test/Testfaelle.md)
 
+## Testdurchführung
+
+Im Rahmen der Testdurchführung wurden verschiedene Testarten eingesetzt, darunter Unit Tests, Blackbox Tests und
+Usability Tests. Dabei traten zwei zentrale Probleme auf: Beim erneuten Ausführen des Blackbox-Tests BB 6 wurde
+festgestellt, dass die Warnung bei Unterschreiten der SoC-Warnschwelle nicht korrekt angezeigt wurde, sofern die
+Schwelle nicht zuvor manuell über den Einstellbutton angepasst wurde. Zur Behebung dieses Fehlers wurde die Logik
+im `BatteryThresholdManager` überarbeitet, sodass das Setzen und Auslesen des Schwellenwerts nun stets über den
+persistent gespeicherten `LowBatteryThreshold` erfolgt.
+
+Zudem führten die Tests UT 5 und BB 13 zur Identifikation eines konzeptionellen Fehlers in der Kalibrierungs- und
+Rekalibrierungslogik der verbleibenden Laufzeit. Es wurde erkannt, dass die verbleibende Laufzeit linear zur zeitlich
+linear abfallenden Spannung verlaufen muss. Zur Korrektur wurde die Speicherung der Kalibrierungsdaten angepasst:
+Anstelle einer vollständigen Verlaufsspeicherung wird nun ausschließlich die maximale Restlaufzeit bei maximaler
+Spannung persistiert und für den Gültigkeitsbereich von 3 V bis 4,2 V linear interpoliert.
+
+Nach Implementierung dieser Änderungen wurden sämtliche zuvor definierten Testfälle – einschließlich der aus früheren
+Sprints – erneut ausgeführt. Alle Tests zeigten das erwartete Verhalten, wodurch die vorgenommenen Anpassungen
+erfolgreich validiert wurden.
+
 ## Dokumentation der Ergebnisse
 
 [Ergebnisse](../referenziert/Test/Testergebnisse.md)
-
-**Hinweise zur Testumgebung und Teststrategie:**
-Die Black-Box-Tests wurden bereits während der Implementierungsphase als kontinuierliche Referenz verwendet.
-Dadurch konnte der Code gezielt auf das erwartete Systemverhalten hin entwickelt werden, was zu einer hohen
-Übereinstimmung zwischen Testspezifikation und tatsächlicher Funktionsweise geführt hat.
