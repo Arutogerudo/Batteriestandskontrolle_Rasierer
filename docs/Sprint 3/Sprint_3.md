@@ -50,6 +50,10 @@ angepasst werden können.
 
 ### Schritt 3: Design
 
+Bei allen Klassendiagrammen wurde bewusst auf die Kardinalitäten verzichtet. Hier handelt es sich lediglich um interne
+Logik und das Ergänzen der Klassendiagramme um jegliche Kardinalitäten erzeugt einen enormen Overhead ohne wirklichen
+Mehrwert im Verständnis.
+
 [Design](Design3.md)
 
 ### Schritt 4: Implementierung

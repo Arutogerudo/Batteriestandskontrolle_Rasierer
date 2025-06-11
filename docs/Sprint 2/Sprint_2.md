@@ -44,6 +44,10 @@ Minimal-Marketable-Product steht. Sprint 3 kann dann für weitere Extras und zur
 
 ### Schritt 3: Design
 
+Bei allen Klassendiagrammen wurde bewusst auf die Kardinalitäten verzichtet. Hier handelt es sich lediglich um interne
+Logik und das Ergänzen der Klassendiagramme um jegliche Kardinalitäten erzeugt einen enormen Overhead ohne wirklichen
+Mehrwert im Verständnis.
+
 [Design](Design2.md)
 
 ### Schritt 4: Implementierung

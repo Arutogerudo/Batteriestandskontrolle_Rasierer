@@ -104,6 +104,10 @@ anwenden lassen (z. B. Singleton, Factory, Observer). Dabei wurde besonderes Aug
 Erweiterbarkeit und die Reduzierung von Kopplung gelegt. Mögliche Pattern wurden identifiziert und deren Einsatz
 sorgfältig abgewogen, um die Struktur des Systems nachhaltig zu verbessern.
 
+Bei allen Klassendiagrammen wurde bewusst auf die Kardinalitäten verzichtet. Hier handelt es sich lediglich um interne
+Logik und das Ergänzen der Klassendiagramme um jegliche Kardinalitäten erzeugt einen enormen Overhead ohne wirklichen
+Mehrwert im Verständnis.
+
 [Design](Design1.md)
 
 ### Schritt 4: Implementierung
