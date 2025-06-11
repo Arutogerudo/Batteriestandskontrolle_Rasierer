@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 class SettingsPersistenceManager {
-    public static final int RUNTIME_FULL_CHARGE_INITIAL = 50;
+    private static final int RUNTIME_FULL_CHARGE_INITIAL = 50;
     private double runtimeFullCharge;
     private static final Path CALIB_TXT_FILE = Paths.get("src", "resources", "calibVoltageToSoC.txt");
     private static final Path THRESHOLD_TXT_FILE = Paths.get("src", "resources", "threshold.txt");

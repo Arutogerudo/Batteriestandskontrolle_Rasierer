@@ -1,7 +1,7 @@
 package hardwareAbstraction;
 
 /**
- * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge. But all rates increased speed by factor 10 for testing purposes.
+ * Simulates the voltage of a battery over time (per tick -> rates are based on 1 s = 1 tick). With 50 minutes operating time and 60 minutes for a full charge.
  */
 public class VoltageSimulator implements IVoltageSimulator {
     private double voltage;

@@ -4,13 +4,13 @@
 
 ### UT1 – Spannungsgrenzen: Untergrenze
 
-* **Ziel:** Sicherstellen, dass Spannung unter 2.8 V in Stromsparmodus wechselt
+* **Ziel:** Sicherstellen, dass Spannung unter 3.0 V korrekt als niedrigst möglicher SoC (0 %) angezeigt wird
 * **Ausgangszustand:** DisplayState = 'OFF' | 'STATE_OF_CHARGE', OperationState = 'OPERATING', ChargingState =
   'DISCHARGING_ACTIVE'
-* **Ereignis (Zustandsübergang):** ChargingState geht auf UNDERVOLTAGE
+* **Ereignis (Zustandsübergang):** Spannung fällt unter 3.0 V
 * **Eingabe:** Spannung = 2.9 V
-* **Erwartete Reaktion:** LEDMode = 'UNDERVOLTAGE', ChargingState = 'UNDERVOLTAGE_PROTECTION'
-* **Erwarteter Folgezustand:** ChargingState = 'UNDERVOLTAGE_PROTECTION'
+* **Erwartete Reaktion:** SoC = 0, RemainingRuntime = 0 
+* **Erwarteter Folgezustand:** siehe Ausgangszustand
 * **Klasse:** `BatteryStateController`
 * **Requirement:** 3.1
 
@@ -19,9 +19,8 @@
 ### UT2 – Spannungsgrenzen: Obergrenze
 
 * **Ziel:** Sicherstellen, dass Spannung nicht über 4.2 V steigt
-*
-    * **Ausgangszustand:** DisplayState = 'OFF' | 'STATE_OF_CHARGE', OperationState = 'OPERATING', ChargingState =
-      'DISCHARGING_ACTIVE'
+* **Ausgangszustand:** DisplayState = 'OFF' | 'STATE_OF_CHARGE', OperationState = 'OPERATING', ChargingState =
+  'DISCHARGING_ACTIVE'
 * **Ereignis (Zustandsübergang):** kein relevanter für Testfall
 * **Eingabe:** Spannung = 4.3 V
 * **Erwartete Reaktion:** Rückgabe- oder Korrekturwert ≤ 4.2 V, ggf. Logging/Fehler
@@ -175,7 +174,7 @@
 
 ---
 
-### UX8 – Anzeige bei Spannungsänderung gut lesbar
+### UX8 – Anzeige bei Restlaufzeit gut lesbar
 
 * **Ziel:** Bewertung der Lesbarkeit der Restlaufzeit-Anzeige bei Spannungsänderung
 * **Ausgangszustand:** OperationState = 'OPERATING', DisplayState = 'REMAINING_TIME'

@@ -24,6 +24,7 @@ public class Program {
                 simulator.tick();
                 try {
                     // intentional sleep for simulation purposes
+                    // (for real application 1000 ms, but here decreased by factor 10 for easy testing / simulation)
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -44,6 +45,6 @@ public class Program {
                 chargingCommandListener.listenForChargingCommands();
             }
         }).start();
-        
+
     }
 }
