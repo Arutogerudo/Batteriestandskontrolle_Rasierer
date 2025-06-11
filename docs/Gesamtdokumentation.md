@@ -80,7 +80,7 @@ Ableitung sowie Priorisierung konkreter Requirements.
 
 [Sprint 3](Sprint%203/Sprint_3.md)
 
-### finale Traceability-Matrix
+### Finale Traceability-Matrix
 
 | Requirement-ID | Jira-Issue | Komponente                         | Klasse(n)                                          | Schnittstelle(n)                                            | Testfall(e)    |
 |----------------|------------|------------------------------------|----------------------------------------------------|-------------------------------------------------------------|----------------|
@@ -115,6 +115,10 @@ Ableitung sowie Priorisierung konkreter Requirements.
 | 6.1            | BAT-35     | hardwareAbstraction, batteryLogic  | `VoltageSensor`, `OperationController`             | updateBcProtectionStates()                                  | BB16           |
 | 6.2            | BAT-36     | batteryLogic                       | `OperationController`                              | updateBcProtectionStates()                                  | BB10           |
 | 6.3            | BAT-37     | hardwareAbstraction, batteryLogic  | `TemperatureSimulator`, `OperationController`      | updateBcProtectionStates()                                  | BB11           |
+
+### zusätzliche Notizen
+
+[zusätzliche Notizen](referenziert/zusätzlicheNotizen.pdf)
 
 ### Lessons_Learned
 
