@@ -9,8 +9,9 @@ externen Quellen wörtlich oder sinngemäß übernommen wurden, sind entsprechen
 Als Grundlage für die inhaltliche und methodische Umsetzung des Projekts dienten die **Vorlesungsfolien
 „Softwareengineering“ von Prof. Karsten Becker**. Ergänzend habe ich die **YouTube-Tutorialreihe „Softwareengineering“
 von Morpheus Tutorials** ([Link zur Playlist](https://www.youtube.com/playlist?list=PLNmsVeXQZj7qNMn6zimfu4JPUklG-4Uu4))
-verwendet, um meinen gesamten Softwareentwicklungsprozess zu strukturieren – insbesondere zur **Unterteilung in Phasen** 
-(Requirements Engineering, Architektur, Design, Implementierung, Test) und zur **Planung iterativer Entwicklungsschritte**.
+verwendet, um meinen gesamten Softwareentwicklungsprozess zu strukturieren – insbesondere zur **Unterteilung in Phasen**
+(Requirements Engineering, Architektur, Design, Implementierung, Test) und zur **Planung iterativer Entwicklungsschritte
+**.
 
 ### Technische Tools und Dokumentation
 
@@ -56,7 +57,7 @@ dienten als Bewertungsmaßstab für Lesbarkeit, Wartbarkeit und Struktur des Que
 Die Verwendung von ChatGPT diente ausschließlich der inhaltlichen Unterstützung auf Basis meiner eigenen Vorarbeit und
 wurde reflektiert und eigenverantwortlich eingesetzt.
 
-### Requirement Engineering
+## Requirement Engineering
 
 Im Rahmen eines Presprints wurde ein strukturierter Requirement Engineering Prozess durchgeführt, um die grundlegenden
 Anforderungen und Aufgaben für das geplante Softwareprojekt zur Batteriestandskontrolle für einen Rasierapparat zu
@@ -68,19 +69,57 @@ Ableitung sowie Priorisierung konkreter Requirements.
 
 [Requirement Engineering](Requirement_Engineering.md)
 
-### Sprint 1
+## Generelles zu Sprints
+
+Zunächst wird das Sprint-Planning durchgeführt, dazu wurden passende Requirements ausgewählt, sodass das Ergebnis des
+Sprints eine funktionsfähige Produktversion ist. Außerdem wurde das Sprintziel und der Startpunkt festgelegt. Die
+Sprints sind keine klassischen Sprints im Sinne von: Sie haben immer dieselbe Dauer (Dadurch bedingt, dass ich an diesem
+Projekt parallel zu vielen anderen Projekten, Vorlesungen, einem Urlaub und anderen Terminen gearbeitet habe. So wurden
+die Sprints in freien Zeitfenstern und dann so zusammenhängend wie möglich bearbeitet.). Sie haben regelmäßige Events
+zur Abstimmung (Dadurch bedingt, dass es sich hier um eine Einzel- und keine Teamarbeit handelt, gab es keine
+Möglichkeit zu sinnvollen Austauschen und externen Feedbackschleifen.). Allerdings wurde im Sinne von klassischen
+Sprints der Fokus auf Inkremente gelegt, also dass jeder Sprint eine funktionsfähige Produktversion als Ergebnis
+liefert.
+
+Anschließend werden in Jira die requirementspezifischen Subtasks angelegt. Dazu werden die Requirements und die
+einzelnen Schritten der Phasen der SW-Entwicklung (Architektur, Design, Implementierung, Test) nebeneinandergelegt und
+überlegt, welche Schritte besonders wichtig für welches Requirement sind. Z.B.:
+
+- Benötige ich noch weitere Informationen, um das Requirement sinnvoll und praxisnah umzusetzen? -> Recherche
+- Benötige ich eine neue Klasse für Requirement XY? -> Klassendiagramm muss aktualisiert werden
+- Benötige ich eine neue öffentliche Schnittstelle um dieses Requirement umzusetzen? -> Schnittstellendoku erweitern
+- Was muss ich testen, um die korrekte Implementierung des Requirements zu gewährleisten?
+
+Anhand dieser und vieler weiterer Fragen, sind die Subtasks aufgestellt worden. Diese sind bewusst nicht voll
+ausformuliert, sondern dienen lediglich als Orientierung bzw. Reminder an die Gedanken, die ich mir zu diesen Fragen
+gemacht habe. Dieses Vorgehen ist hier ausreichend, da es sich um eine Einzelarbeit handelt: Ich lese den Titel der
+Subtask und weiß was zu tun ist. Alles Weitere wäre in diesem Rahmen Overhead gewesen.
+
+Das Jira Board wird während des Sprints so genutzt, dass die Subtasks nach Requirements dargestellt werden. Je Phase der
+SW-Entwicklung wurde anhand der zugewiesenen Labels gefiltert und so konnte sehr zielgerichtet an den einzelnen Phasen
+gearbeitet werden.
+
+Insgesamt liegt in der Bearbeitung des Sprints ein besonderer Fokus auf der Recherche (wissen was umzusetzen und wie
+üblich, welche Standards und Vorgaben sind zu beachten). Die Architektur- und Designphase wurden sich detaillierte
+Gedanken zur sinnvollen Umsetzung der einzelnen Requirements gemacht. Dabei wurde geklärt, ob und wenn ja welche
+Klassen, Schnittstellen oder auch Zustandsautomaten, etc. benötigt werden. In der Implementierungsphase erfolgte eine
+verfeinerte Ausarbeitung, wie diese Planungen richtig und sauber umgesetzt werden können. Dabei haben sich oft
+Optimierungen, Erweiterungen oder auch Kürzungen der Pläne ergeben, welche dann in der Architektur- und Designphase
+nachgezogen werden.
+
+## Sprint 1
 
 [Sprint 1](Sprint%201/Sprint_1.md)
 
-### Sprint 2
+## Sprint 2
 
 [Sprint 2](Sprint%202/Sprint_2.md)
 
-### Sprint 3
+## Sprint 3
 
 [Sprint 3](Sprint%203/Sprint_3.md)
 
-### Finale Traceability-Matrix
+## Finale Traceability-Matrix
 
 | Requirement-ID | Jira-Issue | Komponente                         | Klasse(n)                                          | Schnittstelle(n)                                            | Testfall(e)    |
 |----------------|------------|------------------------------------|----------------------------------------------------|-------------------------------------------------------------|----------------|
@@ -116,11 +155,11 @@ Ableitung sowie Priorisierung konkreter Requirements.
 | 6.2            | BAT-36     | batteryLogic                       | `OperationController`                              | updateBcProtectionStates()                                  | BB10           |
 | 6.3            | BAT-37     | hardwareAbstraction, batteryLogic  | `TemperatureSimulator`, `OperationController`      | updateBcProtectionStates()                                  | BB11           |
 
-### zusätzliche Notizen
+## zusätzliche Notizen
 
 [zusätzliche Notizen](referenziert/zusätzlicheNotizen.pdf)
 
-### Lessons_Learned
+## Lessons_Learned
 
 Nach Abschluss des Projekts wurde eine Retrospektive durchgeführt, um den Entwicklungsprozess kritisch zu reflektieren.
 Dabei konnten wertvolle Erkenntnisse für zukünftige Softwareprojekte gewonnen werden.
