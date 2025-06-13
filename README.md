@@ -2,6 +2,8 @@
 
 Software Engineering Projekt (SS 25)
 
+von Lara Altgeld
+
 ### Repository:
 
 [Github Repository](https://github.com/Arutogerudo/Batteriestandskontrolle_Rasierer)
