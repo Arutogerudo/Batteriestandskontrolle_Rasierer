@@ -70,7 +70,7 @@ class SettingsPersistenceManager {
         }
     }
 
-    int readLowBatteryThresholdFromDisc() {
+    synchronized int readLowBatteryThresholdFromDisc() {
         try {
             String content = Files.readString(THRESHOLD_TXT_FILE, StandardCharsets.UTF_8);
             return Integer.parseInt(content.trim());
@@ -80,7 +80,7 @@ class SettingsPersistenceManager {
         }
     }
 
-    void setLowBatteryThreshold(int threshold) {
+    synchronized void setLowBatteryThreshold(int threshold) {
         writeLowBatteryThresholdToDisc(threshold);
     }
 
