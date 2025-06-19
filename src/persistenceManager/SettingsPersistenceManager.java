@@ -29,7 +29,7 @@ class SettingsPersistenceManager {
         setChargeCycleCount(0);
     }
 
-    double readRuntimeFullChargeFromDisc() {
+    synchronized double readRuntimeFullChargeFromDisc() {
         try {
             String content = Files.readString(RUNTIME_FULL_CHARGE_TXT_FILE, StandardCharsets.UTF_8);
             return Double.parseDouble(content.trim());
@@ -39,7 +39,7 @@ class SettingsPersistenceManager {
         }
     }
 
-    void setRuntimeFullCharge(double newRuntimeFullCharge) {
+    synchronized void setRuntimeFullCharge(double newRuntimeFullCharge) {
         runtimeFullCharge = newRuntimeFullCharge;
         writeRuntimeFullChargeToDisc();
     }
@@ -52,7 +52,7 @@ class SettingsPersistenceManager {
         }
     }
 
-    void setChargeCycleCount(int count) {
+    synchronized void setChargeCycleCount(int count) {
         try {
             Files.writeString(CYCLE_COUNT_FILE, String.valueOf(count), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -60,7 +60,7 @@ class SettingsPersistenceManager {
         }
     }
 
-    int readChargeCycleCount() {
+    synchronized int readChargeCycleCount() {
         try {
             String content = Files.readString(CYCLE_COUNT_FILE, StandardCharsets.UTF_8);
             return Integer.parseInt(content.trim());
@@ -92,7 +92,7 @@ class SettingsPersistenceManager {
         }
     }
 
-    CalibrationData readCalibVoltageToSoCFromDisc() {
+    synchronized CalibrationData readCalibVoltageToSoCFromDisc() {
         try {
             List<String> lines = Files.readAllLines(CALIB_TXT_FILE, StandardCharsets.UTF_8).subList(1, Files.readAllLines(CALIB_TXT_FILE).size());
 
