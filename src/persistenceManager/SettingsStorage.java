@@ -34,7 +34,7 @@ public class SettingsStorage {
      *
      * @param newRuntimeFullCharge the recalibrated operation runtime if the battery is fully charged
      */
-    public void setRuntimeFullCharge(double newRuntimeFullCharge) {
+    public synchronized void setRuntimeFullCharge(double newRuntimeFullCharge) {
         persistenceManager.setRuntimeFullCharge(newRuntimeFullCharge);
     }
 
@@ -43,7 +43,7 @@ public class SettingsStorage {
      * Reads the runtime, which is available if the battery is fully charged, from the disk.
      * @return the runtime if battery is fully charged
      */
-    public double readRuntimeFullChargeFromDisc() {
+    public synchronized double readRuntimeFullChargeFromDisc() {
         return persistenceManager.readRuntimeFullChargeFromDisc();
     }
 
@@ -52,7 +52,7 @@ public class SettingsStorage {
      *
      * @param threshold the threshold value in percentage (0-100)
      */
-    public void setLowBatteryThreshold(int threshold) {
+    public synchronized void setLowBatteryThreshold(int threshold) {
         persistenceManager.setLowBatteryThreshold(threshold);
     }
 
@@ -61,7 +61,7 @@ public class SettingsStorage {
      * Reads the low battery threshold from the disk.
      * @return the low battery threshold
      */
-    public int readLowBatteryThresholdFromDisc() {
+    public synchronized int readLowBatteryThresholdFromDisc() {
         return persistenceManager.readLowBatteryThresholdFromDisc();
     }
 
@@ -69,7 +69,7 @@ public class SettingsStorage {
      * Reads the voltage calibration data from the disk.
      * @return the voltage calibration data
      */
-    public CalibrationData readCalibVoltageToSoCToRuntimeFromDisc() {
+    public synchronized CalibrationData readCalibVoltageToSoCToRuntimeFromDisc() {
         return persistenceManager.readCalibVoltageToSoCFromDisc();
     }
 
@@ -78,7 +78,7 @@ public class SettingsStorage {
      *
      * @param count the number of charge cycles
      */
-    public void setChargeCycleCount(int count) {
+    public synchronized void setChargeCycleCount(int count) {
         persistenceManager.setChargeCycleCount(count);
     }
 
@@ -87,7 +87,7 @@ public class SettingsStorage {
      *
      * @return the number of charge cycles, or -1 on failure
      */
-    public int readChargeCycleCount() {
+    public synchronized int readChargeCycleCount() {
         return persistenceManager.readChargeCycleCount();
     }
 }
